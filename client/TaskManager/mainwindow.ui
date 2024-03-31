@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1442</width>
-    <height>653</height>
+    <width>1495</width>
+    <height>584</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -65,7 +65,7 @@
       <item row="0" column="0">
        <widget class="QFrame" name="user_frame">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
           <horstretch>1</horstretch>
           <verstretch>1</verstretch>
          </sizepolicy>
@@ -937,7 +937,7 @@ background-color: transparent;
             </size>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>2</number>
            </property>
            <property name="tabSpacing">
             <number>6</number>
@@ -947,8 +947,8 @@ background-color: transparent;
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>566</width>
-              <height>248</height>
+              <width>593</width>
+              <height>245</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1035,8 +1035,8 @@ background-color: transparent;
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>566</width>
-              <height>314</height>
+              <width>593</width>
+              <height>245</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1206,8 +1206,8 @@ background-color: transparent;
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>566</width>
-              <height>248</height>
+              <width>593</width>
+              <height>245</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1375,7 +1375,7 @@ background-color: transparent;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1442</width>
+     <width>1495</width>
      <height>21</height>
     </rect>
    </property>
