@@ -3,6 +3,7 @@ CalDAV task manager app
 
 ## Build
 ```bash
+$ cp .env.example .env
 $ docker-compose build
 ```
 
