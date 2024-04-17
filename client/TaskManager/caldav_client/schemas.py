@@ -1,5 +1,6 @@
-from pydantic import BaseModel, field_validator
 from enum import Enum
+from datetime import datetime
+from pydantic import BaseModel
 
 
 class CalDavInfo(BaseModel):
@@ -9,40 +10,18 @@ class CalDavInfo(BaseModel):
     calendar_name: str
 
 
-class TaskType(Enum):
-    vevent = 'VEVENT'
-    vtodo = 'VTODO'
-    vjournal = 'VJOURNAL'
+class Status(Enum):
+    todo = 'TO DO'
+    in_progress = 'IN PROGRESS'
+    done = 'DONE'
+    cancelled = 'CANCELLED'
 
 
 class Task(BaseModel):
     title: str
     description: str
-    start_time: str
-    deadline: str
+    start_time: datetime
+    end_time: datetime
     tags: list[str]
-    type: TaskType
-    status: str
-
-
-    @field_validator('status')
-    @classmethod
-    def validate_status(cls, value, values) -> str:
-        type = values['type']
-        if type == TaskType.vevent:
-            if value == 'TENTATIVE' or value == 'CONFIRMED' or value == 'CANCELLED':
-                return value
-            else:
-                raise ValueError('Invalid status value')
-        elif type == TaskType.vtodo:
-            if value == 'NEEDS-ACTION' or value == 'COMPLETED' or value == 'IN-PROCESS' or value == 'CANCELLED':
-                return value
-            else:
-                raise ValueError('Invalid status value')
-        elif type == TaskType.vjournal:
-            if value == 'DRAFT' or value == 'FINAL' or value == 'CANCELLED':
-                return value
-            else:
-                raise ValueError('Invalid status value')
-        else:
-            raise ValueError('Invalid type value')
+    status: Status
+    executor: str
