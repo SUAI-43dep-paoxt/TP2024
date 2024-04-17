@@ -24,4 +24,5 @@ class Task(BaseModel):
     end_time: datetime
     tags: list[str]
     status: Status
+    creator: str
     executor: str
