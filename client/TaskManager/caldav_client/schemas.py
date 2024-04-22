@@ -34,8 +34,8 @@ class Task(BaseModel):
     start_time: datetime
     end_time: datetime
     tags: list[str]
-    status: Status
-    priority: int = Field(..., ge=0, lt=10)
+    status: Status = Field(default=Status.todo)
+    priority: int = Field(default=9, ge=0, lt=10)
     creator: Optional[str] = None
     executor: Optional[str] = None
 
