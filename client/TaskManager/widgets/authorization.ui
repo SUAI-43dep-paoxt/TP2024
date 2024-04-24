@@ -145,7 +145,7 @@ border: 0px;
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="registration_page">
       <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -580,14 +580,34 @@ color:black;
               </spacer>
              </item>
              <item>
-              <widget class="QLabel" name="label_auth_fio">
+              <widget class="QLabel" name="label_auth_f">
                <property name="text">
-                <string>ФИО</string>
+                <string>Фамилия</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_auth_fio">
+              <widget class="QLineEdit" name="lineEdit_auth_f"/>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_auth_n">
+               <property name="text">
+                <string>Имя</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_auth_n"/>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_auth_m">
+               <property name="text">
+                <string>Отчество</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_auth_m">
                <property name="placeholderText">
                 <string>Жмышенко Валерий Альбертович</string>
                </property>
