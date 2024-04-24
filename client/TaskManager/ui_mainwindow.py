@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 
 ################################################################################
@@ -52,7 +53,6 @@ class Ui_MainWindow(object):
 "\n"
 "QComboBox{\n"
 "background-color: transparent;\n"
-"border: 1px solid gray;\n"
 "}\n"
 "\n"
 "QPushButton::hover{\n"
@@ -92,7 +92,7 @@ class Ui_MainWindow(object):
         self.info_frame.setMinimumSize(QSize(596, 0))
         self.info_frame.setStyleSheet(u" QFrame{\n"
 "  background-color: #08080a;\n"
-" 	border: 2px solid rgb(85, 255, 0) ;\n"
+" 	border: 0px solid rgb(85, 255, 0) ;\n"
 "}")
         self.info_frame.setFrameShape(QFrame.StyledPanel)
         self.info_frame.setFrameShadow(QFrame.Raised)
@@ -221,18 +221,18 @@ class Ui_MainWindow(object):
         self.verticalLayout_16.setSpacing(0)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
         self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
-        self.lineEdit_tag_name = QLineEdit(self.frame_add_tag_border)
-        self.lineEdit_tag_name.setObjectName(u"lineEdit_tag_name")
-        self.lineEdit_tag_name.setMinimumSize(QSize(0, 34))
-        self.lineEdit_tag_name.setStyleSheet(u"QLineEdit{\n"
-"background-color: rgb(36, 36, 36);\n"
-"}\n"
-"\n"
-"QWidget::hover{\n"
-"border:1px solid white;\n"
-"}")
-
-        self.verticalLayout_16.addWidget(self.lineEdit_tag_name)
+#         self.lineEdit_tag_name = QLineEdit(self.frame_add_tag_border)
+#         self.lineEdit_tag_name.setObjectName(u"lineEdit_tag_name")
+#         self.lineEdit_tag_name.setMinimumSize(QSize(0, 34))
+#         self.lineEdit_tag_name.setStyleSheet(u"QLineEdit{\n"
+# "background-color: rgb(36, 36, 36);\n"
+# "}\n"
+# "\n"
+# "QWidget::hover{\n"
+# "border:1px solid white;\n"
+# "}")
+#
+#         self.verticalLayout_16.addWidget(self.lineEdit_tag_name)
 
 
         self.verticalLayout_15.addWidget(self.frame_add_tag_border)
@@ -242,6 +242,7 @@ class Ui_MainWindow(object):
         self.comboBox.addItem("")
         self.comboBox.setObjectName(u"comboBox")
         self.comboBox.setMinimumSize(QSize(0, 34))
+        self.comboBox.setEditable(True)
 
         self.verticalLayout_15.addWidget(self.comboBox)
 
@@ -254,30 +255,30 @@ class Ui_MainWindow(object):
         self.task_date_info.setFrameShadow(QFrame.Raised)
         self.gridLayout_6 = QGridLayout(self.task_date_info)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.dateEdit_to = QDateEdit(self.task_date_info)
-        self.dateEdit_to.setObjectName(u"dateEdit_to")
+        # self.dateEdit_to = QDateEdit(self.task_date_info)
+        # self.dateEdit_to.setObjectName(u"dateEdit_to")
         sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
         sizePolicy4.setHorizontalStretch(0)
         sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.dateEdit_to.sizePolicy().hasHeightForWidth())
-        self.dateEdit_to.setSizePolicy(sizePolicy4)
-        self.dateEdit_to.setMinimumSize(QSize(0, 0))
-        self.dateEdit_to.setMaximumSize(QSize(16777215, 16777215))
-        self.dateEdit_to.setKeyboardTracking(True)
-        self.dateEdit_to.setProperty("showGroupSeparator", False)
-        self.dateEdit_to.setCalendarPopup(True)
-        self.dateEdit_to.setTimeSpec(Qt.LocalTime)
+        #sizePolicy4.setHeightForWidth(self.dateEdit_to.sizePolicy().hasHeightForWidth())
+        # self.dateEdit_to.setSizePolicy(sizePolicy4)
+        # self.dateEdit_to.setMinimumSize(QSize(0, 0))
+        # self.dateEdit_to.setMaximumSize(QSize(16777215, 16777215))
+        # self.dateEdit_to.setKeyboardTracking(True)
+        # self.dateEdit_to.setProperty("showGroupSeparator", False)
+        # self.dateEdit_to.setCalendarPopup(True)
+        # self.dateEdit_to.setTimeSpec(Qt.LocalTime)
+        #
+        # self.gridLayout_6.addWidget(self.dateEdit_to, 0, 0, 1, 1)
 
-        self.gridLayout_6.addWidget(self.dateEdit_to, 0, 0, 1, 1)
-
-        self.dateEdit_from = QDateEdit(self.task_date_info)
-        self.dateEdit_from.setObjectName(u"dateEdit_from")
-        sizePolicy4.setHeightForWidth(self.dateEdit_from.sizePolicy().hasHeightForWidth())
-        self.dateEdit_from.setSizePolicy(sizePolicy4)
-        self.dateEdit_from.setCalendarPopup(True)
-        self.dateEdit_from.setTimeSpec(Qt.LocalTime)
-
-        self.gridLayout_6.addWidget(self.dateEdit_from, 0, 1, 1, 1)
+        # self.dateEdit_from = QDateEdit(self.task_date_info)
+        # self.dateEdit_from.setObjectName(u"dateEdit_from")
+        # sizePolicy4.setHeightForWidth(self.dateEdit_from.sizePolicy().hasHeightForWidth())
+        # self.dateEdit_from.setSizePolicy(sizePolicy4)
+        # self.dateEdit_from.setCalendarPopup(True)
+        # self.dateEdit_from.setTimeSpec(Qt.LocalTime)
+        #
+        # self.gridLayout_6.addWidget(self.dateEdit_from, 0, 1, 1, 1)
 
         self.calendarWidget_from = QCalendarWidget(self.task_date_info)
         self.calendarWidget_from.setObjectName(u"calendarWidget_from")
@@ -286,12 +287,12 @@ class Ui_MainWindow(object):
 
         self.gridLayout_6.addWidget(self.calendarWidget_from, 1, 0, 1, 1)
 
-        self.calendarWidget_to = QCalendarWidget(self.task_date_info)
-        self.calendarWidget_to.setObjectName(u"calendarWidget_to")
-        self.calendarWidget_to.setGridVisible(False)
-        self.calendarWidget_to.setVerticalHeaderFormat(QCalendarWidget.NoVerticalHeader)
-
-        self.gridLayout_6.addWidget(self.calendarWidget_to, 1, 1, 1, 1)
+        # self.calendarWidget_to = QCalendarWidget(self.task_date_info)
+        # self.calendarWidget_to.setObjectName(u"calendarWidget_to")
+        # self.calendarWidget_to.setGridVisible(False)
+        # self.calendarWidget_to.setVerticalHeaderFormat(QCalendarWidget.NoVerticalHeader)
+        #
+        # self.gridLayout_6.addWidget(self.calendarWidget_to, 1, 1, 1, 1)
 
 
         self.verticalLayout_19.addWidget(self.task_date_info)
@@ -317,14 +318,14 @@ class Ui_MainWindow(object):
         self.verticalLayout_17.setSpacing(0)
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.verticalLayout_17.setContentsMargins(0, 0, 0, 0)
-        self.lineEdit_tag_name_2 = QLineEdit(self.frame_add_tag_border_2)
-        self.lineEdit_tag_name_2.setObjectName(u"lineEdit_tag_name_2")
-        self.lineEdit_tag_name_2.setMinimumSize(QSize(0, 34))
-        self.lineEdit_tag_name_2.setStyleSheet(u"QLineEdit{\n"
-"background-color: rgb(36, 36, 36);\n"
-"}")
+#         self.lineEdit_tag_name_2 = QLineEdit(self.frame_add_tag_border_2)
+#         self.lineEdit_tag_name_2.setObjectName(u"lineEdit_tag_name_2")
+#         self.lineEdit_tag_name_2.setMinimumSize(QSize(0, 34))
+#         self.lineEdit_tag_name_2.setStyleSheet(u"QLineEdit{\n"
+# "background-color: rgb(36, 36, 36);\n"
+# "}")
 
-        self.verticalLayout_17.addWidget(self.lineEdit_tag_name_2)
+        #self.verticalLayout_17.addWidget(self.lineEdit_tag_name_2)
 
 
         self.verticalLayout_12.addWidget(self.frame_add_tag_border_2)
@@ -334,6 +335,7 @@ class Ui_MainWindow(object):
         self.comboBox_2.addItem("")
         self.comboBox_2.setObjectName(u"comboBox_2")
         self.comboBox_2.setMinimumSize(QSize(0, 34))
+        self.comboBox_2.setEditable(True)
 
         self.verticalLayout_12.addWidget(self.comboBox_2)
 
@@ -366,7 +368,7 @@ class Ui_MainWindow(object):
         self.menu_frame.setMinimumSize(QSize(200, 0))
         self.menu_frame.setStyleSheet(u" QFrame{\n"
 "  background-color: #08080a;\n"
-" 	border: 2px solid rgb(85, 170, 255);\n"
+" 	border: 0px solid rgb(85, 170, 255);\n"
 "}")
         self.menu_frame.setFrameShape(QFrame.StyledPanel)
         self.menu_frame.setFrameShadow(QFrame.Raised)
@@ -480,15 +482,15 @@ class Ui_MainWindow(object):
         self.user_frame = QFrame(self.centralwidget)
         self.user_frame.setObjectName(u"user_frame")
         sizePolicy8 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        sizePolicy8.setHorizontalStretch(1)
-        sizePolicy8.setVerticalStretch(1)
+        #sizePolicy8.setHorizontalStretch(1)
+        #sizePolicy8.setVerticalStretch(1)
         sizePolicy8.setHeightForWidth(self.user_frame.sizePolicy().hasHeightForWidth())
         self.user_frame.setSizePolicy(sizePolicy8)
         self.user_frame.setMinimumSize(QSize(48, 0))
         self.user_frame.setMaximumSize(QSize(16777215, 16777215))
         self.user_frame.setStyleSheet(u" QFrame{\n"
 "  background-color: #08080a;\n"
-" 	border: 2px solid rgb(255, 0, 0) ;\n"
+" 	border: 0px solid rgb(255, 0, 0) ;\n"
 "}")
         self.user_frame.setFrameShape(QFrame.StyledPanel)
         self.user_frame.setFrameShadow(QFrame.Raised)
@@ -506,7 +508,7 @@ class Ui_MainWindow(object):
         self.user_items_frame.setFrameShape(QFrame.StyledPanel)
         self.user_items_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_7 = QVBoxLayout(self.user_items_frame)
-        self.verticalLayout_7.setSpacing(30)
+        self.verticalLayout_7.setSpacing(20)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.verticalLayout_7.setContentsMargins(0, 5, 0, 5)
         self.account_button = QPushButton(self.user_items_frame)
@@ -521,6 +523,7 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_6.addWidget(self.user_items_frame)
+        self.verticalLayout_6.setAlignment(Qt.AlignTop | Qt.AlignLeft)
 
         self.verticalSpacer_4 = QSpacerItem(20, 800, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
 
@@ -536,7 +539,7 @@ class Ui_MainWindow(object):
         self.tasks_frame.setMinimumSize(QSize(596, 0))
         self.tasks_frame.setStyleSheet(u" QFrame{\n"
 "  background-color: #08080a;\n"
-" 	border: 2px solid rgb(255, 170, 0);\n"
+" 	border: 0px solid rgb(255, 170, 0);\n"
 "}")
         self.tasks_frame.setFrameShape(QFrame.StyledPanel)
         self.tasks_frame.setFrameShadow(QFrame.Raised)
@@ -914,20 +917,20 @@ class Ui_MainWindow(object):
         self.label_empty_info.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0436\u043c\u0438\u0442\u0435 \u043d\u0430 \u0437\u0430\u0434\u0430\u0447\u0443, \u0447\u0442\u043e\u0431\u044b \u043f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u0435\u0451...", None))
         self.label_task_name.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u0437\u0430\u0434\u0430\u0447\u0438", None))
         self.lineEdit_task_description.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0437\u0430\u0434\u0430\u0447\u0438??", None))
-        self.lineEdit_tag_name.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043d\u043e\u0432\u044b\u0439 \u0442\u0435\u0433", None))
+        #self.lineEdit_tag_name.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043d\u043e\u0432\u044b\u0439 \u0442\u0435\u0433", None))
         self.comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0422\u0435\u04331", None))
         self.comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0422\u0435\u04332", None))
 
         self.comboBox.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0440\u0430\u0442\u044c \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0439 \u0442\u0435\u0433", None))
-        self.dateEdit_from.setDisplayFormat(QCoreApplication.translate("MainWindow", u"dd.MM.yyyy", None))
-        self.lineEdit_tag_name_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043d\u043e\u0432\u043e\u0433\u043e \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f", None))
+        #self.dateEdit_to.setDisplayFormat(QCoreApplication.translate("MainWindow", u"dd.MM.yyyy", None))
+        #self.lineEdit_tag_name_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043d\u043e\u0432\u043e\u0433\u043e \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f", None))
         self.comboBox_2.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0422\u0435\u04331", None))
         self.comboBox_2.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0422\u0435\u04332", None))
 
         self.comboBox_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0438\u0432\u044f\u0437\u0430\u0442\u044c \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f", None))
-        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
-        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"Сегодня", None))
+        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Следующие 7 дней", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Все задачи", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u041c\u0435\u0442\u043a\u0438 / \u0422\u0435\u0433\u0438", None))
         ___qtreewidgetitem = self.treeWidget.headerItem()
         ___qtreewidgetitem.setText(1, QCoreApplication.translate("MainWindow", u"\u0426\u0432\u0435\u0442 \u0442\u0435\u0433\u0430", None));
@@ -956,19 +959,19 @@ class Ui_MainWindow(object):
         self.treeWidget.setSortingEnabled(__sortingEnabled)
 
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0438\u0441\u043a\u0438", None))
-        self.account_button.setText(QCoreApplication.translate("MainWindow", u"avatar", None))
-        self.calendar_button.setText(QCoreApplication.translate("MainWindow", u"calendar", None))
+        #self.account_button.setText(QCoreApplication.translate("MainWindow", u"avatar", None))
+        #self.calendar_button.setText(QCoreApplication.translate("MainWindow", u"calendar", None))
         self.lineEdit_add_task.setText("")
         self.lineEdit_add_task.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443", None))
-        self.pushButton_tags.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u0433\u0438", None))
-        self.pushButton_assign.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0432\u044f\u0437\u0430\u0442\u044c", None))
-        self.pushButton_data.setText(QCoreApplication.translate("MainWindow", u"\u0414\u0430\u0442\u0430", None))
+        #self.pushButton_tags.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u0433\u0438", None))
+        #self.pushButton_assign.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0432\u044f\u0437\u0430\u0442\u044c", None))
+        #self.pushButton_data.setText(QCoreApplication.translate("MainWindow", u"\u0414\u0430\u0442\u0430", None))
         self.pushButton_create.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u0437\u0434\u0430\u0442\u044c", None))
-        self.pushButton_panel_close.setText(QCoreApplication.translate("MainWindow", u"<--", None))
+        #self.pushButton_panel_close.setText(QCoreApplication.translate("MainWindow", u"<--", None))
         self.label_info_week.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0435 7 \u0434\u043d\u0435\u0439", None))
-        self.comboBox_tasks_filters.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0424\u0438\u043b\u044c\u0442\u0440", None))
-        self.comboBox_tasks_filters.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0424\u0438\u043b\u044c\u0442\u04401", None))
-        self.comboBox_tasks_filters.setItemText(2, QCoreApplication.translate("MainWindow", u"\u0424\u0438\u043b\u044c\u0442\u04402", None))
+        #self.comboBox_tasks_filters.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0424\u0438\u043b\u044c\u0442\u0440", None))
+        #self.comboBox_tasks_filters.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0424\u0438\u043b\u044c\u0442\u04401", None))
+        #self.comboBox_tasks_filters.setItemText(2, QCoreApplication.translate("MainWindow", u"\u0424\u0438\u043b\u044c\u0442\u04402", None))
 
         ___qtreewidgetitem7 = self.treeWidget_overdue.headerItem()
         ___qtreewidgetitem7.setText(1, QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043b\u043e\u0436\u0438\u0442\u044c", None));
@@ -1063,4 +1066,3 @@ class Ui_MainWindow(object):
         self.toolBox.setItemText(self.toolBox.indexOf(self.page_completed), QCoreApplication.translate("MainWindow", u"\u0412\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u043e, <X>", None))
         self.menu.setTitle(QCoreApplication.translate("MainWindow", u"\u041a\u0442\u043e", None))
     # retranslateUi
-

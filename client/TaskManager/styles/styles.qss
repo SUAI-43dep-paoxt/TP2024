@@ -1,0 +1,297 @@
+#lineEdit_add_task, #lineEdit_task_description, #lineEdit_tag_name, #lineEdit_tag_name_2 {
+    padding: 10px;
+}
+
+QFrame {
+    background-color: white;
+}
+
+#black_info, #frame_3, #label_app_img, #label_app_name, #label_app_quote, #label_app_author_quote {
+   background-color: #18181B;
+   color: white;
+}
+
+#label_app_img {
+    padding-left: 20px;
+    padding-bottom: 8px;
+    border-image: url(./images/cc.png);
+}
+
+#label_app_name {
+    font-size: 22px;
+}
+
+#label_reg_email, #label_reg_fio, #label_reg_url, #label_reg_calendar_name, #label_reg_password1,
+#label_reg_password2, #pushButton_reg, #pushButton_auth, #pushButton_haveacc_auth_up, #pushButton_noacc_reg_up,
+#label_noacc_reg, #label_auth_f, #label_auth_n, #label_auth_m, #label_auth_login, #label_auth_email, #label_auth_code {
+    font-weight: bold;
+}
+
+QLineEdit, #pushButton_auth, #pushButton_reg {
+    border-radius: 10px; /* Радиус закругления */
+    padding: 5px; /* Отступы вокруг текста */
+    border: 1px solid #ccc; /* Граница с тенью */
+}
+
+#pushButton_auth, #pushButton_reg {
+    color: white;
+    background-color: #18181B;
+}
+
+#pushButton_auth:focus, #pushButton_reg:focus {
+    outline: none; /* Убираем пунктирную рамку при фокусировке */
+}
+
+#pushButton_auth:hover, #pushButton_reg:hover {
+    background-color: #3b3b3b; /* Убираем пунктирную рамку при фокусировке */
+}
+
+QLineEdit:focus, QLineEdit:hover {
+    border-color: grey; /* Цвет границы при фокусе */
+    border-style: solid; /* Стиль границы при фокусе */
+}
+
+#frame_adding_border, #frame_add_tag_border_2, #frame_add_tag_border, #frame_edit_border, #lineEdit_task_description, #lineEdit_tag_name, #lineEdit_tag_name_2  {
+     border-radius: 10px;
+}
+
+#toolBox::tab {
+    background-color: #000000;
+    border: none;
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #FAFAFA;
+}
+
+#account_button {
+    width: 10px;
+    height: 10px;
+
+    position: relative;
+
+    border-radius: 20%;
+    border: none;
+
+
+    color: #FFFFFF;
+    font-family: 'Inter';
+    font-size: 0px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding-top: 30px;
+
+    background-image: url(1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+
+}
+
+#user_items_frame {
+    border: 2px solid grey;
+}
+
+#calendar_button {
+    width: 20px;
+    height: 20px;
+
+    position: relative;
+
+    border: none;
+
+
+    color: #FFFFFF;
+    font-family: 'Inter';
+    font-size: 0px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding-top: 5px;
+
+    background-image: url(./images/calendar-days.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+
+}
+
+QPushButton#pushButton_3, QPushButton#pushButton_2, QPushButton#pushButton {
+
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FAFAFA;
+    padding-right: 40px;
+
+    border: 0px solid #000000;
+
+}
+
+#pushButton_3 {
+    background-image: url('./images/icon.png');
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+}
+
+#pushButton_2 {
+    background-image: url('./images/icon2.png');
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    min-width: 140px;
+    padding: 5px 10px;
+    border: none;
+}
+
+#pushButton_7::hover, #pushButton_6::hover, #pushButton_8::hover {
+    border: none;
+}
+
+#pushButton {
+    background-image: url('./images/icon3.png');
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+}
+
+#pushButton_panel_close {
+    background-image: url('./images/panel-left-close.png');
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+}
+
+#comboBox_tasks_filters {
+    background-image: url('./images/filter.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-color: transparent;
+    border: 0px solid gray;
+    padding-left: 20px;
+}
+
+#comboBox_2, #comboBox {
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+
+#comboBox_tasks_filters::focus {
+    border: none;
+    outline: none;
+}
+
+#comboBox_tasks_filters QAbstractItemView::item:selected, #comboBox_2 QAbstractItemView::item:selected, #comboBox QAbstractItemView::item:selected {
+    background-color: transparent;
+}
+
+#comboBox_tasks_filters QAbstractItemView::item:hover, #comboBox_2 QAbstractItemView::item:hover, #comboBox QAbstractItemView::item:hover {
+    background-color: transparent;
+}
+
+#comboBox_tasks_filters::down-arrow {
+    image: none;
+}
+
+#label_info_week, #label_task_name {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.6px;
+}
+
+#label_4 {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 32px;
+    letter-spacing: -0.6px;
+}
+
+#label_2, #label {
+    border: none;
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #A1A1AA;
+}
+
+#treeWidget::item {
+    spacing: 10px;
+}
+
+#pushButton_tags {
+    background-image: url('./images/tags.png');
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+}
+
+#pushButton_assign {
+    background-image: url('./images/avatar.png');
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+}
+
+#pushButton_data {
+    background-image: url('./images/calendar.png');
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+}
+
+#treeWidget::item:selected, #treeWidget_overdue::item:selected, #treeWidget_current::item:selected, #treeWidget_completed::item:selected {
+    background: transparent;
+    border: none;
+    color: #FAFAFA;
+}
+
+#treeWidget::item:hover, #treeWidget_overdue::item:hover, #treeWidget_current::item:hover, #treeWidget_completed::item:hover {
+    background-color: none;
+    border: none;
+    color: #FAFAFA;
+}
+
+
+
+QCalendarWidget QToolButton#qt_calendar_prevmonth {
+    icon-size:15px 10px;
+    border: none;
+    qproperty-icon: url(./images/l1.png); /* Путь к изображению стрелки вправо */
+}
+
+QCalendarWidget QToolButton#qt_calendar_nextmonth {
+    icon-size:15px 10px;
+    border: none;
+    qproperty-icon: url(./images/r1.png); /* Путь к изображению стрелки вправо */
+}
+
+QCalendarWidget QTableView {
+    alternate-background-color: #f0f0f0; /* Цвет фона для четных строк (для четных дней недели) */
+}
+
+QCalendarWidget QTableView::item {
+    background-color: transparent; /* Цвет фона для дней недели */
+
+}
+
+QCalendarWidget QTableView::item:selected {
+    background-color: rgb(128,128,128); /* Цвет выделения при выборе */
+    color: rgb(0,255,0); /* Цвет текста при выборе */
+}
+
+
+QCalendarWidget QTableView::item:hover {
+    background-color: rgb(128,128,128); /* Цвет подсветки при наведении */
+}
