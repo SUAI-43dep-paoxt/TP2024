@@ -327,15 +327,35 @@ class Ui_Authorization(object):
 
         self.verticalLayout_3.addItem(self.verticalSpacer_6)
 
-        self.label_auth_fio = QLabel(self.auth_frame_main)
-        self.label_auth_fio.setObjectName(u"label_auth_fio")
+        self.label_auth_f = QLabel(self.auth_frame_main)
+        self.label_auth_f.setObjectName(u"label_auth_f")
 
-        self.verticalLayout_3.addWidget(self.label_auth_fio)
+        self.verticalLayout_3.addWidget(self.label_auth_f)
 
-        self.lineEdit_auth_fio = QLineEdit(self.auth_frame_main)
-        self.lineEdit_auth_fio.setObjectName(u"lineEdit_auth_fio")
+        self.lineEdit_auth_f = QLineEdit(self.auth_frame_main)
+        self.lineEdit_auth_f.setObjectName(u"lineEdit_auth_f")
 
-        self.verticalLayout_3.addWidget(self.lineEdit_auth_fio)
+        self.verticalLayout_3.addWidget(self.lineEdit_auth_f)
+
+        self.label_auth_n = QLabel(self.auth_frame_main)
+        self.label_auth_n.setObjectName(u"label_auth_n")
+
+        self.verticalLayout_3.addWidget(self.label_auth_n)
+
+        self.lineEdit_auth_n = QLineEdit(self.auth_frame_main)
+        self.lineEdit_auth_n.setObjectName(u"lineEdit_auth_n")
+
+        self.verticalLayout_3.addWidget(self.lineEdit_auth_n)
+
+        self.label_auth_m = QLabel(self.auth_frame_main)
+        self.label_auth_m.setObjectName(u"label_auth_m")
+
+        self.verticalLayout_3.addWidget(self.label_auth_m)
+
+        self.lineEdit_auth_m = QLineEdit(self.auth_frame_main)
+        self.lineEdit_auth_m.setObjectName(u"lineEdit_auth_m")
+
+        self.verticalLayout_3.addWidget(self.lineEdit_auth_m)
 
         self.label_auth_email = QLabel(self.auth_frame_main)
         self.label_auth_email.setObjectName(u"label_auth_email")
@@ -448,7 +468,7 @@ class Ui_Authorization(object):
 
         self.retranslateUi(Authorization)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(Authorization)
@@ -476,8 +496,10 @@ class Ui_Authorization(object):
         self.pushButton_reg.setText(QCoreApplication.translate("Authorization", u"\u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044f", None))
         self.pushButton_haveacc_auth_up.setText(QCoreApplication.translate("Authorization", u"\u0412\u0445\u043e\u0434", None))
         self.label_auth_login.setText(QCoreApplication.translate("Authorization", u"\u0412\u0445\u043e\u0434 \u0432 \u0430\u043a\u043a\u0430\u0443\u043d\u0442", None))
-        self.label_auth_fio.setText(QCoreApplication.translate("Authorization", u"\u0424\u0418\u041e", None))
-        self.lineEdit_auth_fio.setPlaceholderText(QCoreApplication.translate("Authorization", u"\u0416\u043c\u044b\u0448\u0435\u043d\u043a\u043e \u0412\u0430\u043b\u0435\u0440\u0438\u0439 \u0410\u043b\u044c\u0431\u0435\u0440\u0442\u043e\u0432\u0438\u0447", None))
+        self.label_auth_f.setText(QCoreApplication.translate("Authorization", u"\u0424\u0430\u043c\u0438\u043b\u0438\u044f", None))
+        self.label_auth_n.setText(QCoreApplication.translate("Authorization", u"\u0418\u043c\u044f", None))
+        self.label_auth_m.setText(QCoreApplication.translate("Authorization", u"\u041e\u0442\u0447\u0435\u0441\u0442\u0432\u043e", None))
+        self.lineEdit_auth_m.setPlaceholderText(QCoreApplication.translate("Authorization", u"\u0416\u043c\u044b\u0448\u0435\u043d\u043a\u043e \u0412\u0430\u043b\u0435\u0440\u0438\u0439 \u0410\u043b\u044c\u0431\u0435\u0440\u0442\u043e\u0432\u0438\u0447", None))
         self.label_auth_email.setText(QCoreApplication.translate("Authorization", u"\u041f\u043e\u0447\u0442\u0430", None))
         self.lineEdit_auth_email.setPlaceholderText(QCoreApplication.translate("Authorization", u"address@example.com", None))
         self.label_auth_code.setText(QCoreApplication.translate("Authorization", u"\u0428\u0438\u0444\u0440 \u0432\u0445\u043e\u0434\u0430", None))

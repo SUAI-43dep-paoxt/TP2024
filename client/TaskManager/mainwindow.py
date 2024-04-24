@@ -11,6 +11,8 @@ from ui_mainwindow import Ui_MainWindow
 from widgets.ui_authorization import Ui_Authorization
 # from PyQt6.QtCore import pyqtSignal
 from PySide6.QtCore import Signal
+from invite_code.schemas import Person
+from invite_code.services import *
 
 
 class AuthorizationDialog(QDialog):
@@ -35,6 +37,22 @@ class AuthorizationDialog(QDialog):
 
     def check_auth_data(self):
         # Здесь проверка учетных данных
+        # Если middle name none
+        person = Person(
+            last_name=self.ui.lineEdit_auth_f.text(),
+            first_name=self.ui.lineEdit_auth_n.text(),
+            middle_name=self.ui.lineEdit_auth_m.text(),
+            email=self.ui.lineEdit_auth_email.text()
+        )
+        try:
+            invite_code = validate_invite_code(
+                self.ui.lineEdit_auth_code.text(),
+                person
+            )
+        except:
+            print("Invalid invite code")
+
+
         if True:
             self.login_successful.emit()
             self.accept()
