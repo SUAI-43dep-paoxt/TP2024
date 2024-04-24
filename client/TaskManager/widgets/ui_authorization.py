@@ -407,10 +407,10 @@ class Ui_Authorization(object):
 
         self.pushButton_auth = QPushButton(self.auth_frame_main)
         self.pushButton_auth.setObjectName(u"pushButton_auth")
-        self.pushButton_auth.setStyleSheet(u"QWidget{\n"
-"background-color: #18181B;\n"
-"color: white;\n"
-"}")
+#         self.pushButton_auth.setStyleSheet(u"QWidget{\n"
+# "background-color: #18181B;\n"
+# "color: white;\n"
+# "}")
 
         self.verticalLayout_3.addWidget(self.pushButton_auth)
 
@@ -476,7 +476,7 @@ class Ui_Authorization(object):
 
     def retranslateUi(self, Authorization):
         Authorization.setWindowTitle(QCoreApplication.translate("Authorization", u"Dialog", None))
-        self.label_app_img.setText(QCoreApplication.translate("Authorization", u"\u041a\u0430\u0440\u0442\u0438\u043d\u043a\u0430", None))
+        #self.label_app_img.setText(QCoreApplication.translate("Authorization", u"\u041a\u0430\u0440\u0442\u0438\u043d\u043a\u0430", None))
         self.label_app_name.setText(QCoreApplication.translate("Authorization", u"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u044f", None))
         self.label_app_quote.setText(QCoreApplication.translate("Authorization", u"\"\u041f\u043b\u0430\u043d - \u044d\u0442\u043e \u043f\u043e\u043b\u043e\u0432\u0438\u043d\u0430 \u0443\u0441\u043f\u0435\u0445\u0430\".", None))
         self.label_app_author_quote.setText(QCoreApplication.translate("Authorization", u"\u0414\u0436\u043e\u0440\u0434\u0436 \u041a\u043b\u044e\u043a\u0430\u043d\u043e\u0432 \u044d\u043b\u044c \u0412\u0430\u0448\u0438\u043d\u0433\u0442\u043e\u043d", None))

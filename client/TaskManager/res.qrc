@@ -1,5 +1,17 @@
 <RCC>
-    <qresource prefix="/images">
-        <file>icon.png</file>
+    <qresource prefix="images">
+        <file>images/l1.png</file>
+        <file>images/r1.png</file>
+        <file>images/cc.jpg</file>
+        <file>images/tags.png</file>
+        <file>images/tag.png</file>
+        <file>images/filter.png</file>
+        <file>images/icon.png</file>
+        <file>images/calendar-days.png</file>
+        <file>images/icon3.png</file>
+        <file>images/icon2.png</file>
+        <file>images/avatar.png</file>
+        <file>images/calendar.png</file>
+        <file>images/panel-left-close.png</file>
     </qresource>
 </RCC>

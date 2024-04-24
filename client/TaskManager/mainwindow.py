@@ -13,7 +13,7 @@ from widgets.ui_authorization import Ui_Authorization
 from PySide6.QtCore import Signal
 from invite_code.schemas import Person
 from invite_code.services import *
-
+from rc_resource import *
 
 class AuthorizationDialog(QDialog):
     login_successful = Signal()
@@ -73,6 +73,9 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    style_file = "styles/styles.qss"
+    with open(style_file, "r", encoding='UTF-8') as f:
+        app.setStyleSheet(f.read())
     login_dialog = AuthorizationDialog()
     if login_dialog.exec() == QDialog.DialogCode.Accepted:
         main_window = MainWindow()
