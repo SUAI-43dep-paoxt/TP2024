@@ -44,3 +44,20 @@ class CalDavAdapter:
                 return CalDavStatus.completed.value
             case Status.cancelled:
                 return CalDavStatus.cancelled.value
+
+
+# testdata
+URL = 'http://localhost:8080/remote.php/dav'
+LOGIN = 'admin'
+PASSWORD = 'admin'
+
+if __name__ == "__main__":
+    test_task = Task(
+        title='title',
+        description='description',
+        start_time=datetime.now(),
+        end_time=datetime.now() + timedelta(hours=5),
+        tags=['qwe', 'rty'],
+    )
+    adapter = CalDavAdapter(url=URL, login=LOGIN, password=PASSWORD)
+    adapter.create_task(test_task)
