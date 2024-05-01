@@ -1,7 +1,9 @@
 # This Python file uses the following encoding: utf-8
 import sys
 
-from PySide6.QtWidgets import QApplication, QMainWindow, QDialog
+from PySide6.QtUiTools import QUiLoader
+from PySide6.QtWidgets import (QApplication, QMainWindow,
+                               QDialog, QPushButton, QWidget, QVBoxLayout)
 
 # Important:
 # You need to run the following command to generate the ui_form.py file
@@ -9,11 +11,32 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QDialog
 #     pyside2-uic form.ui -o ui_form.py
 from ui_mainwindow import Ui_MainWindow
 from widgets.ui_authorization import Ui_Authorization
+from widgets.ui_gen_invite import Ui_Invite_window
 # from PyQt6.QtCore import pyqtSignal
-from PySide6.QtCore import Signal
+from PySide6.QtCore import Signal, Qt, QFile
+from PySide6.QtGui import QColor
 from invite_code.schemas import Person
 from invite_code.services import *
 from rc_resource import *
+
+
+class Overlay(QWidget):
+    def __init__(self, parent=None):
+        super(Overlay, self).__init__(parent)
+        self.setPalette(QColor(0, 0, 0, 100))
+        self.setAutoFillBackground(True)
+
+
+class InviteWindow(QWidget, Ui_Invite_window):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_Invite_window()
+        self.ui.setupUi(self)
+        self.ui.pushButton_invite_send.clicked.connect(self.send_invite_code)
+
+    def send_invite_code(self):
+        print("Send")
+
 
 class AuthorizationDialog(QDialog):
     login_successful = Signal()
@@ -66,9 +89,17 @@ class AuthorizationDialog(QDialog):
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
-        super().__init__(parent)
+        super(MainWindow, self).__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        # Вызов инвайт-формы
+        self.ui.invite_button.clicked.connect(self.show_invite_window)
+        self.widget = None
+
+    def show_invite_window(self):
+        self.invite_window = InviteWindow()
+        self.invite_window.show()
 
 
 if __name__ == "__main__":
