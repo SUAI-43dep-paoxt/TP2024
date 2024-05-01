@@ -145,7 +145,7 @@ border: 0px;
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="registration_page">
       <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -282,16 +282,44 @@ color:black;
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_reg_fio">
+              <widget class="QLabel" name="label_reg_f">
                <property name="text">
-                <string>ФИО</string>
+                <string>Фамилия</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_reg_fio">
+              <widget class="QLineEdit" name="lineEdit_reg_f">
                <property name="placeholderText">
-                <string>Валерий Альбертович Жмышенко</string>
+                <string>Жмышенко</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_reg_n">
+               <property name="text">
+                <string>Имя</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_reg_n">
+               <property name="placeholderText">
+                <string>Валерий</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_reg_m">
+               <property name="text">
+                <string>Отчество</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_reg_m">
+               <property name="placeholderText">
+                <string>Альбертович</string>
                </property>
               </widget>
              </item>
@@ -441,8 +469,8 @@ QPushButton:hover{
             </layout>
            </widget>
           </item>
-          <item row="2" column="3">
-           <spacer name="horizontalSpacer_2">
+          <item row="2" column="0" rowspan="2">
+           <spacer name="horizontalSpacer">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -457,8 +485,8 @@ QPushButton:hover{
             </property>
            </spacer>
           </item>
-          <item row="2" column="0">
-           <spacer name="horizontalSpacer">
+          <item row="2" column="3" rowspan="2">
+           <spacer name="horizontalSpacer_2">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -587,7 +615,14 @@ color:black;
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_auth_f"/>
+              <widget class="QLineEdit" name="lineEdit_auth_f">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="placeholderText">
+                <string>Жмышенко</string>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QLabel" name="label_auth_n">
@@ -597,7 +632,14 @@ color:black;
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_auth_n"/>
+              <widget class="QLineEdit" name="lineEdit_auth_n">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="placeholderText">
+                <string>Валерий</string>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QLabel" name="label_auth_m">
@@ -608,8 +650,11 @@ color:black;
              </item>
              <item>
               <widget class="QLineEdit" name="lineEdit_auth_m">
+               <property name="text">
+                <string/>
+               </property>
                <property name="placeholderText">
-                <string>Жмышенко Валерий Альбертович</string>
+                <string>Альбертович</string>
                </property>
               </widget>
              </item>

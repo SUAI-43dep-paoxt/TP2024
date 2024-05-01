@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1442</width>
-    <height>613</height>
+    <height>656</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Менеджер задач</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget{
@@ -44,10 +44,7 @@ border: 1px solid gray;
 QPushButton::hover{
 border:1px solid white;
 }
-
-QWidget QFrame::hover{
-border:1px solid white;
-}</string>
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
@@ -101,10 +98,7 @@ border:1px solid white;
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true"> QFrame{
-  background-color: #08080a;
- 	border: 2px solid rgb(85, 255, 0) ;
-}</string>
+         <string notr="true"/>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
@@ -231,8 +225,8 @@ background-color: transparent;
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>588</width>
-                  <height>560</height>
+                  <width>596</width>
+                  <height>611</height>
                  </rect>
                 </property>
                 <property name="sizePolicy">
@@ -465,45 +459,6 @@ border:1px solid white;
                       </property>
                      </widget>
                     </item>
-                    <item row="0" column="1">
-                     <widget class="QDateEdit" name="dateEdit_from">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="displayFormat">
-                       <string>dd.MM.yyyy</string>
-                      </property>
-                      <property name="calendarPopup">
-                       <bool>true</bool>
-                      </property>
-                      <property name="timeSpec">
-                       <enum>Qt::LocalTime</enum>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="0">
-                     <widget class="QCalendarWidget" name="calendarWidget_from">
-                      <property name="gridVisible">
-                       <bool>false</bool>
-                      </property>
-                      <property name="verticalHeaderFormat">
-                       <enum>QCalendarWidget::NoVerticalHeader</enum>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="1">
-                     <widget class="QCalendarWidget" name="calendarWidget_to">
-                      <property name="gridVisible">
-                       <bool>false</bool>
-                      </property>
-                      <property name="verticalHeaderFormat">
-                       <enum>QCalendarWidget::NoVerticalHeader</enum>
-                      </property>
-                     </widget>
-                    </item>
                    </layout>
                   </widget>
                  </item>
@@ -638,10 +593,7 @@ background-color: rgb(36, 36, 36);
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true"> QFrame{
-  background-color: #08080a;
- 	border: 2px solid rgb(85, 170, 255);
-}</string>
+         <string notr="true"/>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
@@ -902,10 +854,7 @@ border: 0px;
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true"> QFrame{
-  background-color: #08080a;
- 	border: 2px solid rgb(255, 0, 0) ;
-}</string>
+         <string notr="true"/>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
@@ -943,7 +892,7 @@ border: 0px;
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,0">
+           <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,0,0">
             <property name="spacing">
              <number>30</number>
             </property>
@@ -970,6 +919,13 @@ border: 0px;
              <widget class="QPushButton" name="calendar_button">
               <property name="text">
                <string>calendar</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="invite_button">
+              <property name="text">
+               <string>invite</string>
               </property>
              </widget>
             </item>
@@ -1010,10 +966,7 @@ border: 0px;
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true"> QFrame{
-  background-color: #08080a;
- 	border: 2px solid rgb(255, 170, 0);
-}</string>
+         <string notr="true"/>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
@@ -1080,15 +1033,7 @@ border: 0px;
                </sizepolicy>
               </property>
               <property name="styleSheet">
-               <string notr="true">QFrame{
-border: 1px solid gray;
-}
-
-QWidget::hover{
-border:1px solid white;
-}
-
-</string>
+               <string notr="true"/>
               </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
@@ -1148,14 +1093,7 @@ border:0px;
                <item>
                 <widget class="QFrame" name="frame__adding_buttons">
                  <property name="styleSheet">
-                  <string notr="true">QFrame{
-background-color:transparent; 
-border: 0px transparent;
-}
-
-QPushButton::hover{
-border:1px solid white;
-}</string>
+                  <string notr="true"/>
                  </property>
                  <property name="frameShape">
                   <enum>QFrame::StyledPanel</enum>
@@ -1463,7 +1401,7 @@ background-color: transparent;
             </size>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="tabSpacing">
             <number>6</number>
@@ -1473,8 +1411,8 @@ background-color: transparent;
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>566</width>
-              <height>280</height>
+              <width>578</width>
+              <height>345</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1594,8 +1532,8 @@ QTreeView::branch:open:has-children:!has-siblings {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>566</width>
-              <height>280</height>
+              <width>578</width>
+              <height>345</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1807,8 +1745,8 @@ QTreeView::branch:open:has-children:!has-siblings {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>566</width>
-              <height>280</height>
+              <width>578</width>
+              <height>345</height>
              </rect>
             </property>
             <attribute name="label">

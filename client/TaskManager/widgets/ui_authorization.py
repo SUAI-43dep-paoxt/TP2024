@@ -155,15 +155,35 @@ class Ui_Authorization(object):
 
         self.verticalLayout.addWidget(self.lineEdit_reg_email)
 
-        self.label_reg_fio = QLabel(self.frame_reg_main)
-        self.label_reg_fio.setObjectName(u"label_reg_fio")
+        self.label_reg_f = QLabel(self.frame_reg_main)
+        self.label_reg_f.setObjectName(u"label_reg_f")
 
-        self.verticalLayout.addWidget(self.label_reg_fio)
+        self.verticalLayout.addWidget(self.label_reg_f)
 
-        self.lineEdit_reg_fio = QLineEdit(self.frame_reg_main)
-        self.lineEdit_reg_fio.setObjectName(u"lineEdit_reg_fio")
+        self.lineEdit_reg_f = QLineEdit(self.frame_reg_main)
+        self.lineEdit_reg_f.setObjectName(u"lineEdit_reg_f")
 
-        self.verticalLayout.addWidget(self.lineEdit_reg_fio)
+        self.verticalLayout.addWidget(self.lineEdit_reg_f)
+
+        self.label_reg_n = QLabel(self.frame_reg_main)
+        self.label_reg_n.setObjectName(u"label_reg_n")
+
+        self.verticalLayout.addWidget(self.label_reg_n)
+
+        self.lineEdit_reg_n = QLineEdit(self.frame_reg_main)
+        self.lineEdit_reg_n.setObjectName(u"lineEdit_reg_n")
+
+        self.verticalLayout.addWidget(self.lineEdit_reg_n)
+
+        self.label_reg_m = QLabel(self.frame_reg_main)
+        self.label_reg_m.setObjectName(u"label_reg_m")
+
+        self.verticalLayout.addWidget(self.label_reg_m)
+
+        self.lineEdit_reg_m = QLineEdit(self.frame_reg_main)
+        self.lineEdit_reg_m.setObjectName(u"lineEdit_reg_m")
+
+        self.verticalLayout.addWidget(self.lineEdit_reg_m)
 
         self.label_reg_url = QLabel(self.frame_reg_main)
         self.label_reg_url.setObjectName(u"label_reg_url")
@@ -277,13 +297,13 @@ class Ui_Authorization(object):
 
         self.gridLayout.addWidget(self.frame_haveacc_auth_up, 0, 0, 1, 4)
 
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout.addItem(self.horizontalSpacer_2, 2, 3, 1, 1)
-
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout.addItem(self.horizontalSpacer, 2, 0, 1, 1)
+        self.gridLayout.addItem(self.horizontalSpacer, 2, 0, 2, 1)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout.addItem(self.horizontalSpacer_2, 2, 3, 2, 1)
 
 
         self.horizontalLayout_4.addWidget(self.frame_reg_grid)
@@ -407,10 +427,10 @@ class Ui_Authorization(object):
 
         self.pushButton_auth = QPushButton(self.auth_frame_main)
         self.pushButton_auth.setObjectName(u"pushButton_auth")
-#         self.pushButton_auth.setStyleSheet(u"QWidget{\n"
-# "background-color: #18181B;\n"
-# "color: white;\n"
-# "}")
+        self.pushButton_auth.setStyleSheet(u"QWidget{\n"
+"background-color: #18181B;\n"
+"color: white;\n"
+"}")
 
         self.verticalLayout_3.addWidget(self.pushButton_auth)
 
@@ -468,7 +488,7 @@ class Ui_Authorization(object):
 
         self.retranslateUi(Authorization)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Authorization)
@@ -476,15 +496,19 @@ class Ui_Authorization(object):
 
     def retranslateUi(self, Authorization):
         Authorization.setWindowTitle(QCoreApplication.translate("Authorization", u"Dialog", None))
-        #self.label_app_img.setText(QCoreApplication.translate("Authorization", u"\u041a\u0430\u0440\u0442\u0438\u043d\u043a\u0430", None))
+        self.label_app_img.setText(QCoreApplication.translate("Authorization", u"\u041a\u0430\u0440\u0442\u0438\u043d\u043a\u0430", None))
         self.label_app_name.setText(QCoreApplication.translate("Authorization", u"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u044f", None))
         self.label_app_quote.setText(QCoreApplication.translate("Authorization", u"\"\u041f\u043b\u0430\u043d - \u044d\u0442\u043e \u043f\u043e\u043b\u043e\u0432\u0438\u043d\u0430 \u0443\u0441\u043f\u0435\u0445\u0430\".", None))
         self.label_app_author_quote.setText(QCoreApplication.translate("Authorization", u"\u0414\u0436\u043e\u0440\u0434\u0436 \u041a\u043b\u044e\u043a\u0430\u043d\u043e\u0432 \u044d\u043b\u044c \u0412\u0430\u0448\u0438\u043d\u0433\u0442\u043e\u043d", None))
         self.label_reg_main.setText(QCoreApplication.translate("Authorization", u"\u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044f \u0430\u043a\u043a\u0430\u0443\u043d\u0442\u0430", None))
         self.label_reg_email.setText(QCoreApplication.translate("Authorization", u"Email", None))
         self.lineEdit_reg_email.setPlaceholderText(QCoreApplication.translate("Authorization", u"addres@example.com", None))
-        self.label_reg_fio.setText(QCoreApplication.translate("Authorization", u"\u0424\u0418\u041e", None))
-        self.lineEdit_reg_fio.setPlaceholderText(QCoreApplication.translate("Authorization", u"\u0412\u0430\u043b\u0435\u0440\u0438\u0439 \u0410\u043b\u044c\u0431\u0435\u0440\u0442\u043e\u0432\u0438\u0447 \u0416\u043c\u044b\u0448\u0435\u043d\u043a\u043e", None))
+        self.label_reg_f.setText(QCoreApplication.translate("Authorization", u"\u0424\u0430\u043c\u0438\u043b\u0438\u044f", None))
+        self.lineEdit_reg_f.setPlaceholderText(QCoreApplication.translate("Authorization", u"\u0416\u043c\u044b\u0448\u0435\u043d\u043a\u043e", None))
+        self.label_reg_n.setText(QCoreApplication.translate("Authorization", u"\u0418\u043c\u044f", None))
+        self.lineEdit_reg_n.setPlaceholderText(QCoreApplication.translate("Authorization", u"\u0412\u0430\u043b\u0435\u0440\u0438\u0439", None))
+        self.label_reg_m.setText(QCoreApplication.translate("Authorization", u"\u041e\u0442\u0447\u0435\u0441\u0442\u0432\u043e", None))
+        self.lineEdit_reg_m.setPlaceholderText(QCoreApplication.translate("Authorization", u"\u0410\u043b\u044c\u0431\u0435\u0440\u0442\u043e\u0432\u0438\u0447", None))
         self.label_reg_url.setText(QCoreApplication.translate("Authorization", u"\u0410\u0434\u0440\u0435\u0441 \u0441\u0435\u0440\u0432\u0435\u0440 Nextcloud", None))
         self.lineEdit_reg_url_nc.setPlaceholderText(QCoreApplication.translate("Authorization", u"url", None))
         self.label_reg_calendar_name.setText(QCoreApplication.translate("Authorization", u"\u0418\u043c\u044f \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u044f", None))
@@ -497,9 +521,14 @@ class Ui_Authorization(object):
         self.pushButton_haveacc_auth_up.setText(QCoreApplication.translate("Authorization", u"\u0412\u0445\u043e\u0434", None))
         self.label_auth_login.setText(QCoreApplication.translate("Authorization", u"\u0412\u0445\u043e\u0434 \u0432 \u0430\u043a\u043a\u0430\u0443\u043d\u0442", None))
         self.label_auth_f.setText(QCoreApplication.translate("Authorization", u"\u0424\u0430\u043c\u0438\u043b\u0438\u044f", None))
+        self.lineEdit_auth_f.setText("")
+        self.lineEdit_auth_f.setPlaceholderText(QCoreApplication.translate("Authorization", u"\u0416\u043c\u044b\u0448\u0435\u043d\u043a\u043e", None))
         self.label_auth_n.setText(QCoreApplication.translate("Authorization", u"\u0418\u043c\u044f", None))
+        self.lineEdit_auth_n.setText("")
+        self.lineEdit_auth_n.setPlaceholderText(QCoreApplication.translate("Authorization", u"\u0412\u0430\u043b\u0435\u0440\u0438\u0439", None))
         self.label_auth_m.setText(QCoreApplication.translate("Authorization", u"\u041e\u0442\u0447\u0435\u0441\u0442\u0432\u043e", None))
-        self.lineEdit_auth_m.setPlaceholderText(QCoreApplication.translate("Authorization", u"\u0416\u043c\u044b\u0448\u0435\u043d\u043a\u043e \u0412\u0430\u043b\u0435\u0440\u0438\u0439 \u0410\u043b\u044c\u0431\u0435\u0440\u0442\u043e\u0432\u0438\u0447", None))
+        self.lineEdit_auth_m.setText("")
+        self.lineEdit_auth_m.setPlaceholderText(QCoreApplication.translate("Authorization", u"\u0410\u043b\u044c\u0431\u0435\u0440\u0442\u043e\u0432\u0438\u0447", None))
         self.label_auth_email.setText(QCoreApplication.translate("Authorization", u"\u041f\u043e\u0447\u0442\u0430", None))
         self.lineEdit_auth_email.setPlaceholderText(QCoreApplication.translate("Authorization", u"address@example.com", None))
         self.label_auth_code.setText(QCoreApplication.translate("Authorization", u"\u0428\u0438\u0444\u0440 \u0432\u0445\u043e\u0434\u0430", None))

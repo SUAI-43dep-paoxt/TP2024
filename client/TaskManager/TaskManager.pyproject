@@ -2,6 +2,7 @@
     "files": [
         "mainwindow.py",
         "mainwindow.ui",
-        "widgets/authorization.ui"
+        "widgets/authorization.ui",
+        "widgets/gen_invite.ui"
     ]
 }
