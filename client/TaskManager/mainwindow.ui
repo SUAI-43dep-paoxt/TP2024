@@ -365,28 +365,6 @@ border: 1px solid gray;
                        <property name="bottomMargin">
                         <number>0</number>
                        </property>
-                       <item>
-                        <widget class="QLineEdit" name="lineEdit_tag_name">
-                         <property name="minimumSize">
-                          <size>
-                           <width>0</width>
-                           <height>34</height>
-                          </size>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">QLineEdit{
-background-color: rgb(36, 36, 36);
-}
-
-QWidget::hover{
-border:1px solid white;
-}</string>
-                         </property>
-                         <property name="placeholderText">
-                          <string>Добавить новый тег</string>
-                         </property>
-                        </widget>
-                       </item>
                       </layout>
                      </widget>
                     </item>
@@ -397,6 +375,9 @@ border:1px solid white;
                         <width>0</width>
                         <height>34</height>
                        </size>
+                      </property>
+                      <property name="editable">
+                       <bool>true</bool>
                       </property>
                       <property name="placeholderText">
                        <string>Выбрать существующий тег</string>
@@ -426,38 +407,7 @@ border:1px solid white;
                    </property>
                    <layout class="QGridLayout" name="gridLayout_6">
                     <item row="0" column="0">
-                     <widget class="QDateEdit" name="dateEdit_to">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                      <property name="keyboardTracking">
-                       <bool>true</bool>
-                      </property>
-                      <property name="showGroupSeparator" stdset="0">
-                       <bool>false</bool>
-                      </property>
-                      <property name="calendarPopup">
-                       <bool>true</bool>
-                      </property>
-                      <property name="timeSpec">
-                       <enum>Qt::LocalTime</enum>
-                      </property>
-                     </widget>
+                     <widget class="QCalendarWidget" name="calendarWidget"/>
                     </item>
                    </layout>
                   </widget>
@@ -504,24 +454,6 @@ border:1px solid white;
                        <property name="bottomMargin">
                         <number>0</number>
                        </property>
-                       <item>
-                        <widget class="QLineEdit" name="lineEdit_tag_name_2">
-                         <property name="minimumSize">
-                          <size>
-                           <width>0</width>
-                           <height>34</height>
-                          </size>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">QLineEdit{
-background-color: rgb(36, 36, 36);
-}</string>
-                         </property>
-                         <property name="placeholderText">
-                          <string>Добавить нового пользователя</string>
-                         </property>
-                        </widget>
-                       </item>
                       </layout>
                      </widget>
                     </item>
@@ -532,6 +464,9 @@ background-color: rgb(36, 36, 36);
                         <width>0</width>
                         <height>34</height>
                        </size>
+                      </property>
+                      <property name="editable">
+                       <bool>true</bool>
                       </property>
                       <property name="placeholderText">
                        <string>Привязать пользователя</string>
@@ -911,14 +846,14 @@ border: 0px;
             <item>
              <widget class="QPushButton" name="account_button">
               <property name="text">
-               <string>avatar</string>
+               <string/>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QPushButton" name="calendar_button">
               <property name="text">
-               <string>calendar</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -1144,7 +1079,7 @@ background-color: transparent;
 </string>
                     </property>
                     <property name="text">
-                     <string>Теги</string>
+                     <string/>
                     </property>
                    </widget>
                   </item>
@@ -1174,7 +1109,7 @@ background-color: transparent;
 }</string>
                     </property>
                     <property name="text">
-                     <string>Связать</string>
+                     <string/>
                     </property>
                    </widget>
                   </item>
@@ -1204,7 +1139,7 @@ background-color: transparent;
 }</string>
                     </property>
                     <property name="text">
-                     <string>Дата</string>
+                     <string/>
                     </property>
                    </widget>
                   </item>
@@ -1355,7 +1290,11 @@ background-color: transparent;
               <property name="styleSheet">
                <string notr="true">QWidget{
 background-color: transparent;
+border: none;
 }</string>
+              </property>
+              <property name="currentText">
+               <string>Фильтр</string>
               </property>
               <property name="frame">
                <bool>true</bool>
@@ -1899,7 +1838,7 @@ QTreeView::branch:open:has-children:!has-siblings {
      <x>0</x>
      <y>0</y>
      <width>1442</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="defaultUp">

@@ -97,7 +97,8 @@ class Ui_Invite_window(object):
 "\n"
 "QLineEdit:placeholderText {\n"
 "    color: #ff0000;\n"
-"}")
+"}\n"
+"")
 
         self.verticalLayout.addWidget(self.lineEdit_invite_f)
 
@@ -113,6 +114,7 @@ class Ui_Invite_window(object):
 
         self.lineEdit_invite_email = QLineEdit(self.frame)
         self.lineEdit_invite_email.setObjectName(u"lineEdit_invite_email")
+        self.lineEdit_invite_email.setStyleSheet(u"text-color: solid grey;")
 
         self.verticalLayout.addWidget(self.lineEdit_invite_email)
 
@@ -156,12 +158,12 @@ class Ui_Invite_window(object):
 
     def retranslateUi(self, Invite_window):
         Invite_window.setWindowTitle(QCoreApplication.translate("Invite_window", u"\u0413\u0435\u043d\u0435\u0440\u0446\u0438\u044f \u043f\u0440\u0438\u0433\u043b\u0430\u0441\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0433\u043e \u043a\u043e\u0434\u0430", None))
-        self.label_invite_img.setText(QCoreApplication.translate("Invite_window", u"img", None))
+        self.label_invite_img.setText("")
         self.label_invite_user.setText(QCoreApplication.translate("Invite_window", u"\u041f\u0440\u0438\u0433\u043b\u0430\u0441\u0438\u0442\u044c \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f", None))
-        self.lineEdit_invite_f.setPlaceholderText(QCoreApplication.translate("Invite_window", u"\u0424\u0430\u043c\u0438\u043b\u0438\u044f", None))
-        self.lineEdit_invite_n.setPlaceholderText(QCoreApplication.translate("Invite_window", u"\u0418\u043c\u044f", None))
-        self.lineEdit_invite_m.setPlaceholderText(QCoreApplication.translate("Invite_window", u"\u041e\u0442\u0447\u0435\u0441\u0442\u0432\u043e", None))
-        self.lineEdit_invite_email.setPlaceholderText(QCoreApplication.translate("Invite_window", u"email", None))
+        self.lineEdit_invite_f.setPlaceholderText(QCoreApplication.translate("Invite_window", u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0444\u0430\u043c\u0438\u043b\u0438\u044e", None))
+        self.lineEdit_invite_n.setPlaceholderText(QCoreApplication.translate("Invite_window", u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043c\u044f", None))
+        self.lineEdit_invite_m.setPlaceholderText(QCoreApplication.translate("Invite_window", u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043e\u0442\u0447\u0435\u0441\u0442\u0432\u043e", None))
+        self.lineEdit_invite_email.setPlaceholderText(QCoreApplication.translate("Invite_window", u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 Email", None))
         self.pushButton_invite_send.setText(QCoreApplication.translate("Invite_window", u"\u041e\u043f\u0440\u0430\u0432\u0438\u0442\u044c", None))
     # retranslateUi
 

@@ -100,7 +100,7 @@ color: gray;
          <item>
           <widget class="QLabel" name="label_invite_img">
            <property name="text">
-            <string>img</string>
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -130,31 +130,35 @@ font-size:14px
 
 QLineEdit:placeholderText {
     color: #ff0000;
-}</string>
+}
+</string>
         </property>
         <property name="placeholderText">
-         <string>Фамилия</string>
+         <string>Введите фамилию</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLineEdit" name="lineEdit_invite_n">
         <property name="placeholderText">
-         <string>Имя</string>
+         <string>Введите имя</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLineEdit" name="lineEdit_invite_m">
         <property name="placeholderText">
-         <string>Отчество</string>
+         <string>Введите отчество</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLineEdit" name="lineEdit_invite_email">
+        <property name="styleSheet">
+         <string notr="true">text-color: solid grey;</string>
+        </property>
         <property name="placeholderText">
-         <string>email</string>
+         <string>Введите Email</string>
         </property>
        </widget>
       </item>
