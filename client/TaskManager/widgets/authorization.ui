@@ -82,7 +82,7 @@ border: 0px;
          <item>
           <widget class="QLabel" name="label_app_img">
            <property name="text">
-            <string>Картинка</string>
+            <string/>
            </property>
           </widget>
          </item>

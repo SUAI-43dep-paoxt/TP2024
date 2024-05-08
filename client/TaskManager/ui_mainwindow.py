@@ -16,7 +16,7 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QComboBox, QDateEdit,
+from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QCalendarWidget, QComboBox,
     QFrame, QGridLayout, QHBoxLayout, QHeaderView,
     QLabel, QLayout, QLineEdit, QMainWindow,
     QMenu, QMenuBar, QPushButton, QScrollArea,
@@ -215,19 +215,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_16.setSpacing(0)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
         self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
-        self.lineEdit_tag_name = QLineEdit(self.frame_add_tag_border)
-        self.lineEdit_tag_name.setObjectName(u"lineEdit_tag_name")
-        self.lineEdit_tag_name.setMinimumSize(QSize(0, 34))
-        self.lineEdit_tag_name.setStyleSheet(u"QLineEdit{\n"
-"background-color: rgb(36, 36, 36);\n"
-"}\n"
-"\n"
-"QWidget::hover{\n"
-"border:1px solid white;\n"
-"}")
-
-        self.verticalLayout_16.addWidget(self.lineEdit_tag_name)
-
 
         self.verticalLayout_15.addWidget(self.frame_add_tag_border)
 
@@ -236,6 +223,7 @@ class Ui_MainWindow(object):
         self.comboBox.addItem("")
         self.comboBox.setObjectName(u"comboBox")
         self.comboBox.setMinimumSize(QSize(0, 34))
+        self.comboBox.setEditable(True)
 
         self.verticalLayout_15.addWidget(self.comboBox)
 
@@ -248,21 +236,10 @@ class Ui_MainWindow(object):
         self.task_date_info.setFrameShadow(QFrame.Raised)
         self.gridLayout_6 = QGridLayout(self.task_date_info)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.dateEdit_to = QDateEdit(self.task_date_info)
-        self.dateEdit_to.setObjectName(u"dateEdit_to")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.dateEdit_to.sizePolicy().hasHeightForWidth())
-        self.dateEdit_to.setSizePolicy(sizePolicy4)
-        self.dateEdit_to.setMinimumSize(QSize(0, 0))
-        self.dateEdit_to.setMaximumSize(QSize(16777215, 16777215))
-        self.dateEdit_to.setKeyboardTracking(True)
-        self.dateEdit_to.setProperty("showGroupSeparator", False)
-        self.dateEdit_to.setCalendarPopup(True)
-        self.dateEdit_to.setTimeSpec(Qt.LocalTime)
+        self.calendarWidget = QCalendarWidget(self.task_date_info)
+        self.calendarWidget.setObjectName(u"calendarWidget")
 
-        self.gridLayout_6.addWidget(self.dateEdit_to, 0, 0, 1, 1)
+        self.gridLayout_6.addWidget(self.calendarWidget, 0, 0, 1, 1)
 
 
         self.verticalLayout_19.addWidget(self.task_date_info)
@@ -288,15 +265,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_17.setSpacing(0)
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.verticalLayout_17.setContentsMargins(0, 0, 0, 0)
-        self.lineEdit_tag_name_2 = QLineEdit(self.frame_add_tag_border_2)
-        self.lineEdit_tag_name_2.setObjectName(u"lineEdit_tag_name_2")
-        self.lineEdit_tag_name_2.setMinimumSize(QSize(0, 34))
-        self.lineEdit_tag_name_2.setStyleSheet(u"QLineEdit{\n"
-"background-color: rgb(36, 36, 36);\n"
-"}")
-
-        self.verticalLayout_17.addWidget(self.lineEdit_tag_name_2)
-
 
         self.verticalLayout_12.addWidget(self.frame_add_tag_border_2)
 
@@ -305,6 +273,7 @@ class Ui_MainWindow(object):
         self.comboBox_2.addItem("")
         self.comboBox_2.setObjectName(u"comboBox_2")
         self.comboBox_2.setMinimumSize(QSize(0, 34))
+        self.comboBox_2.setEditable(True)
 
         self.verticalLayout_12.addWidget(self.comboBox_2)
 
@@ -329,11 +298,11 @@ class Ui_MainWindow(object):
         self.menu_frame = QFrame(self.centralwidget)
         self.menu_frame.setObjectName(u"menu_frame")
         self.menu_frame.setEnabled(True)
-        sizePolicy5 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
-        sizePolicy5.setHorizontalStretch(4)
-        sizePolicy5.setVerticalStretch(1)
-        sizePolicy5.setHeightForWidth(self.menu_frame.sizePolicy().hasHeightForWidth())
-        self.menu_frame.setSizePolicy(sizePolicy5)
+        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        sizePolicy4.setHorizontalStretch(4)
+        sizePolicy4.setVerticalStretch(1)
+        sizePolicy4.setHeightForWidth(self.menu_frame.sizePolicy().hasHeightForWidth())
+        self.menu_frame.setSizePolicy(sizePolicy4)
         self.menu_frame.setMinimumSize(QSize(200, 0))
         self.menu_frame.setStyleSheet(u"")
         self.menu_frame.setFrameShape(QFrame.StyledPanel)
@@ -343,11 +312,11 @@ class Ui_MainWindow(object):
         self.gridLayout_3.setContentsMargins(9, -1, -1, -1)
         self.buttons_frame = QFrame(self.menu_frame)
         self.buttons_frame.setObjectName(u"buttons_frame")
-        sizePolicy6 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-        sizePolicy6.setHorizontalStretch(0)
-        sizePolicy6.setVerticalStretch(0)
-        sizePolicy6.setHeightForWidth(self.buttons_frame.sizePolicy().hasHeightForWidth())
-        self.buttons_frame.setSizePolicy(sizePolicy6)
+        sizePolicy5 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.buttons_frame.sizePolicy().hasHeightForWidth())
+        self.buttons_frame.setSizePolicy(sizePolicy5)
         self.buttons_frame.setFrameShape(QFrame.StyledPanel)
         self.buttons_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_3 = QVBoxLayout(self.buttons_frame)
@@ -372,8 +341,8 @@ class Ui_MainWindow(object):
 
         self.tags_frame = QFrame(self.menu_frame)
         self.tags_frame.setObjectName(u"tags_frame")
-        sizePolicy6.setHeightForWidth(self.tags_frame.sizePolicy().hasHeightForWidth())
-        self.tags_frame.setSizePolicy(sizePolicy6)
+        sizePolicy5.setHeightForWidth(self.tags_frame.sizePolicy().hasHeightForWidth())
+        self.tags_frame.setSizePolicy(sizePolicy5)
         self.tags_frame.setStyleSheet(u"")
         self.tags_frame.setFrameShape(QFrame.StyledPanel)
         self.tags_frame.setFrameShadow(QFrame.Raised)
@@ -419,11 +388,11 @@ class Ui_MainWindow(object):
 
         self.lists_frame = QFrame(self.menu_frame)
         self.lists_frame.setObjectName(u"lists_frame")
-        sizePolicy7 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Maximum)
-        sizePolicy7.setHorizontalStretch(0)
-        sizePolicy7.setVerticalStretch(0)
-        sizePolicy7.setHeightForWidth(self.lists_frame.sizePolicy().hasHeightForWidth())
-        self.lists_frame.setSizePolicy(sizePolicy7)
+        sizePolicy6 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Maximum)
+        sizePolicy6.setHorizontalStretch(0)
+        sizePolicy6.setVerticalStretch(0)
+        sizePolicy6.setHeightForWidth(self.lists_frame.sizePolicy().hasHeightForWidth())
+        self.lists_frame.setSizePolicy(sizePolicy6)
         self.lists_frame.setMinimumSize(QSize(0, 40))
         self.lists_frame.setFrameShape(QFrame.StyledPanel)
         self.lists_frame.setFrameShadow(QFrame.Raised)
@@ -447,11 +416,11 @@ class Ui_MainWindow(object):
 
         self.user_frame = QFrame(self.centralwidget)
         self.user_frame.setObjectName(u"user_frame")
-        sizePolicy8 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        sizePolicy8.setHorizontalStretch(1)
-        sizePolicy8.setVerticalStretch(1)
-        sizePolicy8.setHeightForWidth(self.user_frame.sizePolicy().hasHeightForWidth())
-        self.user_frame.setSizePolicy(sizePolicy8)
+        sizePolicy7 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy7.setHorizontalStretch(1)
+        sizePolicy7.setVerticalStretch(1)
+        sizePolicy7.setHeightForWidth(self.user_frame.sizePolicy().hasHeightForWidth())
+        self.user_frame.setSizePolicy(sizePolicy7)
         self.user_frame.setMinimumSize(QSize(48, 0))
         self.user_frame.setMaximumSize(QSize(16777215, 16777215))
         self.user_frame.setStyleSheet(u"")
@@ -463,11 +432,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.setContentsMargins(1, 1, 1, 1)
         self.user_items_frame = QFrame(self.user_frame)
         self.user_items_frame.setObjectName(u"user_items_frame")
-        sizePolicy9 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
-        sizePolicy9.setHorizontalStretch(0)
-        sizePolicy9.setVerticalStretch(0)
-        sizePolicy9.setHeightForWidth(self.user_items_frame.sizePolicy().hasHeightForWidth())
-        self.user_items_frame.setSizePolicy(sizePolicy9)
+        sizePolicy8 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        sizePolicy8.setHorizontalStretch(0)
+        sizePolicy8.setVerticalStretch(0)
+        sizePolicy8.setHeightForWidth(self.user_items_frame.sizePolicy().hasHeightForWidth())
+        self.user_items_frame.setSizePolicy(sizePolicy8)
         self.user_items_frame.setFrameShape(QFrame.StyledPanel)
         self.user_items_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_7 = QVBoxLayout(self.user_items_frame)
@@ -515,11 +484,11 @@ class Ui_MainWindow(object):
 
         self.frame_adding_grid = QFrame(self.tasks_frame)
         self.frame_adding_grid.setObjectName(u"frame_adding_grid")
-        sizePolicy10 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Maximum)
-        sizePolicy10.setHorizontalStretch(0)
-        sizePolicy10.setVerticalStretch(100)
-        sizePolicy10.setHeightForWidth(self.frame_adding_grid.sizePolicy().hasHeightForWidth())
-        self.frame_adding_grid.setSizePolicy(sizePolicy10)
+        sizePolicy9 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Maximum)
+        sizePolicy9.setHorizontalStretch(0)
+        sizePolicy9.setVerticalStretch(100)
+        sizePolicy9.setHeightForWidth(self.frame_adding_grid.sizePolicy().hasHeightForWidth())
+        self.frame_adding_grid.setSizePolicy(sizePolicy9)
         self.frame_adding_grid.setMinimumSize(QSize(0, 0))
         self.frame_adding_grid.setFrameShape(QFrame.StyledPanel)
         self.frame_adding_grid.setFrameShadow(QFrame.Raised)
@@ -528,8 +497,8 @@ class Ui_MainWindow(object):
         self.gridLayout_5.setContentsMargins(5, 5, 5, 5)
         self.frame_adding_border = QFrame(self.frame_adding_grid)
         self.frame_adding_border.setObjectName(u"frame_adding_border")
-        sizePolicy7.setHeightForWidth(self.frame_adding_border.sizePolicy().hasHeightForWidth())
-        self.frame_adding_border.setSizePolicy(sizePolicy7)
+        sizePolicy6.setHeightForWidth(self.frame_adding_border.sizePolicy().hasHeightForWidth())
+        self.frame_adding_border.setSizePolicy(sizePolicy6)
         self.frame_adding_border.setStyleSheet(u"")
         self.frame_adding_border.setFrameShape(QFrame.StyledPanel)
         self.frame_adding_border.setFrameShadow(QFrame.Raised)
@@ -560,11 +529,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setContentsMargins(3, 3, 3, 3)
         self.pushButton_tags = QPushButton(self.frame__adding_buttons)
         self.pushButton_tags.setObjectName(u"pushButton_tags")
-        sizePolicy11 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
-        sizePolicy11.setHorizontalStretch(0)
-        sizePolicy11.setVerticalStretch(0)
-        sizePolicy11.setHeightForWidth(self.pushButton_tags.sizePolicy().hasHeightForWidth())
-        self.pushButton_tags.setSizePolicy(sizePolicy11)
+        sizePolicy10 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
+        sizePolicy10.setHorizontalStretch(0)
+        sizePolicy10.setVerticalStretch(0)
+        sizePolicy10.setHeightForWidth(self.pushButton_tags.sizePolicy().hasHeightForWidth())
+        self.pushButton_tags.setSizePolicy(sizePolicy10)
         self.pushButton_tags.setMinimumSize(QSize(30, 16))
         self.pushButton_tags.setMaximumSize(QSize(20, 16777215))
         self.pushButton_tags.setStyleSheet(u"QWidget{\n"
@@ -576,8 +545,8 @@ class Ui_MainWindow(object):
 
         self.pushButton_assign = QPushButton(self.frame__adding_buttons)
         self.pushButton_assign.setObjectName(u"pushButton_assign")
-        sizePolicy11.setHeightForWidth(self.pushButton_assign.sizePolicy().hasHeightForWidth())
-        self.pushButton_assign.setSizePolicy(sizePolicy11)
+        sizePolicy10.setHeightForWidth(self.pushButton_assign.sizePolicy().hasHeightForWidth())
+        self.pushButton_assign.setSizePolicy(sizePolicy10)
         self.pushButton_assign.setMinimumSize(QSize(30, 16))
         self.pushButton_assign.setMaximumSize(QSize(20, 16777215))
         self.pushButton_assign.setStyleSheet(u"QWidget{\n"
@@ -588,8 +557,8 @@ class Ui_MainWindow(object):
 
         self.pushButton_data = QPushButton(self.frame__adding_buttons)
         self.pushButton_data.setObjectName(u"pushButton_data")
-        sizePolicy11.setHeightForWidth(self.pushButton_data.sizePolicy().hasHeightForWidth())
-        self.pushButton_data.setSizePolicy(sizePolicy11)
+        sizePolicy10.setHeightForWidth(self.pushButton_data.sizePolicy().hasHeightForWidth())
+        self.pushButton_data.setSizePolicy(sizePolicy10)
         self.pushButton_data.setMinimumSize(QSize(30, 16))
         self.pushButton_data.setMaximumSize(QSize(20, 16777215))
         self.pushButton_data.setStyleSheet(u"QWidget{\n"
@@ -600,8 +569,8 @@ class Ui_MainWindow(object):
 
         self.pushButton_create = QPushButton(self.frame__adding_buttons)
         self.pushButton_create.setObjectName(u"pushButton_create")
-        sizePolicy11.setHeightForWidth(self.pushButton_create.sizePolicy().hasHeightForWidth())
-        self.pushButton_create.setSizePolicy(sizePolicy11)
+        sizePolicy10.setHeightForWidth(self.pushButton_create.sizePolicy().hasHeightForWidth())
+        self.pushButton_create.setSizePolicy(sizePolicy10)
         self.pushButton_create.setMinimumSize(QSize(50, 16))
         self.pushButton_create.setMaximumSize(QSize(20, 16777215))
         self.pushButton_create.setStyleSheet(u"QWidget{\n"
@@ -621,8 +590,11 @@ class Ui_MainWindow(object):
 
         self.frame_info = QFrame(self.tasks_frame)
         self.frame_info.setObjectName(u"frame_info")
-        sizePolicy4.setHeightForWidth(self.frame_info.sizePolicy().hasHeightForWidth())
-        self.frame_info.setSizePolicy(sizePolicy4)
+        sizePolicy11 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        sizePolicy11.setHorizontalStretch(0)
+        sizePolicy11.setVerticalStretch(0)
+        sizePolicy11.setHeightForWidth(self.frame_info.sizePolicy().hasHeightForWidth())
+        self.frame_info.setSizePolicy(sizePolicy11)
         self.frame_info.setMinimumSize(QSize(40, 0))
         self.frame_info.setMaximumSize(QSize(16777215, 50))
         self.frame_info.setFrameShape(QFrame.StyledPanel)
@@ -648,8 +620,8 @@ class Ui_MainWindow(object):
 
         self.label_info_week = QLabel(self.frame_info)
         self.label_info_week.setObjectName(u"label_info_week")
-        sizePolicy4.setHeightForWidth(self.label_info_week.sizePolicy().hasHeightForWidth())
-        self.label_info_week.setSizePolicy(sizePolicy4)
+        sizePolicy11.setHeightForWidth(self.label_info_week.sizePolicy().hasHeightForWidth())
+        self.label_info_week.setSizePolicy(sizePolicy11)
         self.label_info_week.setMinimumSize(QSize(0, 40))
 
         self.horizontalLayout.addWidget(self.label_info_week)
@@ -667,6 +639,7 @@ class Ui_MainWindow(object):
         self.comboBox_tasks_filters.setMaximumSize(QSize(30, 30))
         self.comboBox_tasks_filters.setStyleSheet(u"QWidget{\n"
 "background-color: transparent;\n"
+"border: none;\n"
 "}")
         self.comboBox_tasks_filters.setFrame(True)
 
@@ -677,8 +650,8 @@ class Ui_MainWindow(object):
 
         self.toolBox = QToolBox(self.tasks_frame)
         self.toolBox.setObjectName(u"toolBox")
-        sizePolicy11.setHeightForWidth(self.toolBox.sizePolicy().hasHeightForWidth())
-        self.toolBox.setSizePolicy(sizePolicy11)
+        sizePolicy10.setHeightForWidth(self.toolBox.sizePolicy().hasHeightForWidth())
+        self.toolBox.setSizePolicy(sizePolicy10)
         self.toolBox.setMinimumSize(QSize(0, 200))
         self.toolBox.setMaximumSize(QSize(16777215, 16777215))
         self.page_overdue = QWidget()
@@ -830,7 +803,7 @@ class Ui_MainWindow(object):
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
         self.menubar.setEnabled(True)
-        self.menubar.setGeometry(QRect(0, 0, 1442, 21))
+        self.menubar.setGeometry(QRect(0, 0, 1442, 22))
         self.menubar.setDefaultUp(False)
         self.menubar.setNativeMenuBar(True)
         self.menu = QMenu(self.menubar)
@@ -866,12 +839,10 @@ class Ui_MainWindow(object):
         self.label_empty_info.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0436\u043c\u0438\u0442\u0435 \u043d\u0430 \u0437\u0430\u0434\u0430\u0447\u0443, \u0447\u0442\u043e\u0431\u044b \u043f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u0435\u0451...", None))
         self.label_task_name.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u0437\u0430\u0434\u0430\u0447\u0438", None))
         self.lineEdit_task_description.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0437\u0430\u0434\u0430\u0447\u0438??", None))
-        self.lineEdit_tag_name.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043d\u043e\u0432\u044b\u0439 \u0442\u0435\u0433", None))
         self.comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0422\u0435\u04331", None))
         self.comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0422\u0435\u04332", None))
 
         self.comboBox.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0440\u0430\u0442\u044c \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0439 \u0442\u0435\u0433", None))
-        self.lineEdit_tag_name_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043d\u043e\u0432\u043e\u0433\u043e \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f", None))
         self.comboBox_2.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0422\u0435\u04331", None))
         self.comboBox_2.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0422\u0435\u04332", None))
 
@@ -907,14 +878,14 @@ class Ui_MainWindow(object):
         self.treeWidget.setSortingEnabled(__sortingEnabled)
 
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0438\u0441\u043a\u0438", None))
-        self.account_button.setText(QCoreApplication.translate("MainWindow", u"avatar", None))
-        self.calendar_button.setText(QCoreApplication.translate("MainWindow", u"calendar", None))
+        self.account_button.setText("")
+        self.calendar_button.setText("")
         self.invite_button.setText(QCoreApplication.translate("MainWindow", u"invite", None))
         self.lineEdit_add_task.setText("")
         self.lineEdit_add_task.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443", None))
-        self.pushButton_tags.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u0433\u0438", None))
-        self.pushButton_assign.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0432\u044f\u0437\u0430\u0442\u044c", None))
-        self.pushButton_data.setText(QCoreApplication.translate("MainWindow", u"\u0414\u0430\u0442\u0430", None))
+        self.pushButton_tags.setText("")
+        self.pushButton_assign.setText("")
+        self.pushButton_data.setText("")
         self.pushButton_create.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u0437\u0434\u0430\u0442\u044c", None))
         self.pushButton_panel_close.setText(QCoreApplication.translate("MainWindow", u"<--", None))
         self.label_info_week.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0435 7 \u0434\u043d\u0435\u0439", None))
@@ -922,6 +893,7 @@ class Ui_MainWindow(object):
         self.comboBox_tasks_filters.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0424\u0438\u043b\u044c\u0442\u04401", None))
         self.comboBox_tasks_filters.setItemText(2, QCoreApplication.translate("MainWindow", u"\u0424\u0438\u043b\u044c\u0442\u04402", None))
 
+        self.comboBox_tasks_filters.setCurrentText(QCoreApplication.translate("MainWindow", u"\u0424\u0438\u043b\u044c\u0442\u0440", None))
         ___qtreewidgetitem7 = self.treeWidget_overdue.headerItem()
         ___qtreewidgetitem7.setText(1, QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043b\u043e\u0436\u0438\u0442\u044c", None));
         ___qtreewidgetitem7.setText(0, QCoreApplication.translate("MainWindow", u"\u0414\u0435\u043d\u044c \u043d\u0435\u0434\u0435\u043b\u0438", None));
