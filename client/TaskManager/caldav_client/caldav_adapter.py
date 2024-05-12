@@ -2,9 +2,9 @@ import caldav
 from caldav import CalendarObjectResource
 from caldav.lib.error import NotFoundError, AuthorizationError
 from client.TaskManager.caldav_client.exceptions import CalendarNotFound, InvalidCredentials, TaskNotFound
-from datetime import datetime, timedelta
+from datetime import datetime
 from enum import Enum
-from schemas import Task, Status
+from schemas import Status, Task, UpdateTask
 
 
 class CalDavStatus(Enum):
@@ -124,7 +124,7 @@ class CalDavAdapter:
         except AuthorizationError:
             raise InvalidCredentials
 
-    def update_task(self, calendar_name: str, uid: str, task: Task):
+    def update_task(self, calendar_name: str, uid: str, task: UpdateTask):
         try:
             with caldav.DAVClient(url=self.url, username=self.login, password=self.password) as client:
                 principal = client.principal()
@@ -139,13 +139,21 @@ class CalDavAdapter:
                 except NotFoundError:
                     raise TaskNotFound
 
-                todo.icalendar_component["summary"] = task.title
-                todo.icalendar_component["description"] = task.description
-                todo.icalendar_component["dtstart"].dt = task.start_time
-                todo.icalendar_component["due"].dt = task.end_time
-                todo.icalendar_component["categories"] = task.tags
-                todo.icalendar_component["priority"] = task.priority
-                todo.icalendar_component["status"] = map_to_caldavstatus(task.status).value
+                if task.title is not None:
+                    todo.icalendar_component["summary"] = task.title
+                if task.description is not None:
+                    todo.icalendar_component["description"] = task.description
+                if task.start_time is not None:
+                    todo.icalendar_component["dtstart"].dt = task.start_time
+                if task.end_time is not None:
+                    todo.icalendar_component["due"].dt = task.end_time
+                if task.tags is not None:
+                    todo.icalendar_component["categories"] = task.tags
+                if task.priority is not None:
+                    todo.icalendar_component["priority"] = task.priority
+                if task.status is not None:
+                    todo.icalendar_component["status"] = map_to_caldavstatus(task.status).value
+                # TODO executor
 
                 todo.save()
 
