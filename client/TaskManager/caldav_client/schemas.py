@@ -19,13 +19,6 @@ class Status(Enum):
     cancelled = 'CANCELLED'
 
 
-class CalDavStatus(Enum):
-    needs_action = 'NEEDS-ACTION'
-    in_progress = 'IN-PROCESS'
-    completed = 'COMPLETED'
-    cancelled = 'CANCELLED'
-
-
 class Task(BaseModel):
     uid: Optional[str] = None
     title: str
@@ -39,3 +32,13 @@ class Task(BaseModel):
     creator: Optional[str] = None
     executor: Optional[str] = None
 
+
+class UpdateTask(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+    start_time: Optional[datetime] = None
+    end_time: Optional[datetime] = None
+    tags: Optional[list[str]] = None
+    status: Optional[Status] = None
+    priority: Optional[int] = None
+    executor: Optional[str] = None
