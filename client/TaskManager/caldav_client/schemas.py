@@ -29,7 +29,7 @@ class Task(BaseModel):
     tags: list[str]
     status: Status = Field(default=Status.todo)
     priority: int = Field(default=9, ge=0, lt=10)
-    creator: Optional[str] = None
+    creator: str
     executor: Optional[str] = None
 
 

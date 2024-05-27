@@ -1,6 +1,7 @@
 import caldav
 from caldav import CalendarObjectResource
 from caldav.lib.error import NotFoundError, AuthorizationError
+from icalendar.prop import vCategory
 from client.TaskManager.caldav_client.exceptions import CalendarAlreadyExists, CalendarNotFound, InvalidCredentials, TaskNotFound
 from datetime import datetime
 from enum import Enum
@@ -39,6 +40,15 @@ def map_to_status(caldavstatus: CalDavStatus) -> Status:
 
 
 def map_to_task(todo: CalendarObjectResource) -> Task:
+
+    ics = str(todo.icalendar_component["ics"])
+    fields = ics.split(':')
+
+    creator = fields[0]
+    executor = None
+    if len(fields) > 1:
+        executor = fields[1]
+
     return Task(
         uid=str(todo.icalendar_component["uid"]),
         title=str(todo.icalendar_component["summary"]),
@@ -49,8 +59,8 @@ def map_to_task(todo: CalendarObjectResource) -> Task:
         tags=[str(tag) for tag in todo.icalendar_component["categories"].cats],
         status=map_to_status(CalDavStatus(str(todo.icalendar_component["status"]))),
         priority=int(todo.icalendar_component["priority"]),
-        # creator: Optional[str] = None
-        # executor: Optional[str] = None
+        creator=creator,
+        executor=executor
     )
 
 
@@ -87,6 +97,8 @@ class CalDavAdapter:
                 except NotFoundError:
                     raise CalendarNotFound
 
+                ics = task.creator if task.executor is None else f'{task.creator}:{task.executor}'
+
                 calendar.save_todo(
                     summary=task.title,
                     description=task.description,
@@ -94,7 +106,8 @@ class CalDavAdapter:
                     due=task.end_time,
                     categories=task.tags,
                     priority=task.priority,
-                    status=map_to_caldavstatus(task.status).value)
+                    status=map_to_caldavstatus(task.status).value,
+                    ics=ics)
 
         except AuthorizationError:
             raise InvalidCredentials
@@ -164,12 +177,16 @@ class CalDavAdapter:
                 if task.end_time is not None:
                     todo.icalendar_component["due"].dt = task.end_time
                 if task.tags is not None:
-                    todo.icalendar_component["categories"] = task.tags
+                    todo.icalendar_component["categories"] = vCategory(task.tags)
                 if task.priority is not None:
                     todo.icalendar_component["priority"] = task.priority
                 if task.status is not None:
                     todo.icalendar_component["status"] = map_to_caldavstatus(task.status).value
-                # TODO executor
+                if task.executor is not None:
+                    ics = str(todo.icalendar_component["ics"])
+                    fields = ics.split(':')
+                    creator = fields[0]
+                    todo.icalendar_component["ics"] = f'{creator}:{task.executor}'
 
                 todo.save()
 
