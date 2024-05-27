@@ -2,26 +2,21 @@
 import sys
 
 from datetime import datetime, timedelta
+
+from PySide6 import QtGui, QtWidgets
 from client.TaskManager.caldav_client.schemas import Status, Task, UpdateTask
+from client.TaskManager.caldav_client.caldav_adapter import CalDavAdapter
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import (QApplication, QMainWindow,
-                               QDialog, QPushButton, QWidget, QVBoxLayout, QTreeWidgetItem)
-
-from client.TaskManager.caldav_client.caldav_adapter import CalDavAdapter
-# Important:
-# You need to run the following command to generate the ui_form.py file
-#     pyside6-uic form.ui -o ui_form.py, or
-#     pyside2-uic form.ui -o ui_form.py
+                               QDialog, QPushButton, QWidget, QVBoxLayout, QTreeWidgetItem, QLineEdit)
 from ui_mainwindow import Ui_MainWindow
 from widgets.ui_authorization import Ui_Authorization
 from widgets.ui_gen_invite import Ui_Invite_window
-# from PyQt6.QtCore import pyqtSignal
 from PySide6.QtCore import Signal, Qt, QFile, SIGNAL
-from PySide6.QtGui import QColor
+from PySide6.QtGui import QColor, QPalette
 from invite_code.schemas import Person
 from invite_code.services import *
 from rc_resource import *
-
 
 
 class Overlay(QWidget):
@@ -38,6 +33,16 @@ class InviteWindow(QWidget, Ui_Invite_window):
         self.ui.setupUi(self)
         self.ui.pushButton_invite_send.clicked.connect(self.send_invite_code)
 
+        # Изменение цветов placeholder для QLineEdit
+        line_edit_list = [self.ui.lineEdit_invite_f,
+                          self.ui.lineEdit_invite_m,
+                          self.ui.lineEdit_invite_n,
+                          self.ui.lineEdit_invite_email]
+        palette = line_edit_list[0].palette()
+        palette.setColor(QPalette.PlaceholderText, QColor(161, 161, 170))
+        for line_edit in line_edit_list:
+            line_edit.setPalette(palette)
+
     def send_invite_code(self):
         print("Send")
 
@@ -53,7 +58,10 @@ class AuthorizationDialog(QDialog):
         self.ui.pushButton_reg.clicked.connect(self.check_reg_data)
 
         self.ui.pushButton_noacc_reg_up.clicked.connect(self.switch_page)
+        self.ui.pushButton_noacc_reg.clicked.connect(self.switch_page)
+
         self.ui.pushButton_haveacc_auth_up.clicked.connect(self.switch_page)
+        self.ui.pushButton_haveacc_auth.clicked.connect(self.switch_page)
 
     def switch_page(self):
         current_index = self.ui.stackedWidget.currentIndex()
@@ -79,7 +87,6 @@ class AuthorizationDialog(QDialog):
         except:
             print("Invalid invite code")
 
-
         if True:
             self.login_successful.emit()
             self.accept()
@@ -101,7 +108,6 @@ class MainWindow(QMainWindow):
         self.ui.invite_button.clicked.connect(self.show_invite_window)
         self.widget = None
 
-
         '''
         Подключение к NextCloud 
         URL = 'http://localhost:8080/remote.php/dav'
@@ -117,6 +123,10 @@ class MainWindow(QMainWindow):
         #     status=Status.in_progress,
         #     tags=['qwe', 'rty'],
         # )
+
+        # ----! DELETE COMMENTS FOR\BEFORE USING !------
+        # ЧТОБЫ ЗАПУСТИТЬ ПРИЛОЖЕНИЕ В ТЕСТОВОМ РЕЖИМЕ БЕЗ NC - НУЖНО ЗАККОМЕНТИРОВАТЬ КОД НИЖЕ
+
         self.adapter = CalDavAdapter(url=URL, login=LOGIN, password=PASSWORD)
         # self.adapter.create_task(CALENDAR_NAME, test_task)
         self.filling_tree()
@@ -222,6 +232,7 @@ class MainWindow(QMainWindow):
     def show_invite_window(self):
         self.invite_window = InviteWindow()
         self.invite_window.show()
+
 
 # testdata
 URL = 'http://localhost:8080/remote.php/dav'

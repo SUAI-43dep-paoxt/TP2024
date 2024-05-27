@@ -22,8 +22,8 @@ QFrame {
 }
 
 #label_invite_img {
-    padding-left: 20px;
-    padding-bottom: 8px;
+    min-width: 18px;
+    min-height: 9px;
     border-image: url(./images/person.png);
 }
 
@@ -32,8 +32,8 @@ QFrame {
 }
 
 #label_reg_email, #label_reg_fio, #label_reg_url, #label_reg_calendar_name, #label_reg_password1,
-#label_reg_password2, #pushButton_reg, #pushButton_auth, #pushButton_haveacc_auth_up, #pushButton_haveacc_auth, #pushButton_noacc_reg_up,
-#label_noacc_reg, #label_auth_f, #label_auth_n, #label_auth_m, #label_auth_login, #label_auth_email, #label_auth_code, #label_reg_n, #label_reg_f, #label_reg_m {
+#label_reg_password2, #pushButton_reg, #pushButton_auth, #pushButton_haveacc_auth_up, #pushButton_haveacc_auth,
+#pushButton_noacc_reg_up, #pushButton_haveacc_auth, #label_auth_f, #label_auth_n, #label_auth_m, #label_auth_login, #label_auth_email, #label_auth_code, #label_reg_n, #label_reg_f, #label_reg_m {
     font-weight: bold;
 }
 
@@ -52,8 +52,8 @@ QLineEdit, #pushButton_auth, #pushButton_reg {
     outline: none; /* Убираем пунктирную рамку при фокусировке */
 }
 
-#pushButton_auth:hover, #pushButton_reg:hover {
-    background-color: #3b3b3b; /* Убираем пунктирную рамку при фокусировке */
+QPushButton:hover, #pushButton_auth, #pushButton_reg {
+    background-color: white;
 }
 
 QLineEdit:focus, QLineEdit:hover {

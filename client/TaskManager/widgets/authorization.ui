@@ -11,7 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Вход в систему</string>
+  </property>
+  <property name="toolTipDuration">
+   <number>-1</number>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="spacing">
@@ -88,6 +91,12 @@ border: 0px;
          </item>
          <item alignment="Qt::AlignLeft">
           <widget class="QLabel" name="label_app_name">
+           <property name="minimumSize">
+            <size>
+             <width>200</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <pointsize>12</pointsize>
@@ -95,7 +104,7 @@ border: 0px;
             </font>
            </property>
            <property name="text">
-            <string>Название приложения</string>
+            <string>Менеджер задач</string>
            </property>
           </widget>
          </item>
@@ -145,7 +154,7 @@ border: 0px;
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="registration_page">
       <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -244,7 +253,7 @@ color:black;
                 </font>
                </property>
                <property name="text">
-                <string>Регистрация аккаунта</string>
+                <string>Создание проекта</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -340,7 +349,7 @@ color:black;
              <item>
               <widget class="QLabel" name="label_reg_calendar_name">
                <property name="text">
-                <string>Имя календаря</string>
+                <string>Имя проекта</string>
                </property>
               </widget>
              </item>
@@ -359,17 +368,11 @@ color:black;
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_reg_password1"/>
-             </item>
-             <item>
-              <widget class="QLabel" name="label_reg_password2">
-               <property name="text">
-                <string>Подтвердите пароль</string>
+              <widget class="QLineEdit" name="lineEdit_reg_password1">
+               <property name="echoMode">
+                <enum>QLineEdit::Password</enum>
                </property>
               </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="lineEdit_reg_password2"/>
              </item>
              <item alignment="Qt::AlignHCenter">
               <widget class="QFrame" name="frame_haveacc_auth">
@@ -383,12 +386,17 @@ color:black;
                 <item>
                  <widget class="QLabel" name="label_haveacc">
                   <property name="text">
-                   <string>Есть аккаунт?</string>
+                   <string>Уже есть проект?</string>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QPushButton" name="pushButton_haveacc_auth">
+                  <property name="font">
+                   <font>
+                    <bold>true</bold>
+                   </font>
+                  </property>
                   <property name="styleSheet">
                    <string notr="true">QPushButton{
 	border: 0px;
@@ -401,7 +409,7 @@ QPushButton:hover{
 }</string>
                   </property>
                   <property name="text">
-                   <string>Войти</string>
+                   <string>Присоединиться</string>
                   </property>
                  </widget>
                 </item>
@@ -410,6 +418,12 @@ QPushButton:hover{
              </item>
              <item>
               <widget class="QPushButton" name="pushButton_reg">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>32</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -423,7 +437,7 @@ color: white;
 }</string>
                </property>
                <property name="text">
-                <string>Регистрация</string>
+                <string>Создать</string>
                </property>
               </widget>
              </item>
@@ -462,7 +476,7 @@ QPushButton:hover{
 }</string>
                </property>
                <property name="text">
-                <string>Вход</string>
+                <string>Присоединиться к проекту</string>
                </property>
               </widget>
              </item>
@@ -587,7 +601,7 @@ color:black;
                 </font>
                </property>
                <property name="text">
-                <string>Вход в аккаунт</string>
+                <string>Присоединиться к проекту</string>
                </property>
               </widget>
              </item>
@@ -675,12 +689,16 @@ color:black;
              <item>
               <widget class="QLabel" name="label_auth_code">
                <property name="text">
-                <string>Шифр входа</string>
+                <string>Пригласительный код</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_auth_code"/>
+              <widget class="QLineEdit" name="lineEdit_auth_code">
+               <property name="echoMode">
+                <enum>QLineEdit::Normal</enum>
+               </property>
+              </widget>
              </item>
              <item alignment="Qt::AlignHCenter">
               <widget class="QFrame" name="reg_frame">
@@ -694,12 +712,17 @@ color:black;
                 <item>
                  <widget class="QLabel" name="label_noacc">
                   <property name="text">
-                   <string>Нет аккаунта?</string>
+                   <string>Нет проекта?</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="label_noacc_reg">
+                 <widget class="QPushButton" name="pushButton_noacc_reg">
+                  <property name="font">
+                   <font>
+                    <bold>true</bold>
+                   </font>
+                  </property>
                   <property name="styleSheet">
                    <string notr="true">QPushButton{
 	border: 0px;
@@ -712,7 +735,7 @@ QPushButton:hover{
 }</string>
                   </property>
                   <property name="text">
-                   <string>Регистрация</string>
+                   <string>Создать новый</string>
                   </property>
                  </widget>
                 </item>
@@ -721,6 +744,12 @@ QPushButton:hover{
              </item>
              <item>
               <widget class="QPushButton" name="pushButton_auth">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>32</height>
+                </size>
+               </property>
                <property name="styleSheet">
                 <string notr="true">QWidget{
 background-color: #18181B;
@@ -728,7 +757,7 @@ color: white;
 }</string>
                </property>
                <property name="text">
-                <string>Вход в аккаунт</string>
+                <string>Присоединиться</string>
                </property>
               </widget>
              </item>
@@ -826,7 +855,7 @@ QPushButton:hover{
 }</string>
                </property>
                <property name="text">
-                <string>Регистрация</string>
+                <string>Создать проект</string>
                </property>
               </widget>
              </item>

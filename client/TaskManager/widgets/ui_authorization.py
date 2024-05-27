@@ -25,6 +25,7 @@ class Ui_Authorization(object):
         if not Authorization.objectName():
             Authorization.setObjectName(u"Authorization")
         Authorization.resize(1334, 800)
+        Authorization.setToolTipDuration(-1)
         self.horizontalLayout = QHBoxLayout(Authorization)
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -62,6 +63,7 @@ class Ui_Authorization(object):
 
         self.label_app_name = QLabel(self.frame_3)
         self.label_app_name.setObjectName(u"label_app_name")
+        self.label_app_name.setMinimumSize(QSize(200, 0))
         font = QFont()
         font.setPointSize(12)
         font.setBold(True)
@@ -212,18 +214,9 @@ class Ui_Authorization(object):
 
         self.lineEdit_reg_password1 = QLineEdit(self.frame_reg_main)
         self.lineEdit_reg_password1.setObjectName(u"lineEdit_reg_password1")
+        self.lineEdit_reg_password1.setEchoMode(QLineEdit.Password)
 
         self.verticalLayout.addWidget(self.lineEdit_reg_password1)
-
-        self.label_reg_password2 = QLabel(self.frame_reg_main)
-        self.label_reg_password2.setObjectName(u"label_reg_password2")
-
-        self.verticalLayout.addWidget(self.label_reg_password2)
-
-        self.lineEdit_reg_password2 = QLineEdit(self.frame_reg_main)
-        self.lineEdit_reg_password2.setObjectName(u"lineEdit_reg_password2")
-
-        self.verticalLayout.addWidget(self.lineEdit_reg_password2)
 
         self.frame_haveacc_auth = QFrame(self.frame_reg_main)
         self.frame_haveacc_auth.setObjectName(u"frame_haveacc_auth")
@@ -238,6 +231,9 @@ class Ui_Authorization(object):
 
         self.pushButton_haveacc_auth = QPushButton(self.frame_haveacc_auth)
         self.pushButton_haveacc_auth.setObjectName(u"pushButton_haveacc_auth")
+        font4 = QFont()
+        font4.setBold(True)
+        self.pushButton_haveacc_auth.setFont(font4)
         self.pushButton_haveacc_auth.setStyleSheet(u"QPushButton{\n"
 "	border: 0px;\n"
 "	color:blue;\n"
@@ -255,10 +251,11 @@ class Ui_Authorization(object):
 
         self.pushButton_reg = QPushButton(self.frame_reg_main)
         self.pushButton_reg.setObjectName(u"pushButton_reg")
-        font4 = QFont()
-        font4.setPointSize(10)
-        font4.setBold(False)
-        self.pushButton_reg.setFont(font4)
+        self.pushButton_reg.setMinimumSize(QSize(0, 32))
+        font5 = QFont()
+        font5.setPointSize(10)
+        font5.setBold(False)
+        self.pushButton_reg.setFont(font5)
         self.pushButton_reg.setStyleSheet(u"QWidget{\n"
 "background-color: #18181B;\n"
 "color: white;\n"
@@ -278,10 +275,10 @@ class Ui_Authorization(object):
         self.horizontalLayout_3.setContentsMargins(30, -1, -1, -1)
         self.pushButton_haveacc_auth_up = QPushButton(self.frame_haveacc_auth_up)
         self.pushButton_haveacc_auth_up.setObjectName(u"pushButton_haveacc_auth_up")
-        font5 = QFont()
-        font5.setPointSize(11)
-        font5.setBold(False)
-        self.pushButton_haveacc_auth_up.setFont(font5)
+        font6 = QFont()
+        font6.setPointSize(11)
+        font6.setBold(False)
+        self.pushButton_haveacc_auth_up.setFont(font6)
         self.pushButton_haveacc_auth_up.setStyleSheet(u"QPushButton{\n"
 "	border: 0px;\n"
 "	color:black;\n"
@@ -394,6 +391,7 @@ class Ui_Authorization(object):
 
         self.lineEdit_auth_code = QLineEdit(self.auth_frame_main)
         self.lineEdit_auth_code.setObjectName(u"lineEdit_auth_code")
+        self.lineEdit_auth_code.setEchoMode(QLineEdit.Normal)
 
         self.verticalLayout_3.addWidget(self.lineEdit_auth_code)
 
@@ -408,9 +406,10 @@ class Ui_Authorization(object):
 
         self.horizontalLayout_7.addWidget(self.label_noacc)
 
-        self.label_noacc_reg = QPushButton(self.reg_frame)
-        self.label_noacc_reg.setObjectName(u"label_noacc_reg")
-        self.label_noacc_reg.setStyleSheet(u"QPushButton{\n"
+        self.pushButton_noacc_reg = QPushButton(self.reg_frame)
+        self.pushButton_noacc_reg.setObjectName(u"pushButton_noacc_reg")
+        self.pushButton_noacc_reg.setFont(font4)
+        self.pushButton_noacc_reg.setStyleSheet(u"QPushButton{\n"
 "	border: 0px;\n"
 "	color:blue;\n"
 "}\n"
@@ -420,13 +419,14 @@ class Ui_Authorization(object):
 "	color:blue;\n"
 "}")
 
-        self.horizontalLayout_7.addWidget(self.label_noacc_reg)
+        self.horizontalLayout_7.addWidget(self.pushButton_noacc_reg)
 
 
         self.verticalLayout_3.addWidget(self.reg_frame, 0, Qt.AlignHCenter)
 
         self.pushButton_auth = QPushButton(self.auth_frame_main)
         self.pushButton_auth.setObjectName(u"pushButton_auth")
+        self.pushButton_auth.setMinimumSize(QSize(0, 32))
         self.pushButton_auth.setStyleSheet(u"QWidget{\n"
 "background-color: #18181B;\n"
 "color: white;\n"
@@ -451,9 +451,9 @@ class Ui_Authorization(object):
 
         self.frame_noacc_reg_up = QFrame(self.frame_auth_grid)
         self.frame_noacc_reg_up.setObjectName(u"frame_noacc_reg_up")
-        font6 = QFont()
-        font6.setPointSize(11)
-        self.frame_noacc_reg_up.setFont(font6)
+        font7 = QFont()
+        font7.setPointSize(11)
+        self.frame_noacc_reg_up.setFont(font7)
         self.frame_noacc_reg_up.setFrameShape(QFrame.StyledPanel)
         self.frame_noacc_reg_up.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_6 = QHBoxLayout(self.frame_noacc_reg_up)
@@ -462,7 +462,7 @@ class Ui_Authorization(object):
         self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.pushButton_noacc_reg_up = QPushButton(self.frame_noacc_reg_up)
         self.pushButton_noacc_reg_up.setObjectName(u"pushButton_noacc_reg_up")
-        self.pushButton_noacc_reg_up.setFont(font5)
+        self.pushButton_noacc_reg_up.setFont(font6)
         self.pushButton_noacc_reg_up.setStyleSheet(u"QPushButton{\n"
 "	border: 0px;\n"
 "	color:black;\n"
@@ -488,19 +488,19 @@ class Ui_Authorization(object):
 
         self.retranslateUi(Authorization)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(Authorization)
     # setupUi
 
     def retranslateUi(self, Authorization):
-        Authorization.setWindowTitle(QCoreApplication.translate("Authorization", u"Dialog", None))
+        Authorization.setWindowTitle(QCoreApplication.translate("Authorization", u"\u0412\u0445\u043e\u0434 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0443", None))
         self.label_app_img.setText("")
-        self.label_app_name.setText(QCoreApplication.translate("Authorization", u"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u044f", None))
+        self.label_app_name.setText(QCoreApplication.translate("Authorization", u"\u041c\u0435\u043d\u0435\u0434\u0436\u0435\u0440 \u0437\u0430\u0434\u0430\u0447", None))
         self.label_app_quote.setText(QCoreApplication.translate("Authorization", u"\"\u041f\u043b\u0430\u043d - \u044d\u0442\u043e \u043f\u043e\u043b\u043e\u0432\u0438\u043d\u0430 \u0443\u0441\u043f\u0435\u0445\u0430\".", None))
         self.label_app_author_quote.setText(QCoreApplication.translate("Authorization", u"\u0414\u0436\u043e\u0440\u0434\u0436 \u041a\u043b\u044e\u043a\u0430\u043d\u043e\u0432 \u044d\u043b\u044c \u0412\u0430\u0448\u0438\u043d\u0433\u0442\u043e\u043d", None))
-        self.label_reg_main.setText(QCoreApplication.translate("Authorization", u"\u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044f \u0430\u043a\u043a\u0430\u0443\u043d\u0442\u0430", None))
+        self.label_reg_main.setText(QCoreApplication.translate("Authorization", u"\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u0430", None))
         self.label_reg_email.setText(QCoreApplication.translate("Authorization", u"Email", None))
         self.lineEdit_reg_email.setPlaceholderText(QCoreApplication.translate("Authorization", u"addres@example.com", None))
         self.label_reg_f.setText(QCoreApplication.translate("Authorization", u"\u0424\u0430\u043c\u0438\u043b\u0438\u044f", None))
@@ -511,15 +511,14 @@ class Ui_Authorization(object):
         self.lineEdit_reg_m.setPlaceholderText(QCoreApplication.translate("Authorization", u"\u0410\u043b\u044c\u0431\u0435\u0440\u0442\u043e\u0432\u0438\u0447", None))
         self.label_reg_url.setText(QCoreApplication.translate("Authorization", u"\u0410\u0434\u0440\u0435\u0441 \u0441\u0435\u0440\u0432\u0435\u0440 Nextcloud", None))
         self.lineEdit_reg_url_nc.setPlaceholderText(QCoreApplication.translate("Authorization", u"url", None))
-        self.label_reg_calendar_name.setText(QCoreApplication.translate("Authorization", u"\u0418\u043c\u044f \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u044f", None))
+        self.label_reg_calendar_name.setText(QCoreApplication.translate("Authorization", u"\u0418\u043c\u044f \u043f\u0440\u043e\u0435\u043a\u0442\u0430", None))
         self.lineEdit_reg_calendar_name.setPlaceholderText(QCoreApplication.translate("Authorization", u"ExampleCalendar", None))
         self.label_reg_password1.setText(QCoreApplication.translate("Authorization", u"\u041f\u0430\u0440\u043e\u043b\u044c", None))
-        self.label_reg_password2.setText(QCoreApplication.translate("Authorization", u"\u041f\u043e\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0435 \u043f\u0430\u0440\u043e\u043b\u044c", None))
-        self.label_haveacc.setText(QCoreApplication.translate("Authorization", u"\u0415\u0441\u0442\u044c \u0430\u043a\u043a\u0430\u0443\u043d\u0442?", None))
-        self.pushButton_haveacc_auth.setText(QCoreApplication.translate("Authorization", u"\u0412\u043e\u0439\u0442\u0438", None))
-        self.pushButton_reg.setText(QCoreApplication.translate("Authorization", u"\u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044f", None))
-        self.pushButton_haveacc_auth_up.setText(QCoreApplication.translate("Authorization", u"\u0412\u0445\u043e\u0434", None))
-        self.label_auth_login.setText(QCoreApplication.translate("Authorization", u"\u0412\u0445\u043e\u0434 \u0432 \u0430\u043a\u043a\u0430\u0443\u043d\u0442", None))
+        self.label_haveacc.setText(QCoreApplication.translate("Authorization", u"\u0423\u0436\u0435 \u0435\u0441\u0442\u044c \u043f\u0440\u043e\u0435\u043a\u0442?", None))
+        self.pushButton_haveacc_auth.setText(QCoreApplication.translate("Authorization", u"\u041f\u0440\u0438\u0441\u043e\u0435\u0434\u0438\u043d\u0438\u0442\u044c\u0441\u044f", None))
+        self.pushButton_reg.setText(QCoreApplication.translate("Authorization", u"\u0421\u043e\u0437\u0434\u0430\u0442\u044c", None))
+        self.pushButton_haveacc_auth_up.setText(QCoreApplication.translate("Authorization", u"\u041f\u0440\u0438\u0441\u043e\u0435\u0434\u0438\u043d\u0438\u0442\u044c\u0441\u044f \u043a \u043f\u0440\u043e\u0435\u043a\u0442\u0443", None))
+        self.label_auth_login.setText(QCoreApplication.translate("Authorization", u"\u041f\u0440\u0438\u0441\u043e\u0435\u0434\u0438\u043d\u0438\u0442\u044c\u0441\u044f \u043a \u043f\u0440\u043e\u0435\u043a\u0442\u0443", None))
         self.label_auth_f.setText(QCoreApplication.translate("Authorization", u"\u0424\u0430\u043c\u0438\u043b\u0438\u044f", None))
         self.lineEdit_auth_f.setText("")
         self.lineEdit_auth_f.setPlaceholderText(QCoreApplication.translate("Authorization", u"\u0416\u043c\u044b\u0448\u0435\u043d\u043a\u043e", None))
@@ -531,10 +530,10 @@ class Ui_Authorization(object):
         self.lineEdit_auth_m.setPlaceholderText(QCoreApplication.translate("Authorization", u"\u0410\u043b\u044c\u0431\u0435\u0440\u0442\u043e\u0432\u0438\u0447", None))
         self.label_auth_email.setText(QCoreApplication.translate("Authorization", u"\u041f\u043e\u0447\u0442\u0430", None))
         self.lineEdit_auth_email.setPlaceholderText(QCoreApplication.translate("Authorization", u"address@example.com", None))
-        self.label_auth_code.setText(QCoreApplication.translate("Authorization", u"\u0428\u0438\u0444\u0440 \u0432\u0445\u043e\u0434\u0430", None))
-        self.label_noacc.setText(QCoreApplication.translate("Authorization", u"\u041d\u0435\u0442 \u0430\u043a\u043a\u0430\u0443\u043d\u0442\u0430?", None))
-        self.label_noacc_reg.setText(QCoreApplication.translate("Authorization", u"\u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044f", None))
-        self.pushButton_auth.setText(QCoreApplication.translate("Authorization", u"\u0412\u0445\u043e\u0434 \u0432 \u0430\u043a\u043a\u0430\u0443\u043d\u0442", None))
-        self.pushButton_noacc_reg_up.setText(QCoreApplication.translate("Authorization", u"\u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044f", None))
+        self.label_auth_code.setText(QCoreApplication.translate("Authorization", u"\u041f\u0440\u0438\u0433\u043b\u0430\u0441\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0439 \u043a\u043e\u0434", None))
+        self.label_noacc.setText(QCoreApplication.translate("Authorization", u"\u041d\u0435\u0442 \u043f\u0440\u043e\u0435\u043a\u0442\u0430?", None))
+        self.pushButton_noacc_reg.setText(QCoreApplication.translate("Authorization", u"\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043d\u043e\u0432\u044b\u0439", None))
+        self.pushButton_auth.setText(QCoreApplication.translate("Authorization", u"\u041f\u0440\u0438\u0441\u043e\u0435\u0434\u0438\u043d\u0438\u0442\u044c\u0441\u044f", None))
+        self.pushButton_noacc_reg_up.setText(QCoreApplication.translate("Authorization", u"\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043f\u0440\u043e\u0435\u043a\u0442", None))
     # retranslateUi
 

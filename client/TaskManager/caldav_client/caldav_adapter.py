@@ -7,7 +7,6 @@ from enum import Enum
 from client.TaskManager.caldav_client.schemas import Status, Task, UpdateTask
 
 
-
 class CalDavStatus(Enum):
     needs_action = 'NEEDS-ACTION'
     in_progress = 'IN-PROCESS'
