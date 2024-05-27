@@ -1,11 +1,10 @@
 import caldav
 from caldav import CalendarObjectResource
 from caldav.lib.error import NotFoundError, AuthorizationError
-from client.TaskManager.caldav_client.exceptions import CalendarNotFound, InvalidCredentials, TaskNotFound
+from client.TaskManager.caldav_client.exceptions import CalendarAlreadyExists, CalendarNotFound, InvalidCredentials, TaskNotFound
 from datetime import datetime
 from enum import Enum
 from client.TaskManager.caldav_client.schemas import Status, Task, UpdateTask
-
 
 
 class CalDavStatus(Enum):
@@ -56,6 +55,22 @@ def map_to_task(todo: CalendarObjectResource) -> Task:
 
 
 class CalDavAdapter:
+
+    @staticmethod
+    def create_calendar(url: str, login: str, password: str, name: str):
+        try:
+            with caldav.DAVClient(url=url, username=login, password=password) as client:
+                principal = client.principal()
+
+                calendars = principal.calendars()
+                for calendar in calendars:
+                    if calendar.name == name:
+                        raise CalendarAlreadyExists
+
+                principal.make_calendar(name=name)
+
+        except AuthorizationError:
+            raise InvalidCredentials
 
     def __init__(self, url: str, login: str, password: str):
         self.url = url
