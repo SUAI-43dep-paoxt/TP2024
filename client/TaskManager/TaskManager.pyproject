@@ -2,7 +2,11 @@
     "files": [
         "mainwindow.py",
         "mainwindow.ui",
+        "widgets/acceptionWin.ui",
+        "widgets/acceptionWin.ui",
         "widgets/authorization.ui",
-        "widgets/gen_invite.ui"
+        "widgets/gen_invite.ui",
+        "widgets/warningWin.ui",
+        "widgets/warningWin.ui"
     ]
 }

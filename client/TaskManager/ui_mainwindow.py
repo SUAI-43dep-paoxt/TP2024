@@ -159,6 +159,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_19.setContentsMargins(0, 0, 0, 0)
         self.task_main_info = QFrame(self.scrollAreaWidgetContents)
         self.task_main_info.setObjectName(u"task_main_info")
+        self.task_main_info.setStyleSheet(u"")
         self.task_main_info.setFrameShape(QFrame.StyledPanel)
         self.task_main_info.setFrameShadow(QFrame.Raised)
         self.verticalLayout_13 = QVBoxLayout(self.task_main_info)
@@ -478,10 +479,6 @@ class Ui_MainWindow(object):
         self.tasks_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_4 = QGridLayout(self.tasks_frame)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.verticalSpacer_2 = QSpacerItem(20, 50, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
-
-        self.gridLayout_4.addItem(self.verticalSpacer_2, 3, 0, 1, 1)
-
         self.frame_adding_grid = QFrame(self.tasks_frame)
         self.frame_adding_grid.setObjectName(u"frame_adding_grid")
         sizePolicy9 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Maximum)
@@ -573,6 +570,9 @@ class Ui_MainWindow(object):
         self.pushButton_create.setSizePolicy(sizePolicy10)
         self.pushButton_create.setMinimumSize(QSize(50, 16))
         self.pushButton_create.setMaximumSize(QSize(20, 16777215))
+        font = QFont()
+        font.setFamilies([u"Arial"])
+        self.pushButton_create.setFont(font)
         self.pushButton_create.setStyleSheet(u"QWidget{\n"
 "background-color: transparent;\n"
 "}")
@@ -587,6 +587,10 @@ class Ui_MainWindow(object):
 
 
         self.gridLayout_4.addWidget(self.frame_adding_grid, 1, 0, 1, 1)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 50, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
+
+        self.gridLayout_4.addItem(self.verticalSpacer_2, 3, 0, 1, 1)
 
         self.frame_info = QFrame(self.tasks_frame)
         self.frame_info.setObjectName(u"frame_info")
@@ -803,7 +807,7 @@ class Ui_MainWindow(object):
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
         self.menubar.setEnabled(True)
-        self.menubar.setGeometry(QRect(0, 0, 1442, 22))
+        self.menubar.setGeometry(QRect(0, 0, 1442, 21))
         self.menubar.setDefaultUp(False)
         self.menubar.setNativeMenuBar(True)
         self.menu = QMenu(self.menubar)
@@ -848,7 +852,7 @@ class Ui_MainWindow(object):
 
         self.comboBox_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0438\u0432\u044f\u0437\u0430\u0442\u044c \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f", None))
         self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
-        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"q", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u041c\u0435\u0442\u043a\u0438 / \u0422\u0435\u0433\u0438", None))
         ___qtreewidgetitem = self.treeWidget.headerItem()
@@ -880,7 +884,7 @@ class Ui_MainWindow(object):
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0438\u0441\u043a\u0438", None))
         self.account_button.setText("")
         self.calendar_button.setText("")
-        self.invite_button.setText(QCoreApplication.translate("MainWindow", u"invite", None))
+        self.invite_button.setText(QCoreApplication.translate("MainWindow", u"in", None))
         self.lineEdit_add_task.setText("")
         self.lineEdit_add_task.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443", None))
         self.pushButton_tags.setText("")

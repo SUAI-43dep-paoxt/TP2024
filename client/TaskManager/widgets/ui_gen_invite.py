@@ -23,33 +23,36 @@ class Ui_Invite_window(object):
     def setupUi(self, Invite_window):
         if not Invite_window.objectName():
             Invite_window.setObjectName(u"Invite_window")
-        Invite_window.resize(607, 330)
-        Invite_window.setStyleSheet(u"QWidget{\n"
-"	background-color: #27272A;\n"
+        Invite_window.resize(599, 351)
+        font = QFont()
+        font.setFamilies([u"Arial"])
+        Invite_window.setFont(font)
+        Invite_window.setStyleSheet(u"QWidget {\n"
+"    background-color: rgb(30, 30, 37);\n"
+"    color: rgb(160, 160, 160);\n"
 "}\n"
-"\n"
-"QLineEdit{\n"
-"background-color: #09090B;\n"
-"font-size:14px\n"
+"QPushButton {\n"
+"    background-color: white;\n"
+"	color: rgb(255, 255, 255);\n"
+"    color: black;\n"
+"    border-radius: 6px;\n"
+"    padding: 35px 10px;\n"
 "}\n"
-"\n"
-"QLineEdit::placeholder {\n"
-"    color: red;\n"
+"QPushButton::hover {\n"
+"    background-color: rgb(190, 190, 190);\n"
 "}\n"
-"\n"
-"QPushButton{\n"
-"background-color: #FAFAFA;\n"
-"color:black;\n"
-"font-size:14px\n"
+"QLineEdit {\n"
+"    background-color: rgb(20, 20, 26);\n"
+"    border: 1px solid rgb(52, 52, 52);\n"
+"	border-radius: 6px;\n"
+"    padding: 7px;\n"
 "}\n"
-"\n"
-"QLabel{\n"
-"font-size:22px;\n"
-"color: gray;\n"
+"QLineEdit::hover {\n"
+"    background-color: rgb(40, 40, 48);\n"
 "}")
         self.gridLayout = QGridLayout(Invite_window)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer = QSpacerItem(50, 20, QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
 
         self.gridLayout.addItem(self.horizontalSpacer, 0, 0, 1, 1)
 
@@ -70,17 +73,30 @@ class Ui_Invite_window(object):
         self.frame_invite_label.setFrameShape(QFrame.StyledPanel)
         self.frame_invite_label.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_2 = QHBoxLayout(self.frame_invite_label)
-        self.horizontalLayout_2.setSpacing(3)
+        self.horizontalLayout_2.setSpacing(10)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(5, 15, 5, 15)
         self.label_invite_img = QLabel(self.frame_invite_label)
         self.label_invite_img.setObjectName(u"label_invite_img")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.label_invite_img.sizePolicy().hasHeightForWidth())
+        self.label_invite_img.setSizePolicy(sizePolicy1)
+        self.label_invite_img.setMinimumSize(QSize(0, 0))
         self.label_invite_img.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_2.addWidget(self.label_invite_img)
 
         self.label_invite_user = QLabel(self.frame_invite_label)
         self.label_invite_user.setObjectName(u"label_invite_user")
+        self.label_invite_user.setMinimumSize(QSize(0, 20))
+        font1 = QFont()
+        font1.setFamilies([u"Arial"])
+        font1.setPointSize(14)
+        font1.setBold(True)
+        self.label_invite_user.setFont(font1)
+        self.label_invite_user.setStyleSheet(u"")
         self.label_invite_user.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_2.addWidget(self.label_invite_user)
@@ -90,30 +106,34 @@ class Ui_Invite_window(object):
 
         self.lineEdit_invite_f = QLineEdit(self.frame)
         self.lineEdit_invite_f.setObjectName(u"lineEdit_invite_f")
-        self.lineEdit_invite_f.setStyleSheet(u"QLineEdit{\n"
-"background-color: #09090B;\n"
-"font-size:14px\n"
-"}\n"
-"\n"
-"QLineEdit:placeholderText {\n"
-"    color: #ff0000;\n"
-"}\n"
-"")
+        font2 = QFont()
+        font2.setFamilies([u"Arial Rounded MT Bold"])
+        font2.setPointSize(10)
+        self.lineEdit_invite_f.setFont(font2)
+        self.lineEdit_invite_f.setStyleSheet(u"QLineEdit::placeholder{\n"
+"color: blue; \n"
+"}")
 
         self.verticalLayout.addWidget(self.lineEdit_invite_f)
 
         self.lineEdit_invite_n = QLineEdit(self.frame)
         self.lineEdit_invite_n.setObjectName(u"lineEdit_invite_n")
+        self.lineEdit_invite_n.setFont(font2)
 
         self.verticalLayout.addWidget(self.lineEdit_invite_n)
 
         self.lineEdit_invite_m = QLineEdit(self.frame)
         self.lineEdit_invite_m.setObjectName(u"lineEdit_invite_m")
+        self.lineEdit_invite_m.setFont(font2)
 
         self.verticalLayout.addWidget(self.lineEdit_invite_m)
 
         self.lineEdit_invite_email = QLineEdit(self.frame)
         self.lineEdit_invite_email.setObjectName(u"lineEdit_invite_email")
+        font3 = QFont()
+        font3.setFamilies([u"Arial"])
+        font3.setPointSize(10)
+        self.lineEdit_invite_email.setFont(font3)
         self.lineEdit_invite_email.setStyleSheet(u"text-color: solid grey;")
 
         self.verticalLayout.addWidget(self.lineEdit_invite_email)
@@ -130,9 +150,9 @@ class Ui_Invite_window(object):
 
         self.pushButton_invite_send = QPushButton(self.frame_invite_button)
         self.pushButton_invite_send.setObjectName(u"pushButton_invite_send")
-        self.pushButton_invite_send.setStyleSheet(u"QPushButton::hover{\n"
-"background-color: gray;\n"
-"}")
+        self.pushButton_invite_send.setMinimumSize(QSize(150, 30))
+        self.pushButton_invite_send.setFont(font2)
+        self.pushButton_invite_send.setStyleSheet(u"")
 
         self.horizontalLayout.addWidget(self.pushButton_invite_send)
 
@@ -146,7 +166,7 @@ class Ui_Invite_window(object):
 
         self.gridLayout.addWidget(self.frame, 0, 1, 1, 1)
 
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_2 = QSpacerItem(50, 20, QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
 
         self.gridLayout.addItem(self.horizontalSpacer_2, 0, 2, 1, 1)
 
@@ -164,6 +184,6 @@ class Ui_Invite_window(object):
         self.lineEdit_invite_n.setPlaceholderText(QCoreApplication.translate("Invite_window", u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043c\u044f", None))
         self.lineEdit_invite_m.setPlaceholderText(QCoreApplication.translate("Invite_window", u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043e\u0442\u0447\u0435\u0441\u0442\u0432\u043e", None))
         self.lineEdit_invite_email.setPlaceholderText(QCoreApplication.translate("Invite_window", u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 Email", None))
-        self.pushButton_invite_send.setText(QCoreApplication.translate("Invite_window", u"\u041e\u043f\u0440\u0430\u0432\u0438\u0442\u044c", None))
+        self.pushButton_invite_send.setText(QCoreApplication.translate("Invite_window", u"\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043a\u043e\u0434", None))
     # retranslateUi
 
