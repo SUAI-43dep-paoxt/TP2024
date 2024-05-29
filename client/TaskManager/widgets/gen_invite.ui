@@ -253,7 +253,7 @@ color: blue;
             <string notr="true"/>
            </property>
            <property name="text">
-            <string>Отправить</string>
+            <string>Создать код</string>
            </property>
           </widget>
          </item>

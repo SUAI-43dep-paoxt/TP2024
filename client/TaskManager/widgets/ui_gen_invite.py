@@ -184,6 +184,6 @@ class Ui_Invite_window(object):
         self.lineEdit_invite_n.setPlaceholderText(QCoreApplication.translate("Invite_window", u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043c\u044f", None))
         self.lineEdit_invite_m.setPlaceholderText(QCoreApplication.translate("Invite_window", u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043e\u0442\u0447\u0435\u0441\u0442\u0432\u043e", None))
         self.lineEdit_invite_email.setPlaceholderText(QCoreApplication.translate("Invite_window", u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 Email", None))
-        self.pushButton_invite_send.setText(QCoreApplication.translate("Invite_window", u"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c", None))
+        self.pushButton_invite_send.setText(QCoreApplication.translate("Invite_window", u"\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043a\u043e\u0434", None))
     # retranslateUi
 
