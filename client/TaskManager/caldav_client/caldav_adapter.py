@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from enum import Enum
 
 import caldav
@@ -6,8 +6,8 @@ import icalendar.prop
 from caldav import CalendarObjectResource
 from caldav.lib.error import AuthorizationError, NotFoundError
 
-from caldav_client.exceptions import CalendarNotFound, InvalidCredentials, TaskNotFound
-from caldav_client.schemas import Status, Task, UpdateTask
+from client.TaskManager.caldav_client.exceptions import CalendarNotFound, InvalidCredentials, TaskNotFound
+from client.TaskManager.caldav_client.schemas import Status, Task, UpdateTask
 
 
 class CalDavStatus(Enum):
