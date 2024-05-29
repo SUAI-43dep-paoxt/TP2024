@@ -1,8 +1,10 @@
 from enum import Enum
 from datetime import datetime
-from typing import Optional
+from typing import Optional, Self
 
-from pydantic import BaseModel, Field
+from . import tags
+
+from pydantic import BaseModel, Field, model_validator
 
 
 class CalDavInfo(BaseModel):
@@ -31,6 +33,14 @@ class Task(BaseModel):
     priority: int = Field(default=9, ge=0, lt=10)
     creator: Optional[str] = None
     executor: Optional[str] = None
+    informed: bool = False
+
+    @model_validator(mode='after')
+    def process_informed_tag(self) -> Self:
+        if tags.INFORMED in self.tags:
+            self.informed = True
+            self.tags.remove(tags.INFORMED)
+        return self
 
 
 class UpdateTask(BaseModel):
