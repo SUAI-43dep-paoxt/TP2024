@@ -11,6 +11,7 @@ class Person(BaseModel):
 
 
 class InviteCode(BaseModel):
+    project_name: str
     person: Person
     caldav_info: CalDavInfo
 
