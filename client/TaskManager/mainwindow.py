@@ -5,8 +5,8 @@ import pyperclip
 
 from datetime import datetime, timedelta
 from PySide6 import QtGui, QtWidgets
-from client.TaskManager.caldav_client.schemas import Status, Task, UpdateTask
-from client.TaskManager.caldav_client.caldav_adapter import CalDavAdapter
+from TP2024.client.TaskManager.caldav_client.schemas import Status, Task, UpdateTask
+from TP2024.client.TaskManager.caldav_client.caldav_adapter import CalDavAdapter
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import (QApplication, QMainWindow,
                                QDialog, QPushButton, QWidget, QVBoxLayout, QTreeWidgetItem, QLineEdit)
@@ -280,11 +280,11 @@ class MainWindow(QMainWindow):
         # ----! DELETE COMMENTS FOR\BEFORE USING !------
         # ЧТОБЫ ЗАПУСТИТЬ ПРИЛОЖЕНИЕ В ТЕСТОВОМ РЕЖИМЕ БЕЗ NC - НУЖНО ЗАККОМЕНТИРОВАТЬ КОД НИЖЕ
 
-        self.adapter = CalDavAdapter(url=URL, login=LOGIN, password=PASSWORD)
-        # self.adapter.create_task(CALENDAR_NAME, test_task)
-        self.filling_tree()
-        self.ui.pushButton_create.clicked.connect(self.add_task)
-        self.connect(self.ui.treeWidget_current, SIGNAL("itemClicked(QTreeWidgetItem*, int)"), self.onClickItem)
+        # self.adapter = CalDavAdapter(url=URL, login=LOGIN, password=PASSWORD)
+        # # self.adapter.create_task(CALENDAR_NAME, test_task)
+        # self.filling_tree()
+        # self.ui.pushButton_create.clicked.connect(self.add_task)
+        # self.connect(self.ui.treeWidget_current, SIGNAL("itemClicked(QTreeWidgetItem*, int)"), self.onClickItem)
 
 
     def show_invite_window(self):
