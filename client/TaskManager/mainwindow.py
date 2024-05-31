@@ -10,8 +10,8 @@ from PySide6.QtGui import QColor, QPalette, QIcon
 from PySide6.QtWidgets import (QApplication, QMainWindow,
                                QDialog, QWidget, QTreeWidgetItem)
 
-from caldav_client.schemas import CalDavInfo
-from caldav_client.schemas import Status, Task
+from caldav_client.caldav_adapter import CalDavAdapter
+from caldav_client.schemas import CalDavInfo, Status, Task
 from image_generation.img_generator import GenerateAvatar
 from invite_code.services import *
 from session import SessionStorage
