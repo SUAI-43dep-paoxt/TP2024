@@ -44,6 +44,7 @@ class GenerateAvatar(GenImageWidget, QWidget):
         layout = QVBoxLayout()
         layout.addWidget(pic)
         self.setLayout(layout)
+        self.generate_image()
 
 
     def generate_image(self):
@@ -52,27 +53,28 @@ class GenerateAvatar(GenImageWidget, QWidget):
         selected_color = self.hash_color()
 
         size = 100
-        pad = 25
-
         image = Image.new('RGBA', (size, size), (0, 0, 0, 0))
         draw = ImageDraw.Draw(image)
 
-        draw.ellipse((pad, pad, size - pad, size - pad),
+        draw.ellipse((0, 0, size, size),
                      fill=selected_color)  # добавляем значение прозрачности alpha=128
-
         try:
             initials = self.first_name[0].upper() + self.last_name[0].upper()
         except IndexError:
             initials = self.first_name[0:2]
-
         # font = PIL.ImageFont.truetype(font='Times New Roman', size=20, index=0, encoding='unic')
-        font = ImageFont.load_default(size=20)  # можно использовать другой шрифт, если нужно
         text_color = (255, 255, 255)  # черный цвет
 
         text_position = (size // 2, size // 2)
-        draw.text(text_position, initials, font=font, fill=text_color, anchor="mm")
-        image.save(f"avatar_{initials}.png")
-        return f"avatar_{initials}.png"
+        unicode_font = ImageFont.truetype("DejaVuSans.ttf", 20)
+        draw.text(text_position, initials, font=unicode_font, fill=text_color, anchor="mm")
+        print(initials)
+        try:
+            image.save(f"..\\images\\avatar.png")
+            return f"..\\images\\avatar.png"
+        except:
+            image.save(f"images\\avatar.png")
+            return f"images\\avatar.png"
 
 
 class GenerateTag(GenImageWidget, QWidget):
@@ -107,11 +109,11 @@ class GenerateTag(GenImageWidget, QWidget):
             short_tag = self.tag[0:3]
 
         # font = PIL.ImageFont.truetype(font='Times New Roman', size=20, index=0, encoding='unic')
-        font = ImageFont.load_default(size=20)  # можно использовать другой шрифт, если нужно
         text_color = (255, 255, 255)  # черный цвет
 
         text_position = (size // 2, size // 2)
-        draw.text(text_position, short_tag, font=font, fill=text_color, anchor="mm")
+        unicode_font = ImageFont.truetype("DejaVuSans.ttf", 20)
+        draw.text(text_position, short_tag, font=unicode_font, fill=text_color, anchor="mm")
 
         # Сохраняем изображение в формате PNG
         image.save(f"tag_{self.tag}.png")
@@ -122,10 +124,10 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     main_window = QMainWindow()
 
-    custom_widget = GenerateAvatar("OИванов", "Иван", "KИванович")
-    custom_widget2 = GenerateTag("JOB")
-    custom_widget3 = GenerateTag("Development")
-    custom_widget4 = GenerateTag("Testing")
+    custom_widget = GenerateAvatar("Клюканов", "Иван", "Иванович")
+    custom_widget2 = GenerateTag("Работа")
+    custom_widget3 = GenerateTag("Разработка")
+    custom_widget4 = GenerateTag("Тесты")
 
     layout = QVBoxLayout()  # Используем QVBoxLayout для вертикального размещения
 
