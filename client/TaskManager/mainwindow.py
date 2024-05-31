@@ -1,29 +1,25 @@
 # This Python file uses the following encoding: utf-8
 import re
 import sys
-import pyperclip
-
 from datetime import datetime, timedelta
-from PySide6 import QtGui, QtWidgets
-from TP2024.client.TaskManager.caldav_client.schemas import Status, Task, UpdateTask
-from TP2024.client.TaskManager.caldav_client.caldav_adapter import CalDavAdapter
-from PySide6.QtUiTools import QUiLoader
-from PySide6.QtWidgets import (QApplication, QMainWindow,
-                               QDialog, QPushButton, QWidget, QVBoxLayout, QTreeWidgetItem, QLineEdit)
 
+import pyperclip
+from PySide6 import QtWidgets
+from PySide6.QtCore import Signal
+from PySide6.QtGui import QColor, QPalette, QIcon
+from PySide6.QtWidgets import (QApplication, QMainWindow,
+                               QDialog, QWidget, QTreeWidgetItem)
+
+from caldav_client.schemas import CalDavInfo
+from caldav_client.schemas import Status, Task
+from image_generation.img_generator import GenerateAvatar
+from invite_code.services import *
 from session import SessionStorage
 from ui_mainwindow import Ui_MainWindow
-from widgets.ui_warningWin import Ui_WarningWin
 from widgets.ui_acceptionWin import Ui_AcceptionWin
 from widgets.ui_authorization import Ui_Authorization
 from widgets.ui_gen_invite import Ui_Invite_window
-from PySide6.QtCore import Signal, Qt, QFile, SIGNAL
-from PySide6.QtGui import QColor, QPalette
-from invite_code.schemas import Person
-from invite_code.services import *
-from rc_resource import *
-from caldav_client.schemas import CalDavInfo
-
+from widgets.ui_warningWin import Ui_WarningWin
 
 DEBUG = True
 DEBUG_CALDAV_CONNECTION = CalDavInfo(
@@ -176,6 +172,7 @@ class AuthorizationDialog(QDialog):
         self.ui.setupUi(self)
         self.ui.pushButton_auth.clicked.connect(self.check_auth_data)
         self.ui.pushButton_reg.clicked.connect(self.check_reg_data)
+        self.ui.pushButton_reg.clicked.connect(self.generate_avatar)
 
         self.ui.pushButton_noacc_reg_up.clicked.connect(self.switch_page)
         self.ui.pushButton_noacc_reg.clicked.connect(self.switch_page)
@@ -184,6 +181,14 @@ class AuthorizationDialog(QDialog):
         self.ui.pushButton_haveacc_auth.clicked.connect(self.switch_page)
 
         self.dict_calendar_info = {}
+        print(self.ui.lineEdit_auth_n.text(),
+                               self.ui.lineEdit_auth_m.text(),
+                               self.ui.lineEdit_auth_f.text())
+
+    def generate_avatar(self):
+        image = GenerateAvatar(self.ui.lineEdit_reg_n.text(),
+                               self.ui.lineEdit_reg_m.text(),
+                               self.ui.lineEdit_reg_f.text())
 
         self.session_storage = SessionStorage()
 
@@ -205,6 +210,7 @@ class AuthorizationDialog(QDialog):
         first_name = self.ui.lineEdit_auth_n.text()
         middle_name = self.ui.lineEdit_auth_m.text()
         email = self.ui.lineEdit_auth_email.text()
+
 
         try:
             validate_base_input(last_name, first_name, middle_name, email)
@@ -289,6 +295,12 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        # ---- Аватар -----
+        self.ui.account_button.setStyleSheet('QPushButton {background-color: #A3C1DA}')
+        self.ui.account_button.setIcon(
+            QIcon("images\\avatar.png"))
+        # ---- Аватар -----
+
         # Вызов инвайт-формы
         self.ui.invite_button.clicked.connect(self.show_invite_window)
         self.widget = None
@@ -301,6 +313,10 @@ class MainWindow(QMainWindow):
             calendar_name=self.current_session.caldav_info.calendar_name,
         )
 
+        # Скрытие панели добавления
+        self.set_visible_input_panel(False)
+        self.ui.invite_button.clicked.connect(lambda:
+                                              self.set_visible_input_panel(True))
         '''
         Подключение к NextCloud 
         URL = 'http://localhost:8080/remote.php/dav'
@@ -325,6 +341,18 @@ class MainWindow(QMainWindow):
         # self.ui.pushButton_create.clicked.connect(self.add_task)
         # self.connect(self.ui.treeWidget_current, SIGNAL("itemClicked(QTreeWidgetItem*, int)"), self.onClickItem)
 
+    def set_visible_input_panel(self, visible=True):
+        self.ui.label_task_name.setVisible(visible)
+        self.ui.taska.setVisible(visible)
+        self.ui.label_5.setVisible(visible)
+        self.ui.lineEdit_task_description.setVisible(visible)
+        self.ui.label.setVisible(visible)
+        self.ui.comboBox_2.setVisible(visible)
+        self.ui.label_6.setVisible(visible)
+        self.ui.popup.setVisible(visible)
+        self.ui.comboBox.setVisible(visible)
+        self.ui.add_task.setVisible(visible)
+        self.ui.label_7.setVisible(visible)
 
     def show_invite_window(self):
         self.invite_window = InviteWindow()
@@ -332,7 +360,14 @@ class MainWindow(QMainWindow):
 
     def add_task(self):
         """
-        Метод добавления задачи в NextCloud
+        Метод добавления задачи в NextCloud.
+
+        Получает данные из виджетов интерфейса (название задачи, описание,
+        дату завершения и теги), создает объект задачи Task и добавляет его в
+        NextCloud календарь.
+
+        В случае не заполнения всех необходимых виджетов,
+        выводит сообщение об ошибке.
         """
         end_time = datetime.strptime(self.ui.calendarWidget.selectedDate().toString('dd-MM-yyyy'),
                                      '%d-%m-%Y')
@@ -350,7 +385,14 @@ class MainWindow(QMainWindow):
             print('Виджеты не заполнены!')
 
     def filling_tree(self):
-        """Заполненяет центральную панель задачами из NextCloud"""
+        """
+        Метод заполнения центральной панели задачами из NextCloud.
+
+        Заполняет центральную панель виджетами задач на текущую неделю из NextCloud.
+        Извлекает все задачи на текущую неделю, разделяет их по дням недели и
+        отображает в соответствующих разделах 'Просроченные задачи' и
+        'Текущие задачи'.
+        """
 
         # Дни недели для заполнения деревьев
         WEEKDAY = [
@@ -407,6 +449,17 @@ class MainWindow(QMainWindow):
     def show_task(self, task, root_tree) -> None:
         """
         Вывод задачи на экран в виджет QTreeWidgetItem
+
+        Параметры:
+            task: Task
+                Объект задачи, содержащий информацию о названии,
+                описании и тегах задачи.
+            root_tree: QTreeWidgetItem
+                Родительский виджет QTreeWidgetItem, в который будет
+                добавлена информация о задаче.
+
+        Выводит информацию о задаче на экран в виджет QTreeWidgetItem.
+        Создает дочерние виджеты для отображения названия задачи, ее описания и тегов.
 
         """
         # Додавление виджета с названием задачи (title)
