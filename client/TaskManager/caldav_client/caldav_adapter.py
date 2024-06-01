@@ -6,7 +6,7 @@ import icalendar.prop
 from caldav import CalendarObjectResource
 from caldav.lib.error import AuthorizationError, NotFoundError
 
-from TP2024.client.TaskManager.caldav_client.exceptions import CalendarAlreadyExist, CalendarNotFound, InvalidCredentials, TaskNotFound
+from TP2024.client.TaskManager.caldav_client.exceptions import CalendarAlreadyExists, CalendarNotFound, InvalidCredentials, TaskNotFound
 from TP2024.client.TaskManager.caldav_client.schemas import Status, Task, UpdateTask
 
 class CalDavStatus(Enum):
