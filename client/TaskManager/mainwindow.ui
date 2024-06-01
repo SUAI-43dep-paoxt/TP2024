@@ -105,7 +105,7 @@ border: 0px solid white;
         </property>
         <property name="styleSheet">
          <string notr="true">#menu_frame {
-    border-left: 2px solid grey;
+    border-left: 1px solid grey;
 }</string>
         </property>
         <property name="frameShape">
@@ -419,7 +419,7 @@ border: 0px;
         </property>
         <property name="styleSheet">
          <string notr="true">#tasks_frame {
-    border-left: 2px solid grey;
+    border-left: 1px solid grey;
 }</string>
         </property>
         <property name="frameShape">
@@ -877,7 +877,7 @@ border: none;
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>576</width>
+              <width>577</width>
               <height>338</height>
              </rect>
             </property>
@@ -998,7 +998,7 @@ QTreeView::branch:open:has-children:!has-siblings {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>576</width>
+              <width>577</width>
               <height>338</height>
              </rect>
             </property>
@@ -1211,7 +1211,7 @@ QTreeView::branch:open:has-children:!has-siblings {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>576</width>
+              <width>577</width>
               <height>338</height>
              </rect>
             </property>
@@ -1368,7 +1368,7 @@ QTreeView::branch:open:has-children:!has-siblings {
         </property>
         <property name="styleSheet">
          <string notr="true">#info_frame {
-    border-left: 2px solid grey;
+    border-left: 1px solid grey;
 }</string>
         </property>
         <property name="frameShape">
@@ -1510,7 +1510,7 @@ background-color: transparent;
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>594</width>
+                  <width>595</width>
                   <height>606</height>
                  </rect>
                 </property>
