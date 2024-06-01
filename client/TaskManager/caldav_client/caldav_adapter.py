@@ -6,9 +6,8 @@ import icalendar.prop
 from caldav import CalendarObjectResource
 from caldav.lib.error import AuthorizationError, NotFoundError
 
-from TP2024.client.TaskManager.caldav_client.exceptions import CalendarNotFound, InvalidCredentials, TaskNotFound
+from TP2024.client.TaskManager.caldav_client.exceptions import CalendarAlreadyExists, CalendarNotFound, InvalidCredentials, TaskNotFound
 from TP2024.client.TaskManager.caldav_client.schemas import Status, Task, UpdateTask
-
 
 class CalDavStatus(Enum):
     needs_action = 'NEEDS-ACTION'
@@ -41,8 +40,16 @@ def map_to_status(caldavstatus: CalDavStatus) -> Status:
             return Status.cancelled
 
 
-
 def map_to_task(todo: CalendarObjectResource) -> Task:
+
+    ics = str(todo.icalendar_component["ics"])
+    fields = ics.split(':')
+
+    creator = fields[0]
+    executor = None
+    if len(fields) > 1:
+        executor = fields[1]
+
     return Task(
         uid=str(todo.icalendar_component["uid"]),
         title=str(todo.icalendar_component["summary"]),
@@ -53,12 +60,28 @@ def map_to_task(todo: CalendarObjectResource) -> Task:
         tags=[str(tag) for tag in todo.icalendar_component["categories"].cats],
         status=map_to_status(CalDavStatus(str(todo.icalendar_component["status"]))),
         priority=int(todo.icalendar_component["priority"]),
-        # creator: Optional[str] = None
-        # executor: Optional[str] = None
+        creator=creator,
+        executor=executor
     )
 
 
 class CalDavAdapter:
+
+    @staticmethod
+    def create_calendar(url: str, login: str, password: str, name: str):
+        try:
+            with caldav.DAVClient(url=url, username=login, password=password) as client:
+                principal = client.principal()
+
+                calendars = principal.calendars()
+                for calendar in calendars:
+                    if calendar.name == name:
+                        raise CalendarAlreadyExists
+
+                principal.make_calendar(name=name)
+
+        except AuthorizationError:
+            raise InvalidCredentials
 
     def __init__(self, url: str, login: str, password: str, calendar_name: str):
         self.url = url
@@ -76,6 +99,8 @@ class CalDavAdapter:
                 except NotFoundError:
                     raise CalendarNotFound
 
+                ics = task.creator if task.executor is None else f'{task.creator}:{task.executor}'
+
                 calendar.save_todo(
                     summary=task.title,
                     description=task.description,
@@ -83,7 +108,8 @@ class CalDavAdapter:
                     due=task.end_time,
                     categories=task.tags,
                     priority=task.priority,
-                    status=map_to_caldavstatus(task.status).value)
+                    status=map_to_caldavstatus(task.status).value,
+                    ics=ics)
 
         except AuthorizationError:
             raise InvalidCredentials
@@ -158,7 +184,11 @@ class CalDavAdapter:
                     todo.icalendar_component["priority"] = task.priority
                 if task.status is not None:
                     todo.icalendar_component["status"] = map_to_caldavstatus(task.status).value
-                # TODO executor
+                if task.executor is not None:
+                    ics = str(todo.icalendar_component["ics"])
+                    fields = ics.split(':')
+                    creator = fields[0]
+                    todo.icalendar_component["ics"] = f'{creator}:{task.executor}'
 
                 todo.save()
 

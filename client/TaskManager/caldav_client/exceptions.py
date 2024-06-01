@@ -1,3 +1,7 @@
+class CalendarAlreadyExists(Exception):
+    pass
+
+
 class CalendarNotFound(Exception):
     pass
 
