@@ -6,36 +6,41 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>607</width>
-    <height>330</height>
+    <width>599</width>
+    <height>351</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Генерция пригласительного кода</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget{
-	background-color: #27272A;
+   <string notr="true">QWidget {
+    background-color: rgb(30, 30, 37);
+    color: rgb(160, 160, 160);
 }
-
-QLineEdit{
-background-color: #09090B;
-font-size:14px
+QPushButton {
+    background-color: white;
+	color: rgb(255, 255, 255);
+    color: black;
+    border-radius: 6px;
+    padding: 35px 10px;
 }
-
-QLineEdit::placeholder {
-    color: red;
+QPushButton::hover {
+    background-color: rgb(190, 190, 190);
 }
-
-QPushButton{
-background-color: #FAFAFA;
-color:black;
-font-size:14px
+QLineEdit {
+    background-color: rgb(20, 20, 26);
+    border: 1px solid rgb(52, 52, 52);
+	border-radius: 6px;
+    padding: 7px;
 }
-
-QLabel{
-font-size:22px;
-color: gray;
+QLineEdit::hover {
+    background-color: rgb(40, 40, 48);
 }</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -49,7 +54,7 @@ color: gray;
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>40</width>
+       <width>50</width>
        <height>20</height>
       </size>
      </property>
@@ -83,7 +88,7 @@ color: gray;
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <property name="spacing">
-          <number>3</number>
+          <number>10</number>
          </property>
          <property name="leftMargin">
           <number>5</number>
@@ -99,6 +104,18 @@ color: gray;
          </property>
          <item>
           <widget class="QLabel" name="label_invite_img">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -109,6 +126,22 @@ color: gray;
          </item>
          <item>
           <widget class="QLabel" name="label_invite_user">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>14</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
            <property name="text">
             <string>Пригласить пользователя</string>
            </property>
@@ -122,16 +155,16 @@ color: gray;
       </item>
       <item>
        <widget class="QLineEdit" name="lineEdit_invite_f">
+        <property name="font">
+         <font>
+          <family>Arial Rounded MT Bold</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">QLineEdit{
-background-color: #09090B;
-font-size:14px
-}
-
-QLineEdit:placeholderText {
-    color: #ff0000;
-}
-</string>
+         <string notr="true">QLineEdit::placeholder{
+color: blue; 
+}</string>
         </property>
         <property name="placeholderText">
          <string>Введите фамилию</string>
@@ -140,6 +173,12 @@ QLineEdit:placeholderText {
       </item>
       <item>
        <widget class="QLineEdit" name="lineEdit_invite_n">
+        <property name="font">
+         <font>
+          <family>Arial Rounded MT Bold</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="placeholderText">
          <string>Введите имя</string>
         </property>
@@ -147,6 +186,12 @@ QLineEdit:placeholderText {
       </item>
       <item>
        <widget class="QLineEdit" name="lineEdit_invite_m">
+        <property name="font">
+         <font>
+          <family>Arial Rounded MT Bold</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="placeholderText">
          <string>Введите отчество</string>
         </property>
@@ -154,6 +199,12 @@ QLineEdit:placeholderText {
       </item>
       <item>
        <widget class="QLineEdit" name="lineEdit_invite_email">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">text-color: solid grey;</string>
         </property>
@@ -186,13 +237,23 @@ QLineEdit:placeholderText {
          </item>
          <item>
           <widget class="QPushButton" name="pushButton_invite_send">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial Rounded MT Bold</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
            <property name="styleSheet">
-            <string notr="true">QPushButton::hover{
-background-color: gray;
-}</string>
+            <string notr="true"/>
            </property>
            <property name="text">
-            <string>Оправить</string>
+            <string>Создать код</string>
            </property>
           </widget>
          </item>
@@ -225,7 +286,7 @@ background-color: gray;
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>40</width>
+       <width>50</width>
        <height>20</height>
       </size>
      </property>

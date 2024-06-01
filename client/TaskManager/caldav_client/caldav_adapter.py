@@ -1,12 +1,13 @@
-import caldav
-from caldav import CalendarObjectResource
-from caldav.lib.error import NotFoundError, AuthorizationError
-from icalendar.prop import vCategory
-from client.TaskManager.caldav_client.exceptions import CalendarAlreadyExists, CalendarNotFound, InvalidCredentials, TaskNotFound
 from datetime import datetime
 from enum import Enum
-from client.TaskManager.caldav_client.schemas import Status, Task, UpdateTask
 
+import caldav
+import icalendar.prop
+from caldav import CalendarObjectResource
+from caldav.lib.error import AuthorizationError, NotFoundError
+
+from TP2024.client.TaskManager.caldav_client.exceptions import CalendarAlreadyExist, CalendarNotFound, InvalidCredentials, TaskNotFound
+from TP2024.client.TaskManager.caldav_client.schemas import Status, Task, UpdateTask
 
 class CalDavStatus(Enum):
     needs_action = 'NEEDS-ACTION'
@@ -82,18 +83,19 @@ class CalDavAdapter:
         except AuthorizationError:
             raise InvalidCredentials
 
-    def __init__(self, url: str, login: str, password: str):
+    def __init__(self, url: str, login: str, password: str, calendar_name: str):
         self.url = url
         self.login = login
         self.password = password
+        self.calendar_name = calendar_name
 
-    def create_task(self, calendar_name: str, task: Task):
+    def create_task(self, task: Task):
         try:
             with caldav.DAVClient(url=self.url, username=self.login, password=self.password) as client:
                 principal = client.principal()
 
                 try:
-                    calendar = principal.calendar(calendar_name)
+                    calendar = principal.calendar(self.calendar_name)
                 except NotFoundError:
                     raise CalendarNotFound
 
@@ -112,13 +114,13 @@ class CalDavAdapter:
         except AuthorizationError:
             raise InvalidCredentials
 
-    def get_tasks(self, calendar_name: str, from_date: datetime, to_date: datetime) -> list[Task]:
+    def get_tasks(self, from_date: datetime, to_date: datetime) -> list[Task]:
         try:
             with caldav.DAVClient(url=self.url, username=self.login, password=self.password) as client:
                 principal = client.principal()
 
                 try:
-                    calendar = principal.calendar(calendar_name)
+                    calendar = principal.calendar(self.calendar_name)
                 except NotFoundError:
                     raise CalendarNotFound
 
@@ -133,13 +135,13 @@ class CalDavAdapter:
         except AuthorizationError:
             raise InvalidCredentials
 
-    def get_task(self, calendar_name: str, uid: str):
+    def get_task(self, uid: str):
         try:
             with caldav.DAVClient(url=self.url, username=self.login, password=self.password) as client:
                 principal = client.principal()
 
                 try:
-                    calendar = principal.calendar(calendar_name)
+                    calendar = principal.calendar(self.calendar_name)
                 except NotFoundError:
                     raise CalendarNotFound
 
@@ -153,13 +155,13 @@ class CalDavAdapter:
         except AuthorizationError:
             raise InvalidCredentials
 
-    def update_task(self, calendar_name: str, uid: str, task: UpdateTask):
+    def update_task(self, uid: str, task: UpdateTask):
         try:
             with caldav.DAVClient(url=self.url, username=self.login, password=self.password) as client:
                 principal = client.principal()
 
                 try:
-                    calendar = principal.calendar(calendar_name)
+                    calendar = principal.calendar(self.calendar_name)
                 except NotFoundError:
                     raise CalendarNotFound
 
@@ -177,7 +179,7 @@ class CalDavAdapter:
                 if task.end_time is not None:
                     todo.icalendar_component["due"].dt = task.end_time
                 if task.tags is not None:
-                    todo.icalendar_component["categories"] = vCategory(task.tags)
+                    todo.icalendar_component["categories"] = icalendar.prop.vCategory(task.tags)
                 if task.priority is not None:
                     todo.icalendar_component["priority"] = task.priority
                 if task.status is not None:
@@ -193,13 +195,13 @@ class CalDavAdapter:
         except AuthorizationError:
             raise InvalidCredentials
 
-    def delete_task(self, calendar_name: str, uid: str):
+    def delete_task(self, uid: str):
         try:
             with caldav.DAVClient(url=self.url, username=self.login, password=self.password) as client:
                 principal = client.principal()
 
                 try:
-                    calendar = principal.calendar(calendar_name)
+                    calendar = principal.calendar(self.calendar_name)
                 except NotFoundError:
                     raise CalendarNotFound
 
