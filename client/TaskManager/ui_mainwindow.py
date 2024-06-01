@@ -90,7 +90,7 @@ class Ui_MainWindow(object):
         self.menu_frame.setSizePolicy(sizePolicy2)
         self.menu_frame.setMinimumSize(QSize(200, 0))
         self.menu_frame.setStyleSheet(u"#menu_frame {\n"
-"    border-left: 2px solid grey;\n"
+"    border-left: 1px solid grey;\n"
 "}")
         self.menu_frame.setFrameShape(QFrame.StyledPanel)
         self.menu_frame.setFrameShadow(QFrame.Raised)
@@ -239,7 +239,7 @@ class Ui_MainWindow(object):
         self.tasks_frame.setSizePolicy(sizePolicy6)
         self.tasks_frame.setMinimumSize(QSize(596, 0))
         self.tasks_frame.setStyleSheet(u"#tasks_frame {\n"
-"    border-left: 2px solid grey;\n"
+"    border-left: 1px solid grey;\n"
 "}")
         self.tasks_frame.setFrameShape(QFrame.StyledPanel)
         self.tasks_frame.setFrameShadow(QFrame.Raised)
@@ -432,7 +432,7 @@ class Ui_MainWindow(object):
         self.toolBox.setMaximumSize(QSize(16777215, 16777215))
         self.page_overdue = QWidget()
         self.page_overdue.setObjectName(u"page_overdue")
-        self.page_overdue.setGeometry(QRect(0, 0, 576, 338))
+        self.page_overdue.setGeometry(QRect(0, 0, 577, 338))
         self.verticalLayout_8 = QVBoxLayout(self.page_overdue)
         self.verticalLayout_8.setSpacing(0)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
@@ -485,7 +485,7 @@ class Ui_MainWindow(object):
         self.toolBox.addItem(self.page_overdue, u"\u041f\u0440\u043e\u0441\u0440\u043e\u0447\u0435\u043d\u043e, <X>")
         self.page_current = QWidget()
         self.page_current.setObjectName(u"page_current")
-        self.page_current.setGeometry(QRect(0, 0, 576, 338))
+        self.page_current.setGeometry(QRect(0, 0, 577, 338))
         self.verticalLayout_4 = QVBoxLayout(self.page_current)
         self.verticalLayout_4.setSpacing(0)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
@@ -536,7 +536,7 @@ class Ui_MainWindow(object):
         self.toolBox.addItem(self.page_current, u"\u0422\u0435\u043a\u0443\u0449\u0438\u0435, <X>")
         self.page_completed = QWidget()
         self.page_completed.setObjectName(u"page_completed")
-        self.page_completed.setGeometry(QRect(0, 0, 576, 338))
+        self.page_completed.setGeometry(QRect(0, 0, 577, 338))
         self.verticalLayout_9 = QVBoxLayout(self.page_completed)
         self.verticalLayout_9.setSpacing(0)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
@@ -578,7 +578,7 @@ class Ui_MainWindow(object):
         self.info_frame.setSizePolicy(sizePolicy6)
         self.info_frame.setMinimumSize(QSize(596, 0))
         self.info_frame.setStyleSheet(u"#info_frame {\n"
-"    border-left: 2px solid grey;\n"
+"    border-left: 1px solid grey;\n"
 "}")
         self.info_frame.setFrameShape(QFrame.StyledPanel)
         self.info_frame.setFrameShadow(QFrame.Raised)
@@ -651,7 +651,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 594, 606))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 595, 606))
         sizePolicy1.setHeightForWidth(self.scrollAreaWidgetContents.sizePolicy().hasHeightForWidth())
         self.scrollAreaWidgetContents.setSizePolicy(sizePolicy1)
         self.scrollAreaWidgetContents.setStyleSheet(u"")
@@ -833,7 +833,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.toolBox.setCurrentIndex(0)
+        self.toolBox.setCurrentIndex(2)
         self.toolBox.layout().setSpacing(6)
         self.stackedWidget.setCurrentIndex(1)
 
