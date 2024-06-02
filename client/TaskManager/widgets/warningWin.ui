@@ -21,7 +21,7 @@
 QPushButton{
 	background-color: white;
 	border:1px solid rgb(70,70,70);
-    border-radius: 6px;
+    border-radius: 4px;
 	color: black;
 	padding: 110px;
 	width:50px;
@@ -31,7 +31,6 @@ QPushButton::hover
 {
 	border:1px;
 	background-color: rgb(180,180,180);
-	border-bottom: 1px solid  red;
 }
 </string>
   </property>
@@ -257,13 +256,13 @@ border-top: 1px solid white;</string>
            </property>
            <property name="minimumSize">
             <size>
-             <width>100</width>
+             <width>60</width>
              <height>30</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>150</width>
+             <width>70</width>
              <height>30</height>
             </size>
            </property>

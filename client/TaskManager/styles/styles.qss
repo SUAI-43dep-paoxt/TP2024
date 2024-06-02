@@ -233,9 +233,27 @@ QPushButton::hover {
 }
 
 #add_task {
-    border: 1px solid gray;
-    border-radius: 10px;
-    padding: 12px 10px;
+	border:1px solid rgb(70,70,70);
+    border-radius: 4px;
+    background-color: white;
+	color: black;
+}
+
+#add_task::hover
+{
+	background-color: rgb(180,180,180);
+}
+
+#delete_task {
+	border:1px solid rgb(70,70,70);
+    border-radius: 4px;
+    background-color: rgb(150, 0, 0);
+	color: white;
+}
+
+#delete_task::hover
+{
+	background-color: rgb(180,0,0);
 }
 
 #label_4 {

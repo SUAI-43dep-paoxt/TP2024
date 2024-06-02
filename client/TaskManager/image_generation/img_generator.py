@@ -5,6 +5,7 @@ from PySide6.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QMainW
 from PySide6.QtGui import QPixmap
 from PIL import Image, ImageDraw, ImageFont
 
+
 class GenImageWidget():
     def __init__(self, data):
         super().__init__()
@@ -23,7 +24,6 @@ class GenImageWidget():
     def generate_image(self):
         pass
 
-
     def hash_color(self):
         sha1 = hashlib.sha1()
         sha1.update(self.data.encode(encoding='UTF-8', errors='strict'))
@@ -32,6 +32,7 @@ class GenImageWidget():
         color_index = abs(int(hashed_value, 16)) % len(self.colors)
         selected_color = self.colors[color_index]
         return selected_color
+
 
 class GenerateAvatar(GenImageWidget, QWidget):
     def __init__(self, first_name, middle_name='', last_name=''):
@@ -45,7 +46,6 @@ class GenerateAvatar(GenImageWidget, QWidget):
         layout.addWidget(pic)
         self.setLayout(layout)
         self.generate_image()
-
 
     def generate_image(self):
         # Создаем полностью прозрачное изображение с прозрачностью 0

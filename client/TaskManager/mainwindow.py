@@ -180,17 +180,14 @@ class AuthorizationDialog(QDialog):
         self.ui.pushButton_haveacc_auth_up.clicked.connect(self.switch_page)
         self.ui.pushButton_haveacc_auth.clicked.connect(self.switch_page)
 
-        self.dict_calendar_info = {}
-        print(self.ui.lineEdit_auth_n.text(),
-                               self.ui.lineEdit_auth_m.text(),
-                               self.ui.lineEdit_auth_f.text())
+        self.dict_calendar_empty_lineedits = {}
+        self.dict_calendar_empty_labels = {}
+        self.session_storage = SessionStorage()
 
     def generate_avatar(self):
         image = GenerateAvatar(self.ui.lineEdit_reg_n.text(),
                                self.ui.lineEdit_reg_m.text(),
                                self.ui.lineEdit_reg_f.text())
-
-        self.session_storage = SessionStorage()
 
         if DEBUG:
             self.ui.lineEdit_reg_password.setText(DEBUG_CALDAV_CONNECTION.password)
@@ -210,7 +207,6 @@ class AuthorizationDialog(QDialog):
         first_name = self.ui.lineEdit_auth_n.text()
         middle_name = self.ui.lineEdit_auth_m.text()
         email = self.ui.lineEdit_auth_email.text()
-
 
         try:
             validate_base_input(last_name, first_name, middle_name, email)
@@ -240,21 +236,26 @@ class AuthorizationDialog(QDialog):
             self.accept()
 
     def check_reg_data(self):
+        print(f'{self.ui.lineEdit_reg_calendar_name.text()=} {self.ui.label_reg_calendar_name.text()=}')
         last_name = self.ui.lineEdit_reg_f.text()
         first_name = self.ui.lineEdit_reg_n.text()
         middle_name = self.ui.lineEdit_reg_m.text()
         email = self.ui.lineEdit_reg_email.text()
 
-        self.dict_calendar_info["calendar_name"] = self.ui.lineEdit_reg_calendar_name.text()
-        self.dict_calendar_info["url_nc"] = self.ui.lineEdit_reg_url_nc.text()
-        self.dict_calendar_info["username"] = self.ui.lineEdit_reg_password.text()  # логин CalDAV
-        self.dict_calendar_info["password"] = self.ui.lineEdit_reg_username.text()
+        self.dict_calendar_empty_lineedits["calendar_name"] = [self.ui.lineEdit_reg_calendar_name.text(),
+                                                               self.ui.label_reg_calendar_name.text()]
+        self.dict_calendar_empty_lineedits["url_nc"] = [self.ui.lineEdit_reg_url_nc.text(),
+                                                        self.ui.label_reg_url.text()]
+        self.dict_calendar_empty_lineedits["username"] = [self.ui.lineEdit_reg_password.text(),
+                                                          self.ui.label_reg_password.text()]  # логин CalDAV
+        self.dict_calendar_empty_lineedits["password"] = [self.ui.lineEdit_reg_username.text(),
+                                                          self.ui.label_reg_username.text()]
 
-        # код из авторизации - изменить логику для регистрации
         try:
             validate_base_input(last_name, first_name, middle_name, email)
-
-            empty_keys = [k for k, v in self.dict_calendar_info.items() if not v]
+            # проверка введённых данных календаря
+            empty_keys = [v[1] for v in self.dict_calendar_empty_lineedits.values() if not v[0]]
+            print(empty_keys)
             if empty_keys:
                 show_error_window("Ошибка", f"Следующие поля не заполнены: {', '.join(empty_keys)}")
 
@@ -271,7 +272,7 @@ class AuthorizationDialog(QDialog):
             self.ui.lineEdit_reg_username.setText(DEBUG_CALDAV_CONNECTION.username)
 
             invite_code = InviteCode(
-                project_name="Тестовый Проект", # FIXME: add input for it
+                project_name="Тестовый Проект",  # FIXME: add input for it
                 person=person,
                 caldav_info=CalDavInfo(
                     username=self.ui.lineEdit_reg_username.text(),
@@ -462,13 +463,13 @@ class MainWindow(QMainWindow):
         Создает дочерние виджеты для отображения названия задачи, ее описания и тегов.
 
         """
-        # Додавление виджета с названием задачи (title)
+        # Добавление виджета с названием задачи (title)
         task_tree = QTreeWidgetItem(root_tree)
         task_tree.setText(0, task.title)
-        # Додавление виджета с описанием задачи (description)
+        # Добавление виджета с описанием задачи (description)
         description = QTreeWidgetItem(task_tree)
         description.setText(0, task.description)
-        # Додавление виджета с тегами задачи (tags)
+        # Добавление виджета с тегами задачи (tags)
         tags = QTreeWidgetItem(task_tree)
         tags.setText(0, task.tags[0])
 

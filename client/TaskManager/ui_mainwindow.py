@@ -621,6 +621,8 @@ class Ui_MainWindow(object):
 
         self.delete_task = QPushButton(self.page_empty)
         self.delete_task.setObjectName(u"delete_task")
+        self.delete_task.setMinimumSize(QSize(0, 35))
+        self.delete_task.setStyleSheet(u"")
 
         self.verticalLayout_2.addWidget(self.delete_task)
 
@@ -752,12 +754,17 @@ class Ui_MainWindow(object):
 
         self.add_task = QPushButton(self.task_main_info)
         self.add_task.setObjectName(u"add_task")
+        self.add_task.setMinimumSize(QSize(0, 35))
         font2 = QFont()
         font2.setBold(True)
         font2.setItalic(False)
         self.add_task.setFont(font2)
-        self.add_task.setStyleSheet(u"    background-color: white;\n"
-"    color: black;")
+        self.add_task.setStyleSheet(u"QPushButton::hover\n"
+"{\n"
+"	border:1px;\n"
+"	background-color: rgb(180,180,180);\n"
+"}\n"
+"")
 
         self.verticalLayout_13.addWidget(self.add_task)
 

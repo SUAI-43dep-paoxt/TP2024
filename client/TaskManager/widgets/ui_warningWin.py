@@ -31,7 +31,7 @@ class Ui_WarningWin(object):
 "QPushButton{\n"
 "	background-color: white;\n"
 "	border:1px solid rgb(70,70,70);\n"
-"    border-radius: 6px;\n"
+"    border-radius: 4px;\n"
 "	color: black;\n"
 "	padding: 110px;\n"
 "	width:50px;\n"
@@ -41,7 +41,6 @@ class Ui_WarningWin(object):
 "{\n"
 "	border:1px;\n"
 "	background-color: rgb(180,180,180);\n"
-"	border-bottom: 1px solid  red;\n"
 "}\n"
 "")
         WarningWin.setModal(True)
@@ -147,8 +146,8 @@ class Ui_WarningWin(object):
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.pushButton_ok.sizePolicy().hasHeightForWidth())
         self.pushButton_ok.setSizePolicy(sizePolicy1)
-        self.pushButton_ok.setMinimumSize(QSize(100, 30))
-        self.pushButton_ok.setMaximumSize(QSize(150, 30))
+        self.pushButton_ok.setMinimumSize(QSize(60, 30))
+        self.pushButton_ok.setMaximumSize(QSize(70, 30))
 
         self.horizontalLayout.addWidget(self.pushButton_ok)
 
