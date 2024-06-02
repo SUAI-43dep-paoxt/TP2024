@@ -1445,6 +1445,15 @@ QTreeView::branch:open:has-children:!has-siblings {
              </item>
              <item>
               <widget class="QPushButton" name="delete_task">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
                <property name="text">
                 <string>Удалить задачу</string>
                </property>
@@ -1729,6 +1738,12 @@ border:1px solid white;
                     </item>
                     <item>
                      <widget class="QPushButton" name="add_task">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>35</height>
+                       </size>
+                      </property>
                       <property name="font">
                        <font>
                         <italic>false</italic>
@@ -1736,8 +1751,12 @@ border:1px solid white;
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">    background-color: white;
-    color: black;</string>
+                       <string notr="true">QPushButton::hover
+{
+	border:1px;
+	background-color: rgb(180,180,180);
+}
+</string>
                       </property>
                       <property name="text">
                        <string>Добавить задачу</string>

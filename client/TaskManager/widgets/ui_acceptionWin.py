@@ -32,7 +32,7 @@ class Ui_AcceptionWin(object):
 "QPushButton{\n"
 "	background-color: white;\n"
 "	border:1px solid rgb(70,70,70);\n"
-"    border-radius: 6px;\n"
+"    border-radius: 4px;\n"
 "	color: black;\n"
 "	padding: 110px;\n"
 "	width:50px;\n"
@@ -42,7 +42,6 @@ class Ui_AcceptionWin(object):
 "{\n"
 "	border:1px;\n"
 "	background-color: rgb(180,180,180);\n"
-"	border-bottom: 1px solid  red;\n"
 "}\n"
 "")
         AcceptionWin.setModal(True)
@@ -145,7 +144,7 @@ class Ui_AcceptionWin(object):
         sizePolicy1.setHeightForWidth(self.buttonBox.sizePolicy().hasHeightForWidth())
         self.buttonBox.setSizePolicy(sizePolicy1)
         self.buttonBox.setMinimumSize(QSize(150, 25))
-        self.buttonBox.setMaximumSize(QSize(200, 30))
+        self.buttonBox.setMaximumSize(QSize(70, 30))
         font1 = QFont()
         font1.setFamilies([u"Arial"])
         font1.setPointSize(11)
