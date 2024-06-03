@@ -2,12 +2,9 @@
     font-family: Arial;
 }
 
-#lineEdit_add_task, #lineEdit_task_description, #lineEdit_tag_name, #lineEdit_tag_name_2, #taska {
+#lineEdit_add_task, #lineEdit_task_description, #lineEdit_tag_name, #lineEdit_tag_name_2, #taska, #lineEdit_tags {
     padding: 10px;
 }
-
-
-
 
 
 #black_info, #frame_3, #label_app_img, #label_app_name, #label_app_quote, #label_app_author_quote {
@@ -20,8 +17,6 @@
     padding-bottom: 8px;
     border-image: url(./images/cc.png);
 }
-
-
 
 #label_invite_img {
     min-width: 18px;
@@ -37,20 +32,36 @@
 }
 
 #invite_button {
-   padding-top: 20px;
-
-    background-image: url(./images/invite.png);
+    padding-top: 20px;
+    background-image: url(./images/invite-icon.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     border: none;
 }
 
+#account_button {
+    background-image: url(./images/avatar.png) 0 0 0 0 stretch stretch;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+}
+
+#empty_tasks{
+    background-image: url(./images/file-search.png) 0 0 0 0 stretch stretch;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+}
+
+
 #label_app_name {
     font-size: 22px;
 }
 
-#label_reg_email, #label_reg_fio, #label_reg_url, #label_reg_calendar_name, #label_reg_password, #label_reg_username,
+#label_reg_email, #label_reg_fio, #label_reg_url, #label_reg_project_name, #label_reg_password, #label_reg_username,
 #pushButton_reg, #pushButton_auth, #pushButton_haveacc_auth_up, #pushButton_haveacc_auth,
 #pushButton_noacc_reg_up, #pushButton_haveacc_auth, #label_auth_f, #label_auth_n, #label_auth_m, #label_auth_login, #label_auth_email, #label_auth_code, #label_reg_n, #label_reg_f, #label_reg_m {
     font-weight: bold;
@@ -80,7 +91,7 @@ QLineEdit:focus, QLineEdit:hover {
     border-style: solid; /* Стиль границы при фокусе */
 }
 
-#frame_add_tag_border_2, #frame_add_tag_border, #frame_edit_border, #lineEdit_task_description, #lineEdit_tag_name, #lineEdit_tag_name_2  {
+#frame_add_tag_border_2, #frame_add_tag_border, #frame_edit_border, #lineEdit_task_description, #lineEdit_tag_name, #lineEdit_tag_name_2, #lineEdit_tags  {
      border-radius: 10px;
 }
 
@@ -96,33 +107,6 @@ QLineEdit:focus, QLineEdit:hover {
     font-size: 14px;
     line-height: 24px;
     color: #FAFAFA;
-}
-
-#account_button {
-    width: 10px;
-    height: 10px;
-
-    position: relative;
-
-    border-radius: 20%;
-    border: none;
-
-
-    color: #FFFFFF;
-
-    font-size: 0px;
-    font-weight: bold;
-    text-align: center;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding-top: 30px;
-
-    background-image: url(1.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    border: none;
-
 }
 
 #user_items_frame {
@@ -198,7 +182,7 @@ QPushButton#pushButton_3, QPushButton#pushButton_2, QPushButton#pushButton {
     padding-left: 20px;
 }
 
-#comboBox_2, #comboBox {
+#comboBox_2, #comboBox, #comboBox_status {
     border-radius: 10px;
     border: 1px solid gray;
 }
@@ -216,6 +200,11 @@ QPushButton#pushButton_3, QPushButton#pushButton_2, QPushButton#pushButton {
     background-color: transparent;
 }
 
+#comboBox_tasks_filters QAbstractItemView::item:hover, #comboBox_status QAbstractItemView::item:hover, #comboBox QAbstractItemView::item:hover {
+    background-color: transparent;
+}
+
+
 #comboBox_tasks_filters::down-arrow {
     image: none;
 }
@@ -232,32 +221,31 @@ QPushButton::hover {
     background-color: rgb(190, 190, 190);
 }
 
-#add_task {
+#pushButton_add_task {
 	border:1px solid rgb(70,70,70);
     border-radius: 4px;
     background-color: white;
 	color: black;
 }
 
-#add_task::hover
+#pushButton_add_task::hover
 {
 	background-color: rgb(180,180,180);
 }
 
-#delete_task {
+#pushButton_delete_task {
 	border:1px solid rgb(70,70,70);
     border-radius: 4px;
     background-color: rgb(150, 0, 0);
 	color: white;
 }
 
-#delete_task::hover
+#pushButton_delete_task::hover
 {
 	background-color: rgb(180,0,0);
 }
 
 #label_4 {
-
     font-weight: 600;
     font-size: 16px;
     line-height: 32px;
@@ -285,7 +273,7 @@ QPushButton::hover {
 }
 
 #pushButton_assign {
-    background-image: url('./images/avatar.png');
+    background-image: url('./images/assigners.png');
     background-position: left center;
     background-repeat: no-repeat;
     background-origin: content-box;
@@ -310,6 +298,10 @@ QPushButton::hover {
     color: #FAFAFA;
 }
 
+#treeWidget_current, #treeWidget_completed, #treeWidget_overdue{
+    height: 30px;
+    width: 100px;
+}
 QTreeWidget:hover {
     background-color: solid gray;
 }
@@ -318,7 +310,6 @@ QTreeWidget::item:has-children {
     padding: 5px; /* Отступы между элементами */
     border-bottom: 1px solid gray; /* Граница между элементами */
 }
-
 
 QCalendarWidget QToolButton#qt_calendar_prevmonth {
     icon-size:15px 10px;

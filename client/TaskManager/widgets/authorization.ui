@@ -277,16 +277,16 @@ color:black;
               </spacer>
              </item>
              <item>
-              <widget class="QLabel" name="label_reg_calendar_name">
+              <widget class="QLabel" name="label_reg_project_name">
                <property name="text">
-                <string>Имя проекта</string>
+                <string>Название проекта</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_reg_calendar_name">
+              <widget class="QLineEdit" name="lineEdit_reg_project_name">
                <property name="placeholderText">
-                <string>ExampleCalendar</string>
+                <string>Project name</string>
                </property>
               </widget>
              </item>
