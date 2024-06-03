@@ -101,7 +101,7 @@ class CalDavAdapter:
                     raise CalendarNotFound
 
                 ics = task.creator if task.executor is None else f'{task.creator}:{task.executor}'
-
+                print(map_to_caldavstatus(task.status))
                 calendar.save_todo(
                     summary=task.title,
                     description=task.description,
@@ -109,7 +109,8 @@ class CalDavAdapter:
                     due=task.end_time,
                     categories=task.tags,
                     priority=task.priority,
-                    status=map_to_caldavstatus(task.status).value,
+                    status=CalDavStatus.needs_action.value,
+                    # status=map_to_caldavstatus(task.status).value,
                     ics=ics)
 
         except AuthorizationError:
@@ -184,7 +185,8 @@ class CalDavAdapter:
                 if task.priority is not None:
                     todo.icalendar_component["priority"] = task.priority
                 if task.status is not None:
-                    todo.icalendar_component["status"] = map_to_caldavstatus(task.status).value
+                    # todo.icalendar_component["status"] = map_to_caldavstatus(task.status).value
+                    todo.icalendar_component["status"] = CalDavStatus.needs_action.value
                 if task.executor is not None:
                     ics = str(todo.icalendar_component["ics"])
                     fields = ics.split(':')
