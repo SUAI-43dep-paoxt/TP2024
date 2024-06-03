@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 import pyperclip
 from PySide6 import QtWidgets
-from PySide6.QtCore import Signal
+from PySide6.QtCore import Signal, QDate
 from PySide6.QtGui import QColor, QPalette, QIcon
 from PySide6.QtWidgets import (QApplication, QMainWindow,
                                QDialog, QWidget, QTreeWidgetItem)
@@ -296,11 +296,22 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        self.ui.popup.setDateTime(datetime.now())
+        self.uid = {}
+        self.set_uid = ''
+
         # ---- Аватар -----
         self.ui.account_button.setStyleSheet('QPushButton {background-color: #A3C1DA}')
         self.ui.account_button.setIcon(
             QIcon("images\\avatar.png"))
         # ---- Аватар -----
+
+        # Вызов инвайт-формы
+        self.ui.invite_button.clicked.connect(self.show_invite_window)
+        self.widget = None
+
+        # Скрытие панели добавления
+        self.set_visible_input_panel(False)
 
         # Вызов инвайт-формы
         self.ui.invite_button.clicked.connect(self.show_invite_window)
@@ -314,8 +325,6 @@ class MainWindow(QMainWindow):
             calendar_name=self.current_session.caldav_info.calendar_name,
         )
 
-        # Скрытие панели добавления
-        self.set_visible_input_panel(False)
         self.ui.invite_button.clicked.connect(lambda:
                                               self.set_visible_input_panel(True))
         '''
@@ -337,12 +346,24 @@ class MainWindow(QMainWindow):
         # ----! DELETE COMMENTS FOR\BEFORE USING !------
         # ЧТОБЫ ЗАПУСТИТЬ ПРИЛОЖЕНИЕ В ТЕСТОВОМ РЕЖИМЕ БЕЗ NC - НУЖНО ЗАККОМЕНТИРОВАТЬ КОД НИЖЕ
 
-        # # self.adapter.create_task(CALENDAR_NAME, test_task)
-        # self.filling_tree()
-        # self.ui.pushButton_create.clicked.connect(self.add_task)
-        # self.connect(self.ui.treeWidget_current, SIGNAL("itemClicked(QTreeWidgetItem*, int)"), self.onClickItem)
+        self.adapter = CalDavAdapter(url=URL,
+                                     login=LOGIN,
+                                     password=PASSWORD,
+                                     calendar_name=CALENDAR_NAME)
+        self.filling_tree()
+        self.ui.add_task.clicked.connect(self.add_task)
+        self.ui.treeWidget_current.itemClicked.connect(self.onItemClicked)
+        self.ui.treeWidget_overdue.itemClicked.connect(self.onItemClicked)
+        self.ui.pushButton_create.clicked.connect(lambda:
+                                                  self.set_visible_input_panel(True))
+        # @marginal
+        # self.ui.pushButton_delete_task.clicked.connect(delete_task)
+        #
 
     def set_visible_input_panel(self, visible=True):
+        if visible:
+            self.ui.add_task.setText('Добавить задачу')
+        self.ui.taska.setText(self.ui.lineEdit_add_task.text())
         self.ui.label_task_name.setVisible(visible)
         self.ui.taska.setVisible(visible)
         self.ui.label_5.setVisible(visible)
@@ -359,6 +380,9 @@ class MainWindow(QMainWindow):
         self.invite_window = InviteWindow()
         self.invite_window.show()
 
+    def delete_task(self):
+        self.adapter.delete_task(uid=self.set_uid)
+
     def add_task(self):
         """
         Метод добавления задачи в NextCloud.
@@ -370,20 +394,25 @@ class MainWindow(QMainWindow):
         В случае не заполнения всех необходимых виджетов,
         выводит сообщение об ошибке.
         """
-        end_time = datetime.strptime(self.ui.calendarWidget.selectedDate().toString('dd-MM-yyyy'),
+        end_time = datetime.strptime(self.ui.popup.text().replace('.', '-'),
                                      '%d-%m-%Y')
-        try:
-            test_task = Task(
-                title=self.ui.lineEdit_add_task.text(),
-                description=self.ui.lineEdit_task_description.text(),
-                start_time=datetime.now(),
-                end_time=end_time,
-                status=Status.in_progress,
-                tags=['qwe', 'rty'],
-            )
-            self.adapter.create_task(CALENDAR_NAME, test_task)
-        except:
-            print('Виджеты не заполнены!')
+        task = Task(
+            title=self.ui.taska.text(),
+            description=self.ui.lineEdit_task_description.text(),
+            start_time=datetime(2000, 1, 1),
+            end_time=end_time,
+            status=Status.todo,
+            tags=['qwe', 'rty'],
+            creator='unknown',
+        )
+        if self.ui.add_task.text() == 'Добавить задачу':
+            self.adapter.create_task(task)
+            self.ui.lineEdit_add_task.clear()
+            self.set_visible_input_panel(False)
+        else:
+            self.adapter.update_task(self.set_uid, task)
+
+        self.filling_tree()
 
     def filling_tree(self):
         """
@@ -407,18 +436,16 @@ class MainWindow(QMainWindow):
         ]
 
         # Вычисление начала недели
-        start = datetime.now() - timedelta(days=datetime.now().weekday())
+        start = datetime.now() - timedelta(days=datetime.now().weekday()) - timedelta(days=1)
         # Вычисление конца недели
         end = start + timedelta(days=6)
 
         # 'Вытягивание' всех задач на текущую неделю
-        tasks = self.adapter.get_tasks(CALENDAR_NAME,
-                                       from_date=start,
+        tasks = self.adapter.get_tasks(from_date=start,
                                        to_date=end)
 
         # Текущий день недели
         current_week_day = datetime.now().weekday()
-
         # Ссылки на виджеты в 'Просроченные задачи'
         overdue_days = []
         self.ui.treeWidget_overdue.clear()
@@ -435,17 +462,32 @@ class MainWindow(QMainWindow):
             root.setText(0, WEEKDAY[day])
             current_days.append(root)
 
+        overdue_count = 0
+        current_count = 0
         for task in tasks:
-            end_time_task = task.end_time.weekday()  # Дедлайн задачи
-            if current_week_day <= end_time_task:  # Проверка задачи (текущий день < дедлайна)
-                if task.status == Status.todo:  # Проверка задачи (статус задачи == 'TO DO')
-                    self.show_task(task,
-                                   current_days[current_week_day - end_time_task])
+            end_time_task = (task.end_time + timedelta(hours=3)).weekday()  # Дедлайн задачи
+            if current_week_day <= end_time_task:  # Проверка задачи (текущий день <= дедлайна)
+                self.show_task(task,
+                                current_days[end_time_task - current_week_day])
+                overdue_count += 1
 
             else:
-                if task.status == Status.in_progress:  # Проверка задачи (статус задачи == 'IN PROGRESS')
-                    self.show_task(task,
-                                   overdue_days[end_time_task])
+                self.show_task(task,
+                                overdue_days[end_time_task])
+                current_count += 1
+
+        self.ui.toolBox.setItemText(0, f'Просрочено, {current_count}')
+        self.ui.toolBox.setItemText(1, f'Текущие, {overdue_count}')
+
+    def onItemClicked(self, it, col):
+        try:
+            self.set_visible_input_panel()
+            self.ui.taska.setText(it.text(col))
+            self.ui.lineEdit_task_description.setText(it.child(0).text(col))
+            self.ui.add_task.setText('Изменить')
+            self.set_uid = self.uid[str(it)]
+        except:
+            print()
 
     def show_task(self, task, root_tree) -> None:
         """
@@ -466,15 +508,13 @@ class MainWindow(QMainWindow):
         # Добавление виджета с названием задачи (title)
         task_tree = QTreeWidgetItem(root_tree)
         task_tree.setText(0, task.title)
-        # Добавление виджета с описанием задачи (description)
+        self.uid[str(task_tree)] = task.uid
+        # Додавление виджета с описанием задачи (description)
         description = QTreeWidgetItem(task_tree)
         description.setText(0, task.description)
-        # Добавление виджета с тегами задачи (tags)
+        # Додавление виджета с тегами задачи (tags)
         tags = QTreeWidgetItem(task_tree)
         tags.setText(0, task.tags[0])
-
-    def onClickItem(self, item, column):
-        print(item, column)
 
     def show_invite_window(self):
         self.invite_window = InviteWindow()
