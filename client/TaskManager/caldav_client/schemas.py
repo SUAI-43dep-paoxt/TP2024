@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import StrEnum
 from datetime import datetime
 from typing import Optional, Self
 
@@ -14,7 +14,7 @@ class CalDavInfo(BaseModel):
     calendar_name: str
 
 
-class Status(Enum):
+class Status(StrEnum):
     todo = 'TO DO'
     in_progress = 'IN PROGRESS'
     done = 'DONE'

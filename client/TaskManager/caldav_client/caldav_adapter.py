@@ -1,5 +1,5 @@
 from datetime import datetime
-from enum import Enum
+from enum import StrEnum
 
 import caldav
 import icalendar.prop
@@ -10,7 +10,7 @@ from client.TaskManager.caldav_client.exceptions import CalendarAlreadyExists, C
 from client.TaskManager.caldav_client.schemas import Status, Task, UpdateTask
 
 
-class CalDavStatus(Enum):
+class CalDavStatus(StrEnum):
     needs_action = 'NEEDS-ACTION'
     in_progress = 'IN-PROCESS'
     completed = 'COMPLETED'
@@ -101,7 +101,6 @@ class CalDavAdapter:
                     raise CalendarNotFound
 
                 ics = task.creator if task.executor is None else f'{task.creator}:{task.executor}'
-                print(map_to_caldavstatus(task.status))
                 calendar.save_todo(
                     summary=task.title,
                     description=task.description,
@@ -109,14 +108,15 @@ class CalDavAdapter:
                     due=task.end_time,
                     categories=task.tags,
                     priority=task.priority,
-                    status=CalDavStatus.needs_action.value,
+                    status=map_to_caldavstatus(task.status).value,
                     # status=map_to_caldavstatus(task.status).value,
-                    ics=ics)
+                    ics=ics,
+                )
 
         except AuthorizationError:
             raise InvalidCredentials
 
-    def get_tasks(self, from_date: datetime, to_date: datetime) -> list[Task]:
+    def get_tasks(self, from_date: datetime, to_date: datetime, include_completed=True) -> list[Task]:
         try:
             with caldav.DAVClient(url=self.url, username=self.login, password=self.password) as client:
                 principal = client.principal()
@@ -128,7 +128,7 @@ class CalDavAdapter:
 
                 result = []
 
-                todos = calendar.search(start=from_date, end=to_date, todo=True)
+                todos = calendar.search(start=from_date, end=to_date, todo=True, include_completed=include_completed)
                 for todo in todos:
                     result.append(map_to_task(todo))
 
@@ -185,8 +185,8 @@ class CalDavAdapter:
                 if task.priority is not None:
                     todo.icalendar_component["priority"] = task.priority
                 if task.status is not None:
-                    # todo.icalendar_component["status"] = map_to_caldavstatus(task.status).value
-                    todo.icalendar_component["status"] = CalDavStatus.needs_action.value
+                    todo.icalendar_component["status"] = map_to_caldavstatus(task.status).value
+                    # todo.icalendar_component["status"] = CalDavStatus.needs_action.value
                 if task.executor is not None:
                     ics = str(todo.icalendar_component["ics"])
                     fields = ics.split(':')

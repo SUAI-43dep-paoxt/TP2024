@@ -1,17 +1,22 @@
 # This Python file uses the following encoding: utf-8
 import re
+import uuid
 import sys
 from datetime import datetime, timedelta
+from string import printable
 
 import pyperclip
-from PySide6 import QtWidgets
-from PySide6.QtCore import Signal, QDate
+from PySide6 import QtWidgets, QtCore
+from PySide6.QtCore import Signal, QDate, QTimer
 from PySide6.QtGui import QColor, QPalette, QIcon
 from PySide6.QtWidgets import (QApplication, QMainWindow,
                                QDialog, QWidget, QTreeWidgetItem)
+from _queue import Empty
+from plyer import notification
 
 from caldav_client.caldav_adapter import CalDavAdapter
-from caldav_client.schemas import CalDavInfo, Status, Task
+from caldav_client.notifications.notification_worker import run_notification_worker
+from caldav_client.schemas import CalDavInfo, Status, Task, UpdateTask
 from image_generation.img_generator import GenerateAvatar
 from invite_code.services import *
 from session import SessionStorage
@@ -21,7 +26,7 @@ from widgets.ui_authorization import Ui_Authorization
 from widgets.ui_gen_invite import Ui_Invite_window
 from widgets.ui_warningWin import Ui_WarningWin
 
-DEBUG = True
+DEBUG = False
 DEBUG_CALDAV_CONNECTION = CalDavInfo(
     username='admin',
     password='admin',
@@ -113,7 +118,7 @@ class ValidationError(Exception):
 
 
 class InviteWindow(QWidget, Ui_Invite_window):
-    def __init__(self):
+    def __init__(self, adapter: CalDavAdapter, project_name: str):
         super().__init__()
         self.ui = Ui_Invite_window()
         self.ui.setupUi(self)
@@ -126,6 +131,8 @@ class InviteWindow(QWidget, Ui_Invite_window):
                                self.ui.lineEdit_invite_email]
         palette = self.line_edit_list[0].palette()
         palette.setColor(QPalette.PlaceholderText, QColor(161, 161, 170))
+        self.adapter = adapter
+        self.project_name = project_name
         for line_edit in self.line_edit_list:
             line_edit.setPalette(palette)
 
@@ -147,11 +154,12 @@ class InviteWindow(QWidget, Ui_Invite_window):
                                                    middle_name=line_edit_list_texts[2],
                                                    email=line_edit_list_texts[3],
                                                    ),
-                                     caldav_info=CalDavInfo(username="test1",
-                                                            password="test2",
-                                                            url="test_url",
-                                                            calendar_name="test_cal_name",
-                                                            ), project_name="......")
+                                     caldav_info=CalDavInfo(username=self.adapter.login,
+                                                            password=self.adapter.password,
+                                                            url=self.adapter.url,
+                                                            calendar_name=self.adapter.calendar_name,
+                                                            ),
+                                     project_name=self.project_name)
 
             text = get_encrypted_invite_code(invite_code)
             pyperclip.copy(text)
@@ -172,7 +180,6 @@ class AuthorizationDialog(QDialog):
         self.ui.setupUi(self)
         self.ui.pushButton_auth.clicked.connect(self.check_auth_data)
         self.ui.pushButton_reg.clicked.connect(self.check_reg_data)
-        self.ui.pushButton_reg.clicked.connect(self.generate_avatar)
 
         self.ui.pushButton_noacc_reg_up.clicked.connect(self.switch_page)
         self.ui.pushButton_noacc_reg.clicked.connect(self.switch_page)
@@ -184,14 +191,14 @@ class AuthorizationDialog(QDialog):
         self.dict_calendar_empty_labels = {}
         self.session_storage = SessionStorage()
 
-    def generate_avatar(self):
-        image = GenerateAvatar(self.ui.lineEdit_reg_n.text(),
-                               self.ui.lineEdit_reg_m.text(),
-                               self.ui.lineEdit_reg_f.text())
+    def generate_avatar(self, n, m, f):
+        image = GenerateAvatar(n,
+                               m,
+                               f)
 
         if DEBUG:
             self.ui.lineEdit_reg_password.setText(DEBUG_CALDAV_CONNECTION.password)
-            self.ui.lineEdit_reg_calendar_name.setText(DEBUG_CALDAV_CONNECTION.calendar_name)
+            self.ui.lineEdit_reg_project_name.setText(DEBUG_CALDAV_CONNECTION.calendar_name)
             self.ui.lineEdit_reg_url_nc.setText(DEBUG_CALDAV_CONNECTION.url)
             self.ui.lineEdit_reg_username.setText(DEBUG_CALDAV_CONNECTION.username)
 
@@ -231,19 +238,18 @@ class AuthorizationDialog(QDialog):
             print(e)
             print("Invalid invite code")
 
-        if True:
-            self.login_successful.emit()
-            self.accept()
+        self.generate_avatar(last_name, first_name, middle_name)
+        self.login_successful.emit()
+        self.accept()
 
     def check_reg_data(self):
-        print(f'{self.ui.lineEdit_reg_calendar_name.text()=} {self.ui.label_reg_calendar_name.text()=}')
         last_name = self.ui.lineEdit_reg_f.text()
         first_name = self.ui.lineEdit_reg_n.text()
         middle_name = self.ui.lineEdit_reg_m.text()
         email = self.ui.lineEdit_reg_email.text()
 
-        self.dict_calendar_empty_lineedits["calendar_name"] = [self.ui.lineEdit_reg_calendar_name.text(),
-                                                               self.ui.label_reg_calendar_name.text()]
+        self.dict_calendar_empty_lineedits["calendar_name"] = [self.ui.lineEdit_reg_project_name.text(),
+                                                               self.ui.label_reg_project_name.text()]
         self.dict_calendar_empty_lineedits["url_nc"] = [self.ui.lineEdit_reg_url_nc.text(),
                                                         self.ui.label_reg_url.text()]
         self.dict_calendar_empty_lineedits["username"] = [self.ui.lineEdit_reg_password.text(),
@@ -255,39 +261,52 @@ class AuthorizationDialog(QDialog):
             validate_base_input(last_name, first_name, middle_name, email)
             # проверка введённых данных календаря
             empty_keys = [v[1] for v in self.dict_calendar_empty_lineedits.values() if not v[0]]
-            print(empty_keys)
+
             if empty_keys:
                 show_error_window("Ошибка", f"Следующие поля не заполнены: {', '.join(empty_keys)}")
 
             person = Person(
-                last_name=self.ui.lineEdit_auth_f.text(),
-                first_name=self.ui.lineEdit_auth_n.text(),
-                middle_name=self.ui.lineEdit_auth_m.text(),
-                email=self.ui.lineEdit_auth_email.text()
+                last_name=last_name,
+                first_name=first_name,
+                middle_name=middle_name,
+                email=email
             )
 
-            self.ui.lineEdit_reg_password.setText(DEBUG_CALDAV_CONNECTION.password)
-            self.ui.lineEdit_reg_calendar_name.setText(DEBUG_CALDAV_CONNECTION.calendar_name)
-            self.ui.lineEdit_reg_url_nc.setText(DEBUG_CALDAV_CONNECTION.url)
-            self.ui.lineEdit_reg_username.setText(DEBUG_CALDAV_CONNECTION.username)
-
             invite_code = InviteCode(
-                project_name="Тестовый Проект",  # FIXME: add input for it
+                project_name=self.ui.lineEdit_reg_project_name.text(),
                 person=person,
                 caldav_info=CalDavInfo(
                     username=self.ui.lineEdit_reg_username.text(),
                     password=self.ui.lineEdit_reg_password.text(),
                     url=self.ui.lineEdit_reg_url_nc.text(),
-                    calendar_name=self.ui.lineEdit_reg_calendar_name.text(),  # FIXME: autogenerated calendar name
+                    calendar_name="",
                 )
             )
-            self.session_storage.add(invite_code)
-        except ValidationError as e:
-            print(f"Обработано исключение: {e}")
 
-        if True:  # FIXME: check that calendar was created
+            calendar_name = "".join(filter(lambda c: c in printable, invite_code.project_name)) + f"-{uuid.uuid4().hex}"
+
+            try:
+                CalDavAdapter.create_calendar(
+                    url=invite_code.caldav_info.url,
+                    login=invite_code.caldav_info.username,
+                    password=invite_code.caldav_info.password,
+                    name=calendar_name,
+                )
+            except Exception as e:
+                show_error_window("Ошибка", "Некорректные данные CalDAV")
+                print(e)
+                return
+
+            invite_code.caldav_info.calendar_name = calendar_name
+            self.session_storage.add(invite_code)
+            self.generate_avatar(last_name, first_name, middle_name)
             self.login_successful.emit()
             self.accept()
+
+        except ValidationError as e:
+            print(f"Обработано исключение: {e}")
+        except:
+            show_error_window("Ошибка", f"Ошибка создания календаря")
 
 
 class MainWindow(QMainWindow):
@@ -301,17 +320,15 @@ class MainWindow(QMainWindow):
         self.set_uid = ''
 
         # ---- Аватар -----
-        self.ui.account_button.setStyleSheet('QPushButton {background-color: #A3C1DA}')
-        self.ui.account_button.setIcon(
-            QIcon("images\\avatar.png"))
+        # self.ui.account_button.setIcon(
+        #    QIcon("images\\avatar.png"))
+        # self.ui.account_button.setStyleSheet("""
+        # QPushButton{
+        #     max-width: 28px;
+        #     max-height: 28px;
+        # }
+        # """)
         # ---- Аватар -----
-
-        # Вызов инвайт-формы
-        self.ui.invite_button.clicked.connect(self.show_invite_window)
-        self.widget = None
-
-        # Скрытие панели добавления
-        self.set_visible_input_panel(False)
 
         # Вызов инвайт-формы
         self.ui.invite_button.clicked.connect(self.show_invite_window)
@@ -325,63 +342,72 @@ class MainWindow(QMainWindow):
             calendar_name=self.current_session.caldav_info.calendar_name,
         )
 
+        self.ui.stackedWidget.setCurrentIndex(0)
+
         self.ui.invite_button.clicked.connect(lambda:
                                               self.set_visible_input_panel(True))
-        '''
-        Подключение к NextCloud 
-        URL = 'http://localhost:8080/remote.php/dav'
-        LOGIN = 'admin'
-        PASSWORD = 'admin'
-        CALENDAR_NAME = 'abs'
-        '''
-        # test_task = Task(
-        #     title='Задание №7',
-        #     description='Описание',
-        #     start_time=datetime.now() - timedelta(days=3),
-        #     end_time=datetime.now() - timedelta(days=2),
-        #     status=Status.in_progress,
-        #     tags=['qwe', 'rty'],
-        # )
 
-        # ----! DELETE COMMENTS FOR\BEFORE USING !------
-        # ЧТОБЫ ЗАПУСТИТЬ ПРИЛОЖЕНИЕ В ТЕСТОВОМ РЕЖИМЕ БЕЗ NC - НУЖНО ЗАККОМЕНТИРОВАТЬ КОД НИЖЕ
-
-        self.adapter = CalDavAdapter(url=URL,
-                                     login=LOGIN,
-                                     password=PASSWORD,
-                                     calendar_name=CALENDAR_NAME)
         self.filling_tree()
-        self.ui.add_task.clicked.connect(self.add_task)
-        self.ui.treeWidget_current.itemClicked.connect(self.onItemClicked)
-        self.ui.treeWidget_overdue.itemClicked.connect(self.onItemClicked)
+        self.ui.pushButton_add_task.clicked.connect(self.add_task)
+        self.ui.treeWidget_current.itemClicked.connect(self.onItemClicked)  #
+        self.ui.treeWidget_overdue.itemClicked.connect(self.onItemClicked)  #
+        self.ui.treeWidget_completed.itemClicked.connect(self.onItemClicked)  # ###################
         self.ui.pushButton_create.clicked.connect(lambda:
                                                   self.set_visible_input_panel(True))
-        # @marginal
-        # self.ui.pushButton_delete_task.clicked.connect(delete_task)
-        #
+
+        self.ui.pushButton_delete_task.clicked.connect(self.delete_task)
+
+        self.timer = QTimer(self)
+        self.queue = run_notification_worker(
+            caldav_adapters=[self.adapter],
+            executor=self.current_session.person.email,
+        )
+
+        self.start_handling_notifications()
+
+        self.status_to_index_value = {
+            Status.todo: 0,
+            Status.in_progress: 1,
+            Status.done: 2,
+        }
+
+        self.index_value_to_status = {
+            0: Status.todo,
+            1: Status.in_progress,
+            2: Status.done,
+        }
+
+    def start_handling_notifications(self):
+        self.timer.timeout.connect(self.handle_notifications)
+        self.timer.start(1000)
+
+    def handle_notifications(self):
+        try:
+            while item := self.queue.get_nowait():
+                notification.notify(
+                    title="Наступает дедлайн по задаче",
+                    message=f"Скоро нужно завершить «{item.title}»",
+                    app_name="TP2024",
+                )
+        except Empty:
+            return
 
     def set_visible_input_panel(self, visible=True):
         if visible:
-            self.ui.add_task.setText('Добавить задачу')
+            self.ui.pushButton_add_task.setText('Добавить задачу')
+        self.ui.stackedWidget.setCurrentIndex(1)
         self.ui.taska.setText(self.ui.lineEdit_add_task.text())
-        self.ui.label_task_name.setVisible(visible)
-        self.ui.taska.setVisible(visible)
-        self.ui.label_5.setVisible(visible)
-        self.ui.lineEdit_task_description.setVisible(visible)
-        self.ui.label.setVisible(visible)
-        self.ui.comboBox_2.setVisible(visible)
-        self.ui.label_6.setVisible(visible)
-        self.ui.popup.setVisible(visible)
-        self.ui.comboBox.setVisible(visible)
-        self.ui.add_task.setVisible(visible)
-        self.ui.label_7.setVisible(visible)
-
-    def show_invite_window(self):
-        self.invite_window = InviteWindow()
-        self.invite_window.show()
+        self.ui.pushButton_delete_task.setVisible(False)
 
     def delete_task(self):
         self.adapter.delete_task(uid=self.set_uid)
+        self.filling_tree()
+        self.ui.stackedWidget.setCurrentIndex(0)
+        self.clear_task()
+
+    def clear_task(self):
+        self.ui.taska.clear()
+        self.ui.lineEdit_task_description.clear()
 
     def add_task(self):
         """
@@ -394,24 +420,27 @@ class MainWindow(QMainWindow):
         В случае не заполнения всех необходимых виджетов,
         выводит сообщение об ошибке.
         """
-        end_time = datetime.strptime(self.ui.popup.text().replace('.', '-'),
-                                     '%d-%m-%Y')
+        end_time = datetime.strptime(self.ui.popup.text().replace('.', '-') + " 23:59:59",
+                                     '%d-%m-%Y %H:%M:%S')
+        print(f"{self.current_session.person.email=}")
         task = Task(
             title=self.ui.taska.text(),
             description=self.ui.lineEdit_task_description.text(),
             start_time=datetime(2000, 1, 1),
             end_time=end_time,
-            status=Status.todo,
-            tags=['qwe', 'rty'],
-            creator='unknown',
+            status=self.index_value_to_status[self.ui.comboBox_status.currentIndex()],
+            tags=self.ui.lineEdit_tags.text().split(),
+            creator=self.current_session.person.email,
+            executor=self.current_session.person.email,
         )
-        if self.ui.add_task.text() == 'Добавить задачу':
+        if self.ui.pushButton_add_task.text() == 'Добавить задачу':
             self.adapter.create_task(task)
             self.ui.lineEdit_add_task.clear()
             self.set_visible_input_panel(False)
         else:
             self.adapter.update_task(self.set_uid, task)
 
+        self.ui.stackedWidget.setCurrentIndex(0)
         self.filling_tree()
 
     def filling_tree(self):
@@ -446,6 +475,7 @@ class MainWindow(QMainWindow):
 
         # Текущий день недели
         current_week_day = datetime.now().weekday()
+
         # Ссылки на виджеты в 'Просроченные задачи'
         overdue_days = []
         self.ui.treeWidget_overdue.clear()
@@ -453,6 +483,14 @@ class MainWindow(QMainWindow):
             root = QTreeWidgetItem(self.ui.treeWidget_overdue)
             root.setText(0, WEEKDAY[day])
             overdue_days.append(root)
+
+        # Ссылки на виджеты в 'Выполнены'
+        completed_days = []
+        self.ui.treeWidget_completed.clear()
+        for day in range(current_week_day - 7, current_week_day):
+            root = QTreeWidgetItem(self.ui.treeWidget_completed)
+            root.setText(0, WEEKDAY[day])
+            completed_days.append(root)
 
         # Ссылки на виджеты в 'Текущие задачи'
         current_days = []
@@ -462,10 +500,18 @@ class MainWindow(QMainWindow):
             root.setText(0, WEEKDAY[day])
             current_days.append(root)
 
-        overdue_count = 0
         current_count = 0
+        overdue_count = 0
+        completed_count = 0
         for task in tasks:
-            end_time_task = (task.end_time + timedelta(hours=3)).weekday()  # Дедлайн задачи
+            end_time_task = task.end_time.weekday()  # Дедлайн задачи
+
+            print(task.status, task.status == Status.done)
+            if task.status == Status.done:
+                self.show_task(task, completed_days[end_time_task])
+                completed_count += 1
+                continue
+
             if current_week_day <= end_time_task:  # Проверка задачи (текущий день <= дедлайна)
                 self.show_task(task,
                                 current_days[end_time_task - current_week_day])
@@ -478,16 +524,26 @@ class MainWindow(QMainWindow):
 
         self.ui.toolBox.setItemText(0, f'Просрочено, {current_count}')
         self.ui.toolBox.setItemText(1, f'Текущие, {overdue_count}')
+        self.ui.toolBox.setItemText(2, f'Выполнено, {completed_count}')
 
     def onItemClicked(self, it, col):
         try:
+            task_uid = self.uid[str(it)]
+            task = self.adapter.get_task(task_uid)
+
             self.set_visible_input_panel()
             self.ui.taska.setText(it.text(col))
+            self.ui.lineEdit_tags.setText(" ".join(task.tags))
             self.ui.lineEdit_task_description.setText(it.child(0).text(col))
-            self.ui.add_task.setText('Изменить')
-            self.set_uid = self.uid[str(it)]
-        except:
-            print()
+            self.ui.pushButton_add_task.setText('Изменить')
+            self.ui.pushButton_delete_task.setVisible(True)
+            self.set_uid = task_uid
+
+            self.ui.comboBox_status.setCurrentIndex(self.status_to_index_value[task.status])
+            # self.adapter.update_task(self.uid[str(it)], UpdateTask(status=Status.done))
+            # print(self.adapter.get_task(self.uid[str(it)]))
+        except Exception as e:
+            print(e)
 
     def show_task(self, task, root_tree) -> None:
         """
@@ -509,23 +565,18 @@ class MainWindow(QMainWindow):
         task_tree = QTreeWidgetItem(root_tree)
         task_tree.setText(0, task.title)
         self.uid[str(task_tree)] = task.uid
-        # Додавление виджета с описанием задачи (description)
+        # Добавление виджета с описанием задачи (description)
         description = QTreeWidgetItem(task_tree)
         description.setText(0, task.description)
-        # Додавление виджета с тегами задачи (tags)
-        tags = QTreeWidgetItem(task_tree)
-        tags.setText(0, task.tags[0])
+        # Добавление виджета с тегами задачи (tags)
+        for i, tag in enumerate(task.tags):
+            tags = QTreeWidgetItem(task_tree)
+            tags.setText(0, tag)
 
     def show_invite_window(self):
-        self.invite_window = InviteWindow()
+        self.invite_window = InviteWindow(self.adapter, self.current_session.project_name)
         self.invite_window.show()
 
-
-# testdata
-URL = 'http://localhost:8080/remote.php/dav'
-LOGIN = 'admin'
-PASSWORD = 'admin'
-CALENDAR_NAME = 'abs'
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

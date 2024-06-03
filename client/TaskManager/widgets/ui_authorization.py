@@ -147,15 +147,15 @@ class Ui_Authorization(object):
 
         self.verticalLayout.addItem(self.verticalSpacer_3)
 
-        self.label_reg_calendar_name = QLabel(self.frame_reg_main)
-        self.label_reg_calendar_name.setObjectName(u"label_reg_calendar_name")
+        self.label_reg_project_name = QLabel(self.frame_reg_main)
+        self.label_reg_project_name.setObjectName(u"label_reg_project_name")
 
-        self.verticalLayout.addWidget(self.label_reg_calendar_name)
+        self.verticalLayout.addWidget(self.label_reg_project_name)
 
-        self.lineEdit_reg_calendar_name = QLineEdit(self.frame_reg_main)
-        self.lineEdit_reg_calendar_name.setObjectName(u"lineEdit_reg_calendar_name")
+        self.lineEdit_reg_project_name = QLineEdit(self.frame_reg_main)
+        self.lineEdit_reg_project_name.setObjectName(u"lineEdit_reg_project_name")
 
-        self.verticalLayout.addWidget(self.lineEdit_reg_calendar_name)
+        self.verticalLayout.addWidget(self.lineEdit_reg_project_name)
 
         self.label_reg_email = QLabel(self.frame_reg_main)
         self.label_reg_email.setObjectName(u"label_reg_email")
@@ -511,8 +511,8 @@ class Ui_Authorization(object):
         self.label_app_quote.setText(QCoreApplication.translate("Authorization", u"\"\u041f\u043b\u0430\u043d - \u044d\u0442\u043e \u043f\u043e\u043b\u043e\u0432\u0438\u043d\u0430 \u0443\u0441\u043f\u0435\u0445\u0430\".", None))
         self.label_app_author_quote.setText(QCoreApplication.translate("Authorization", u"\u0414\u0436\u043e\u0440\u0434\u0436 \u041a\u043b\u044e\u043a\u0430\u043d\u043e\u0432 \u044d\u043b\u044c \u0412\u0430\u0448\u0438\u043d\u0433\u0442\u043e\u043d", None))
         self.label_reg_main.setText(QCoreApplication.translate("Authorization", u"\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u0430", None))
-        self.label_reg_calendar_name.setText(QCoreApplication.translate("Authorization", u"\u0418\u043c\u044f \u043f\u0440\u043e\u0435\u043a\u0442\u0430", None))
-        self.lineEdit_reg_calendar_name.setPlaceholderText(QCoreApplication.translate("Authorization", u"ExampleCalendar", None))
+        self.label_reg_project_name.setText(QCoreApplication.translate("Authorization", u"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u0430", None))
+        self.lineEdit_reg_project_name.setPlaceholderText(QCoreApplication.translate("Authorization", u"Project name", None))
         self.label_reg_email.setText(QCoreApplication.translate("Authorization", u"Email", None))
         self.lineEdit_reg_email.setPlaceholderText(QCoreApplication.translate("Authorization", u"addres@example.com", None))
         self.label_reg_f.setText(QCoreApplication.translate("Authorization", u"\u0424\u0430\u043c\u0438\u043b\u0438\u044f", None))

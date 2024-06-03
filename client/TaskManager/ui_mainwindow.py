@@ -19,16 +19,15 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
 from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QComboBox, QDateEdit,
     QFrame, QGridLayout, QHBoxLayout, QHeaderView,
     QLabel, QLayout, QLineEdit, QMainWindow,
-    QMenu, QMenuBar, QPushButton, QScrollArea,
-    QSizePolicy, QSpacerItem, QStackedWidget, QStatusBar,
-    QToolBox, QTreeWidget, QTreeWidgetItem, QVBoxLayout,
-    QWidget)
+    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
+    QStackedWidget, QToolBox, QTreeWidget, QTreeWidgetItem,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1442, 651)
+        MainWindow.resize(1442, 963)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(4)
         sizePolicy.setVerticalStretch(1)
@@ -61,8 +60,8 @@ class Ui_MainWindow(object):
 "")
         self.action2 = QAction(MainWindow)
         self.action2.setObjectName(u"action2")
-        self.action1 = QAction(MainWindow)
-        self.action1.setObjectName(u"action1")
+        self.action = QAction(MainWindow)
+        self.action.setObjectName(u"action")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
@@ -92,8 +91,7 @@ class Ui_MainWindow(object):
         self.menu_frame.setStyleSheet(u"#menu_frame {\n"
 "    border-left: 1px solid grey;\n"
 "}")
-        self.menu_frame.setFrameShape(QFrame.StyledPanel)
-        self.menu_frame.setFrameShadow(QFrame.Raised)
+        self.menu_frame.setFrameShape(QFrame.NoFrame)
         self.gridLayout_3 = QGridLayout(self.menu_frame)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.gridLayout_3.setContentsMargins(9, -1, -1, -1)
@@ -108,7 +106,10 @@ class Ui_MainWindow(object):
         self.treeWidget.setStyleSheet(u"QWidget{\n"
 "	width: 5px;\n"
 "}\n"
-"")
+"\n"
+"QTreeView::item {\n"
+"    height: 20px;\n"
+"}")
         self.treeWidget.setAutoScrollMargin(16)
         self.treeWidget.setAlternatingRowColors(False)
         self.treeWidget.setAllColumnsShowFocus(False)
@@ -125,8 +126,7 @@ class Ui_MainWindow(object):
         sizePolicy3.setHeightForWidth(self.tags_frame.sizePolicy().hasHeightForWidth())
         self.tags_frame.setSizePolicy(sizePolicy3)
         self.tags_frame.setStyleSheet(u"")
-        self.tags_frame.setFrameShape(QFrame.StyledPanel)
-        self.tags_frame.setFrameShadow(QFrame.Raised)
+        self.tags_frame.setFrameShape(QFrame.NoFrame)
         self.verticalLayout = QVBoxLayout(self.tags_frame)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.label_2 = QLabel(self.tags_frame)
@@ -140,7 +140,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_3.addWidget(self.tags_frame, 2, 0, 1, 1)
 
-        self.verticalSpacer = QSpacerItem(20, 100, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.MinimumExpanding)
+        self.verticalSpacer = QSpacerItem(20, 100, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.gridLayout_3.addItem(self.verticalSpacer, 6, 0, 1, 1)
 
@@ -151,8 +151,7 @@ class Ui_MainWindow(object):
         self.buttons_frame.setStyleSheet(u"#buttons_frame {\n"
 "    border-bottom: 1px solid gray;\n"
 "}")
-        self.buttons_frame.setFrameShape(QFrame.StyledPanel)
-        self.buttons_frame.setFrameShadow(QFrame.Raised)
+        self.buttons_frame.setFrameShape(QFrame.NoFrame)
         self.verticalLayout_3 = QVBoxLayout(self.buttons_frame)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.pushButton_3 = QPushButton(self.buttons_frame)
@@ -174,7 +173,7 @@ class Ui_MainWindow(object):
         self.gridLayout_3.addWidget(self.buttons_frame, 0, 0, 1, 1)
 
 
-        self.gridLayout_2.addWidget(self.menu_frame, 0, 1, 1, 1, Qt.AlignHCenter)
+        self.gridLayout_2.addWidget(self.menu_frame, 0, 1, 1, 1)
 
         self.user_frame = QFrame(self.centralwidget)
         self.user_frame.setObjectName(u"user_frame")
@@ -186,8 +185,7 @@ class Ui_MainWindow(object):
         self.user_frame.setMinimumSize(QSize(48, 0))
         self.user_frame.setMaximumSize(QSize(16777215, 16777215))
         self.user_frame.setStyleSheet(u"")
-        self.user_frame.setFrameShape(QFrame.StyledPanel)
-        self.user_frame.setFrameShadow(QFrame.Raised)
+        self.user_frame.setFrameShape(QFrame.NoFrame)
         self.verticalLayout_6 = QVBoxLayout(self.user_frame)
         self.verticalLayout_6.setSpacing(1)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
@@ -199,14 +197,17 @@ class Ui_MainWindow(object):
         sizePolicy5.setVerticalStretch(0)
         sizePolicy5.setHeightForWidth(self.user_items_frame.sizePolicy().hasHeightForWidth())
         self.user_items_frame.setSizePolicy(sizePolicy5)
-        self.user_items_frame.setFrameShape(QFrame.StyledPanel)
-        self.user_items_frame.setFrameShadow(QFrame.Raised)
+        self.user_items_frame.setFrameShape(QFrame.NoFrame)
         self.verticalLayout_7 = QVBoxLayout(self.user_items_frame)
         self.verticalLayout_7.setSpacing(30)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.verticalLayout_7.setContentsMargins(0, 5, 0, 5)
         self.account_button = QPushButton(self.user_items_frame)
         self.account_button.setObjectName(u"account_button")
+        self.account_button.setMinimumSize(QSize(0, 40))
+        font = QFont()
+        font.setFamilies([u"Arial"])
+        self.account_button.setFont(font)
 
         self.verticalLayout_7.addWidget(self.account_button)
 
@@ -223,7 +224,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addWidget(self.user_items_frame)
 
-        self.verticalSpacer_4 = QSpacerItem(20, 800, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
+        self.verticalSpacer_4 = QSpacerItem(20, 800, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout_6.addItem(self.verticalSpacer_4)
 
@@ -241,8 +242,7 @@ class Ui_MainWindow(object):
         self.tasks_frame.setStyleSheet(u"#tasks_frame {\n"
 "    border-left: 1px solid grey;\n"
 "}")
-        self.tasks_frame.setFrameShape(QFrame.StyledPanel)
-        self.tasks_frame.setFrameShadow(QFrame.Raised)
+        self.tasks_frame.setFrameShape(QFrame.NoFrame)
         self.gridLayout_4 = QGridLayout(self.tasks_frame)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.frame_adding_grid = QFrame(self.tasks_frame)
@@ -253,8 +253,7 @@ class Ui_MainWindow(object):
         sizePolicy7.setHeightForWidth(self.frame_adding_grid.sizePolicy().hasHeightForWidth())
         self.frame_adding_grid.setSizePolicy(sizePolicy7)
         self.frame_adding_grid.setMinimumSize(QSize(0, 0))
-        self.frame_adding_grid.setFrameShape(QFrame.StyledPanel)
-        self.frame_adding_grid.setFrameShadow(QFrame.Raised)
+        self.frame_adding_grid.setFrameShape(QFrame.NoFrame)
         self.gridLayout_5 = QGridLayout(self.frame_adding_grid)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.gridLayout_5.setContentsMargins(5, 5, 5, 5)
@@ -269,8 +268,7 @@ class Ui_MainWindow(object):
 "    border: 1px solid grey;\n"
 "	border-radius: 10px;\n"
 "}")
-        self.frame_adding_border.setFrameShape(QFrame.StyledPanel)
-        self.frame_adding_border.setFrameShadow(QFrame.Raised)
+        self.frame_adding_border.setFrameShape(QFrame.NoFrame)
         self.horizontalLayout_4 = QHBoxLayout(self.frame_adding_border)
         self.horizontalLayout_4.setSpacing(0)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
@@ -290,8 +288,7 @@ class Ui_MainWindow(object):
         self.frame__adding_buttons = QFrame(self.frame_adding_border)
         self.frame__adding_buttons.setObjectName(u"frame__adding_buttons")
         self.frame__adding_buttons.setStyleSheet(u"")
-        self.frame__adding_buttons.setFrameShape(QFrame.StyledPanel)
-        self.frame__adding_buttons.setFrameShadow(QFrame.Raised)
+        self.frame__adding_buttons.setFrameShape(QFrame.NoFrame)
         self.horizontalLayout_3 = QHBoxLayout(self.frame__adding_buttons)
         self.horizontalLayout_3.setSpacing(1)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
@@ -342,8 +339,6 @@ class Ui_MainWindow(object):
         self.pushButton_create.setSizePolicy(sizePolicy9)
         self.pushButton_create.setMinimumSize(QSize(50, 16))
         self.pushButton_create.setMaximumSize(QSize(20, 16777215))
-        font = QFont()
-        font.setFamilies([u"Arial"])
         self.pushButton_create.setFont(font)
         self.pushButton_create.setStyleSheet(u"QWidget{\n"
 "background-color: transparent;\n"
@@ -360,7 +355,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4.addWidget(self.frame_adding_grid, 1, 0, 1, 1)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 50, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
+        self.verticalSpacer_2 = QSpacerItem(20, 50, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.gridLayout_4.addItem(self.verticalSpacer_2, 3, 0, 1, 1)
 
@@ -373,8 +368,7 @@ class Ui_MainWindow(object):
         self.frame_info.setSizePolicy(sizePolicy10)
         self.frame_info.setMinimumSize(QSize(40, 0))
         self.frame_info.setMaximumSize(QSize(16777215, 50))
-        self.frame_info.setFrameShape(QFrame.StyledPanel)
-        self.frame_info.setFrameShadow(QFrame.Raised)
+        self.frame_info.setFrameShape(QFrame.NoFrame)
         self.horizontalLayout = QHBoxLayout(self.frame_info)
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -432,7 +426,7 @@ class Ui_MainWindow(object):
         self.toolBox.setMaximumSize(QSize(16777215, 16777215))
         self.page_overdue = QWidget()
         self.page_overdue.setObjectName(u"page_overdue")
-        self.page_overdue.setGeometry(QRect(0, 0, 577, 338))
+        self.page_overdue.setGeometry(QRect(0, 0, 577, 693))
         self.verticalLayout_8 = QVBoxLayout(self.page_overdue)
         self.verticalLayout_8.setSpacing(0)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
@@ -445,47 +439,21 @@ class Ui_MainWindow(object):
         __qtreewidgetitem2 = QTreeWidgetItem(__qtreewidgetitem1)
         __qtreewidgetitem2.setTextAlignment(1, Qt.AlignTrailing|Qt.AlignVCenter);
         self.treeWidget_overdue.setObjectName(u"treeWidget_overdue")
-        self.treeWidget_overdue.setStyleSheet(u"QTreeView::branch {\n"
-"        background: palette(base);\n"
-"}\n"
-"\n"
-"QTreeView::branch:has-siblings:!adjoins-item {\n"
-"        background: cyan;\n"
-"}\n"
-"\n"
-"QTreeView::branch:has-siblings:adjoins-item {\n"
-"        background: red;\n"
-"}\n"
-"\n"
-"QTreeView::branch:!has-children:!has-siblings:adjoins-item {\n"
-"        background: blue;\n"
-"}\n"
-"\n"
-"QTreeView::branch:closed:has-children:has-siblings {\n"
-"        background: pink;\n"
-"}\n"
-"\n"
-"QTreeView::branch:has-children:!has-siblings:closed {\n"
-"        background: gray;\n"
-"}\n"
-"\n"
-"QTreeView::branch:open:has-children:has-siblings {\n"
-"        background: magenta;\n"
-"}\n"
-"\n"
-"QTreeView::branch:open:has-children:!has-siblings {\n"
-"        background: green;\n"
+        self.treeWidget_overdue.setStyleSheet(u"QTreeView::item {\n"
+"    height: 30px;\n"
+"    width: 100px;\n"
 "}")
         self.treeWidget_overdue.setAnimated(True)
         self.treeWidget_overdue.setHeaderHidden(True)
-        self.treeWidget_overdue.header().setDefaultSectionSize(200)
+        self.treeWidget_overdue.header().setMinimumSectionSize(250)
+        self.treeWidget_overdue.header().setDefaultSectionSize(250)
 
         self.verticalLayout_8.addWidget(self.treeWidget_overdue)
 
         self.toolBox.addItem(self.page_overdue, u"\u041f\u0440\u043e\u0441\u0440\u043e\u0447\u0435\u043d\u043e, <X>")
         self.page_current = QWidget()
         self.page_current.setObjectName(u"page_current")
-        self.page_current.setGeometry(QRect(0, 0, 577, 338))
+        self.page_current.setGeometry(QRect(0, 0, 577, 693))
         self.verticalLayout_4 = QVBoxLayout(self.page_current)
         self.verticalLayout_4.setSpacing(0)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
@@ -496,6 +464,7 @@ class Ui_MainWindow(object):
         brush1 = QBrush(QColor(255, 255, 255, 255))
         brush1.setStyle(Qt.NoBrush)
         __qtreewidgetitem3 = QTreeWidgetItem(self.treeWidget_current)
+        __qtreewidgetitem3.setFlags(Qt.ItemIsSelectable|Qt.ItemIsEditable|Qt.ItemIsDragEnabled|Qt.ItemIsDropEnabled|Qt.ItemIsUserCheckable|Qt.ItemIsEnabled);
         __qtreewidgetitem3.setTextAlignment(1, Qt.AlignTrailing|Qt.AlignVCenter);
         __qtreewidgetitem4 = QTreeWidgetItem(__qtreewidgetitem3)
         __qtreewidgetitem4.setFlags(Qt.ItemIsSelectable|Qt.ItemIsDragEnabled|Qt.ItemIsDropEnabled|Qt.ItemIsEnabled);
@@ -520,7 +489,10 @@ class Ui_MainWindow(object):
         __qtreewidgetitem10.setTextAlignment(1, Qt.AlignTrailing|Qt.AlignVCenter);
         self.treeWidget_current.setObjectName(u"treeWidget_current")
         self.treeWidget_current.setAutoFillBackground(False)
-        self.treeWidget_current.setStyleSheet(u"")
+        self.treeWidget_current.setStyleSheet(u"QTreeView::item {\n"
+"    height: 30px;\n"
+"    width: 100px;\n"
+"}")
         self.treeWidget_current.setUniformRowHeights(False)
         self.treeWidget_current.setAnimated(True)
         self.treeWidget_current.setAllColumnsShowFocus(False)
@@ -528,7 +500,8 @@ class Ui_MainWindow(object):
         self.treeWidget_current.setHeaderHidden(True)
         self.treeWidget_current.header().setVisible(False)
         self.treeWidget_current.header().setCascadingSectionResizes(True)
-        self.treeWidget_current.header().setDefaultSectionSize(417)
+        self.treeWidget_current.header().setMinimumSectionSize(250)
+        self.treeWidget_current.header().setDefaultSectionSize(250)
         self.treeWidget_current.header().setProperty("showSortIndicator", False)
 
         self.verticalLayout_4.addWidget(self.treeWidget_current)
@@ -536,7 +509,7 @@ class Ui_MainWindow(object):
         self.toolBox.addItem(self.page_current, u"\u0422\u0435\u043a\u0443\u0449\u0438\u0435, <X>")
         self.page_completed = QWidget()
         self.page_completed.setObjectName(u"page_completed")
-        self.page_completed.setGeometry(QRect(0, 0, 577, 338))
+        self.page_completed.setGeometry(QRect(0, 0, 577, 693))
         self.verticalLayout_9 = QVBoxLayout(self.page_completed)
         self.verticalLayout_9.setSpacing(0)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
@@ -559,9 +532,14 @@ class Ui_MainWindow(object):
         __qtreewidgetitem18 = QTreeWidgetItem(__qtreewidgetitem17)
         __qtreewidgetitem18.setTextAlignment(1, Qt.AlignTrailing|Qt.AlignVCenter);
         self.treeWidget_completed.setObjectName(u"treeWidget_completed")
+        self.treeWidget_completed.setStyleSheet(u"QTreeView::item {\n"
+"    height: 30px;\n"
+"    width: 100px;\n"
+"}")
         self.treeWidget_completed.setAnimated(True)
         self.treeWidget_completed.setHeaderHidden(True)
-        self.treeWidget_completed.header().setDefaultSectionSize(200)
+        self.treeWidget_completed.header().setMinimumSectionSize(250)
+        self.treeWidget_completed.header().setDefaultSectionSize(250)
 
         self.verticalLayout_9.addWidget(self.treeWidget_completed)
 
@@ -580,8 +558,7 @@ class Ui_MainWindow(object):
         self.info_frame.setStyleSheet(u"#info_frame {\n"
 "    border-left: 1px solid grey;\n"
 "}")
-        self.info_frame.setFrameShape(QFrame.StyledPanel)
-        self.info_frame.setFrameShadow(QFrame.Raised)
+        self.info_frame.setFrameShape(QFrame.NoFrame)
         self.gridLayout_7 = QGridLayout(self.info_frame)
         self.gridLayout_7.setObjectName(u"gridLayout_7")
         self.gridLayout_7.setContentsMargins(0, 0, 0, 0)
@@ -591,44 +568,32 @@ class Ui_MainWindow(object):
         self.page_empty.setObjectName(u"page_empty")
         self.verticalLayout_2 = QVBoxLayout(self.page_empty)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.task = QLabel(self.page_empty)
-        self.task.setObjectName(u"task")
+        self.frame = QFrame(self.page_empty)
+        self.frame.setObjectName(u"frame")
+        self.frame.setStyleSheet(u"")
+        self.frame.setFrameShape(QFrame.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_5 = QVBoxLayout(self.frame)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.empty_tasks = QPushButton(self.frame)
+        self.empty_tasks.setObjectName(u"empty_tasks")
+        self.empty_tasks.setMinimumSize(QSize(0, 128))
+
+        self.verticalLayout_5.addWidget(self.empty_tasks)
+
+        self.label_empty = QLabel(self.frame)
+        self.label_empty.setObjectName(u"label_empty")
         font1 = QFont()
-        font1.setPointSize(14)
+        font1.setFamilies([u"Arial"])
+        font1.setPointSize(16)
         font1.setBold(True)
-        self.task.setFont(font1)
-        self.task.setScaledContents(False)
+        self.label_empty.setFont(font1)
+        self.label_empty.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_2.addWidget(self.task)
+        self.verticalLayout_5.addWidget(self.label_empty)
 
-        self.label_3 = QLabel(self.page_empty)
-        self.label_3.setObjectName(u"label_3")
 
-        self.verticalLayout_2.addWidget(self.label_3)
-
-        self.label_4 = QLabel(self.page_empty)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setScaledContents(False)
-        self.label_4.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-        self.label_4.setWordWrap(False)
-
-        self.verticalLayout_2.addWidget(self.label_4)
-
-        self.image_acc = QPushButton(self.page_empty)
-        self.image_acc.setObjectName(u"image_acc")
-
-        self.verticalLayout_2.addWidget(self.image_acc)
-
-        self.delete_task = QPushButton(self.page_empty)
-        self.delete_task.setObjectName(u"delete_task")
-        self.delete_task.setMinimumSize(QSize(0, 35))
-        self.delete_task.setStyleSheet(u"")
-
-        self.verticalLayout_2.addWidget(self.delete_task)
-
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.verticalLayout_2.addItem(self.verticalSpacer_3)
+        self.verticalLayout_2.addWidget(self.frame, 0, Qt.AlignHCenter|Qt.AlignVCenter)
 
         self.stackedWidget.addWidget(self.page_empty)
         self.page_info = QWidget()
@@ -653,7 +618,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 595, 606))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 595, 961))
         sizePolicy1.setHeightForWidth(self.scrollAreaWidgetContents.sizePolicy().hasHeightForWidth())
         self.scrollAreaWidgetContents.setSizePolicy(sizePolicy1)
         self.scrollAreaWidgetContents.setStyleSheet(u"")
@@ -664,8 +629,7 @@ class Ui_MainWindow(object):
         self.task_main_info = QFrame(self.scrollAreaWidgetContents)
         self.task_main_info.setObjectName(u"task_main_info")
         self.task_main_info.setStyleSheet(u"")
-        self.task_main_info.setFrameShape(QFrame.StyledPanel)
-        self.task_main_info.setFrameShadow(QFrame.Raised)
+        self.task_main_info.setFrameShape(QFrame.NoFrame)
         self.verticalLayout_13 = QVBoxLayout(self.task_main_info)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.label_task_name = QLabel(self.task_main_info)
@@ -675,9 +639,10 @@ class Ui_MainWindow(object):
 
         self.taska = QLineEdit(self.task_main_info)
         self.taska.setObjectName(u"taska")
+        self.taska.setMinimumSize(QSize(0, 40))
         self.taska.setStyleSheet(u"    border: 1px solid gray;\n"
 "    border-radius: 10px;")
-        self.taska.setReadOnly(True)
+        self.taska.setReadOnly(False)
 
         self.verticalLayout_13.addWidget(self.taska)
 
@@ -695,15 +660,14 @@ class Ui_MainWindow(object):
 "QWidget::hover{\n"
 "border:1px solid white;\n"
 "}")
-        self.frame_edit_border.setFrameShape(QFrame.StyledPanel)
-        self.frame_edit_border.setFrameShadow(QFrame.Raised)
+        self.frame_edit_border.setFrameShape(QFrame.NoFrame)
         self.verticalLayout_14 = QVBoxLayout(self.frame_edit_border)
         self.verticalLayout_14.setSpacing(0)
         self.verticalLayout_14.setObjectName(u"verticalLayout_14")
         self.verticalLayout_14.setContentsMargins(0, 0, 0, 0)
         self.lineEdit_task_description = QLineEdit(self.frame_edit_border)
         self.lineEdit_task_description.setObjectName(u"lineEdit_task_description")
-        self.lineEdit_task_description.setMinimumSize(QSize(0, 34))
+        self.lineEdit_task_description.setMinimumSize(QSize(0, 35))
         self.lineEdit_task_description.setStyleSheet(u"")
 
         self.verticalLayout_14.addWidget(self.lineEdit_task_description)
@@ -716,14 +680,21 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_13.addWidget(self.label)
 
-        self.comboBox_2 = QComboBox(self.task_main_info)
-        self.comboBox_2.addItem("")
-        self.comboBox_2.addItem("")
-        self.comboBox_2.setObjectName(u"comboBox_2")
-        self.comboBox_2.setMinimumSize(QSize(0, 34))
-        self.comboBox_2.setEditable(True)
+        self.lineEdit_tags = QLineEdit(self.task_main_info)
+        self.lineEdit_tags.setObjectName(u"lineEdit_tags")
+        self.lineEdit_tags.setMinimumSize(QSize(0, 35))
+        self.lineEdit_tags.setStyleSheet(u"QLineEdit {\n"
+"    border-radius: 10px; /* \u0420\u0430\u0434\u0438\u0443\u0441 \u0437\u0430\u043a\u0440\u0443\u0433\u043b\u0435\u043d\u0438\u044f */\n"
+"    padding: 5px; /* \u041e\u0442\u0441\u0442\u0443\u043f\u044b \u0432\u043e\u043a\u0440\u0443\u0433 \u0442\u0435\u043a\u0441\u0442\u0430 */\n"
+"    border: 1px solid grey; /* \u0413\u0440\u0430\u043d\u0438\u0446\u0430 \u0441 \u0442\u0435\u043d\u044c\u044e */\n"
+"}\n"
+"\n"
+"QLineEdit:focus, QLineEdit:hover {\n"
+"    border-color: grey; /* \u0426\u0432\u0435\u0442 \u0433\u0440\u0430\u043d\u0438\u0446\u044b \u043f\u0440\u0438 \u0444\u043e\u043a\u0443\u0441\u0435 */\n"
+"    border-style: solid; /* \u0421\u0442\u0438\u043b\u044c \u0433\u0440\u0430\u043d\u0438\u0446\u044b \u043f\u0440\u0438 \u0444\u043e\u043a\u0443\u0441\u0435 */\n"
+"}")
 
-        self.verticalLayout_13.addWidget(self.comboBox_2)
+        self.verticalLayout_13.addWidget(self.lineEdit_tags)
 
         self.label_6 = QLabel(self.task_main_info)
         self.label_6.setObjectName(u"label_6")
@@ -732,6 +703,7 @@ class Ui_MainWindow(object):
 
         self.popup = QDateEdit(self.task_main_info)
         self.popup.setObjectName(u"popup")
+        self.popup.setMinimumSize(QSize(0, 34))
         self.popup.setStyleSheet(u"")
         self.popup.setCalendarPopup(True)
         self.popup.setDate(QDate(2024, 5, 30))
@@ -752,29 +724,67 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_13.addWidget(self.comboBox)
 
-        self.add_task = QPushButton(self.task_main_info)
-        self.add_task.setObjectName(u"add_task")
-        self.add_task.setMinimumSize(QSize(0, 35))
+        self.label_3 = QLabel(self.task_main_info)
+        self.label_3.setObjectName(u"label_3")
+
+        self.verticalLayout_13.addWidget(self.label_3)
+
+        self.comboBox_status = QComboBox(self.task_main_info)
+        self.comboBox_status.addItem("")
+        self.comboBox_status.addItem("")
+        self.comboBox_status.addItem("")
+        self.comboBox_status.setObjectName(u"comboBox_status")
+        self.comboBox_status.setMinimumSize(QSize(0, 34))
+
+        self.verticalLayout_13.addWidget(self.comboBox_status)
+
+        self.pushButton_add_task = QPushButton(self.task_main_info)
+        self.pushButton_add_task.setObjectName(u"pushButton_add_task")
+        self.pushButton_add_task.setMinimumSize(QSize(0, 35))
         font2 = QFont()
         font2.setBold(True)
         font2.setItalic(False)
-        self.add_task.setFont(font2)
-        self.add_task.setStyleSheet(u"QPushButton::hover\n"
-"{\n"
-"	border:1px;\n"
-"	background-color: rgb(180,180,180);\n"
+        self.pushButton_add_task.setFont(font2)
+        self.pushButton_add_task.setStyleSheet(u"QPushButton {\n"
+"	border:1px solid rgb(70,70,70);\n"
+"    border-radius: 4px;\n"
+"    background-color: rgb(225,225,225);\n"
+"	color: black;\n"
 "}\n"
-"")
+"\n"
+"QPushButton::hover\n"
+"{\n"
+"	background-color: rgb(180,180,180);\n"
+"}")
 
-        self.verticalLayout_13.addWidget(self.add_task)
+        self.verticalLayout_13.addWidget(self.pushButton_add_task)
+
+        self.pushButton_delete_task = QPushButton(self.task_main_info)
+        self.pushButton_delete_task.setObjectName(u"pushButton_delete_task")
+        self.pushButton_delete_task.setMinimumSize(QSize(0, 35))
+        font3 = QFont()
+        font3.setBold(True)
+        self.pushButton_delete_task.setFont(font3)
+        self.pushButton_delete_task.setStyleSheet(u"QPushButton {\n"
+"	border:1px solid rgb(70,70,70);\n"
+"    border-radius: 4px;\n"
+"    background-color: rgb(150, 0, 0);\n"
+"	color: white;\n"
+"}\n"
+"\n"
+"QPushButton::hover\n"
+"{\n"
+"	background-color: rgb(180,0,0);\n"
+"}")
+
+        self.verticalLayout_13.addWidget(self.pushButton_delete_task)
 
 
         self.verticalLayout_19.addWidget(self.task_main_info)
 
         self.task_tags_info = QFrame(self.scrollAreaWidgetContents)
         self.task_tags_info.setObjectName(u"task_tags_info")
-        self.task_tags_info.setFrameShape(QFrame.StyledPanel)
-        self.task_tags_info.setFrameShadow(QFrame.Raised)
+        self.task_tags_info.setFrameShape(QFrame.NoFrame)
         self.verticalLayout_15 = QVBoxLayout(self.task_tags_info)
         self.verticalLayout_15.setObjectName(u"verticalLayout_15")
 
@@ -782,8 +792,7 @@ class Ui_MainWindow(object):
 
         self.task_date_info = QFrame(self.scrollAreaWidgetContents)
         self.task_date_info.setObjectName(u"task_date_info")
-        self.task_date_info.setFrameShape(QFrame.StyledPanel)
-        self.task_date_info.setFrameShadow(QFrame.Raised)
+        self.task_date_info.setFrameShape(QFrame.NoFrame)
         self.gridLayout_6 = QGridLayout(self.task_date_info)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
 
@@ -791,8 +800,7 @@ class Ui_MainWindow(object):
 
         self.task_tags_info_2 = QFrame(self.scrollAreaWidgetContents)
         self.task_tags_info_2.setObjectName(u"task_tags_info_2")
-        self.task_tags_info_2.setFrameShape(QFrame.StyledPanel)
-        self.task_tags_info_2.setFrameShadow(QFrame.Raised)
+        self.task_tags_info_2.setFrameShape(QFrame.NoFrame)
         self.verticalLayout_12 = QVBoxLayout(self.task_tags_info_2)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
 
@@ -817,26 +825,6 @@ class Ui_MainWindow(object):
         self.gridLayout.addLayout(self.gridLayout_2, 1, 0, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QMenuBar(MainWindow)
-        self.menubar.setObjectName(u"menubar")
-        self.menubar.setEnabled(True)
-        self.menubar.setGeometry(QRect(0, 0, 1442, 22))
-        self.menubar.setDefaultUp(False)
-        self.menubar.setNativeMenuBar(True)
-        self.menu = QMenu(self.menubar)
-        self.menu.setObjectName(u"menu")
-        icon = QIcon(QIcon.fromTheme(u"accessories-character-map"))
-        self.menu.setIcon(icon)
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QStatusBar(MainWindow)
-        self.statusbar.setObjectName(u"statusbar")
-        self.statusbar.setEnabled(True)
-        self.statusbar.setSizeGripEnabled(True)
-        MainWindow.setStatusBar(self.statusbar)
-
-        self.menubar.addAction(self.menu.menuAction())
-        self.menu.addAction(self.action2)
-        self.menu.addAction(self.action1)
 
         self.retranslateUi(MainWindow)
 
@@ -851,7 +839,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"\u041c\u0435\u043d\u0435\u0434\u0436\u0435\u0440 \u0437\u0430\u0434\u0430\u0447", None))
         self.action2.setText(QCoreApplication.translate("MainWindow", u"2", None))
-        self.action1.setText(QCoreApplication.translate("MainWindow", u"1", None))
+        self.action.setText(QCoreApplication.translate("MainWindow", u"1", None))
         ___qtreewidgetitem = self.treeWidget.headerItem()
         ___qtreewidgetitem.setText(1, QCoreApplication.translate("MainWindow", u"\u0426\u0432\u0435\u0442 \u0442\u0435\u0433\u0430", None));
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"\u0422\u0435\u0433", None));
@@ -980,29 +968,28 @@ class Ui_MainWindow(object):
         self.treeWidget_completed.setSortingEnabled(__sortingEnabled3)
 
         self.toolBox.setItemText(self.toolBox.indexOf(self.page_completed), QCoreApplication.translate("MainWindow", u"\u0412\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u043e, <X>", None))
-        self.task.setText(QCoreApplication.translate("MainWindow", u"\u0417\u0430\u0434\u0430\u043d\u0438\u0435", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"30.05.2024", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\u0443\u043c\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435", None))
-        self.image_acc.setText("")
-        self.delete_task.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443", None))
+        self.empty_tasks.setText("")
+        self.label_empty.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0436\u043c\u0438\u0442\u0435 \u043d\u0430 \u0437\u0430\u0434\u0430\u0447\u0443, \u0447\u0442\u043e\u0431\u044b \u043f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u0435\u0451...", None))
         self.label_task_name.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u0437\u0430\u0434\u0430\u0447\u0438", None))
         self.taska.setInputMask("")
         self.taska.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0417\u0430\u0434\u0430\u043d\u0438\u0435 1", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0437\u0430\u0434\u0430\u0447\u0438", None))
-        self.lineEdit_task_description.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0437\u0430\u0434\u0430\u0447\u0438??", None))
+        self.lineEdit_task_description.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043e\u043f\u0438\u0441\u0430\u043d\u0438\u0435", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u0433\u0438", None))
-        self.comboBox_2.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0422\u0435\u04331", None))
-        self.comboBox_2.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0422\u0435\u04332", None))
-
-        self.comboBox_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0438\u0432\u044f\u0437\u0430\u0442\u044c \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f", None))
+        self.lineEdit_tags.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u0435\u0433\u0438 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u043e\u0431\u0435\u043b", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"\u0414\u0435\u0434\u043b\u0430\u0439\u043d", None))
         self.popup.setDisplayFormat(QCoreApplication.translate("MainWindow", u"dd.MM.yyyy", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0437\u043d\u0430\u0447\u0438\u0442\u044c \u0438\u0441\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u0435\u0439", None))
-        self.comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0422\u0435\u04331", None))
-        self.comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0422\u0435\u04332", None))
+        self.comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0410\u043a\u043a\u0430\u0443\u043d\u0442 1", None))
+        self.comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0410\u043a\u043a\u0430\u0443\u043d\u0442 2", None))
 
         self.comboBox.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0440\u0430\u0442\u044c \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0439 \u0442\u0435\u0433", None))
-        self.add_task.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443", None))
-        self.menu.setTitle(QCoreApplication.translate("MainWindow", u"\u041a\u0442\u043e", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0442\u0430\u0442\u0443\u0441 \u0437\u0430\u0434\u0430\u0447\u0438", None))
+        self.comboBox_status.setItemText(0, QCoreApplication.translate("MainWindow", u"\u041d\u0443\u0436\u043d\u043e \u0441\u0434\u0435\u043b\u0430\u0442\u044c", None))
+        self.comboBox_status.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0412 \u043f\u0440\u043e\u0446\u0435\u0441\u0441\u0435", None))
+        self.comboBox_status.setItemText(2, QCoreApplication.translate("MainWindow", u"\u0412\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u043e", None))
+
+        self.pushButton_add_task.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443", None))
+        self.pushButton_delete_task.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443", None))
     # retranslateUi
 

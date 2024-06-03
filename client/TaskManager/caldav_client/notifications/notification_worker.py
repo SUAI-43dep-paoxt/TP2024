@@ -15,13 +15,14 @@ def _notification_worker(
 ) -> None:
     while True:
         for caldav_adapter in caldav_adapters:
-            time.sleep(period.total_seconds())
-
             try:
+                all_tasks = caldav_adapter.get_tasks(
+                    from_date=datetime.now(), to_date=datetime.now() + timedelta(hours=24), include_completed=False,
+                )
                 tasks: list[Task] = list(
                     filter(
                         lambda t: t.executor == executor and not t.informed,
-                        caldav_adapter.get_tasks(from_date=datetime.now(), to_date=datetime.now() + timedelta(hours=24)),
+                        all_tasks,
                     ),
                 )
             except:
@@ -33,6 +34,7 @@ def _notification_worker(
                 new_tags = task.tags + [tags.INFORMED]
                 caldav_adapter.update_task(task.uid, UpdateTask(tags=new_tags))
                 output_queue.put_nowait(task)
+        time.sleep(period.total_seconds())
 
 
 def run_notification_worker(

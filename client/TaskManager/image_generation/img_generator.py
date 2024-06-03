@@ -62,11 +62,11 @@ class GenerateAvatar(GenImageWidget, QWidget):
             initials = self.first_name[0].upper() + self.last_name[0].upper()
         except IndexError:
             initials = self.first_name[0:2]
-        # font = PIL.ImageFont.truetype(font='Times New Roman', size=20, index=0, encoding='unic')
+        #font = ImageFont.truetype(font='Times New Roman', size=20, index=0, encoding='unic')
         text_color = (255, 255, 255)  # черный цвет
 
         text_position = (size // 2, size // 2)
-        unicode_font = ImageFont.truetype("DejaVuSans.ttf", 20)
+        unicode_font = ImageFont.truetype("arial.ttf", 20)
         draw.text(text_position, initials, font=unicode_font, fill=text_color, anchor="mm")
         print(initials)
         try:
