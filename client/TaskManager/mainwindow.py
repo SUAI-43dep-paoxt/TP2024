@@ -1,4 +1,5 @@
 # This Python file uses the following encoding: utf-8
+import itertools
 import re
 import uuid
 import sys
@@ -431,7 +432,7 @@ class MainWindow(QMainWindow):
             status=self.index_value_to_status[self.ui.comboBox_status.currentIndex()],
             tags=self.ui.lineEdit_tags.text().split(),
             creator=self.current_session.person.email,
-            executor=self.current_session.person.email,
+            executor=self.ui.comboBox.currentText(),
         )
         if self.ui.pushButton_add_task.text() == 'Добавить задачу':
             self.adapter.create_task(task)
@@ -472,6 +473,17 @@ class MainWindow(QMainWindow):
         # 'Вытягивание' всех задач на текущую неделю
         tasks = self.adapter.get_tasks(from_date=start,
                                        to_date=end)
+
+        self.ui.comboBox.clear()
+        self.ui.comboBox.addItems(sorted(set(itertools.chain(*[(task.executor, task.creator) for task in tasks]))))
+
+        tags = sorted(set(itertools.chain(*[task.tags for task in tasks])))
+        self.ui.treeWidget.clear()
+        for tag in tags:
+            if not tag.strip():
+                continue
+            tag_tree = QTreeWidgetItem(self.ui.treeWidget)
+            tag_tree.setText(0, tag)
 
         # Текущий день недели
         current_week_day = datetime.now().weekday()
@@ -538,6 +550,8 @@ class MainWindow(QMainWindow):
             self.ui.pushButton_add_task.setText('Изменить')
             self.ui.pushButton_delete_task.setVisible(True)
             self.set_uid = task_uid
+
+            self.ui.comboBox.setCurrentIndex(self.ui.comboBox.findText(task.executor))
 
             self.ui.comboBox_status.setCurrentIndex(self.status_to_index_value[task.status])
             # self.adapter.update_task(self.uid[str(it)], UpdateTask(status=Status.done))
